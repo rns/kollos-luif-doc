@@ -1,5 +1,7 @@
 ﻿# The LUIF
 
+Warning: the below is an unedited draft/skeleton, mostly wrapping up what's been done so far for further work.
+
 ## Overview
 
 This document desribes the LUIF (LUa InterFace), 
