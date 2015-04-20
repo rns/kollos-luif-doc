@@ -18,7 +18,9 @@ There is only one BNF statement, combining precedence, sequences, and alternatio
 LUIF extends the Lua syntax by adding `bnf` and `grammarexp` alternatives to, accordingly, `stat` and `exp` rules of the [Lua grammar](http://www.lua.org/manual/5.1/manual.html#8) and introducing the new rules. The general syntax for a BNF statement is
 
 [todo: convert the below SLIF syntax to EBNF used by Lua manual]
+
 [todo: make sure it conforms to other sections]
+
 ```
 stat ::= bnf
 exp  ::= grammarexp
