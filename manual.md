@@ -202,17 +202,18 @@ in names.
 
 ## Grammars
 
-BNF statements may be grouped into one or more grammars, or left in a default grammar.
-It is a fatal error to try to do both --
-that is, no Lua script with one or more rules in the default grammar may have a rule in an explicit grammar, and vice versa.
+BNF statements are grouped into one or more grammars.  The grammar is indicated by the produce-operator of the 
+BNF.  Its general form is `:grammar:=`, where `grammar` is the name of a grammar.  `grammar` must not contain colons.  The grammar names `g1` and `l0` have special significance to the post-processing.
+
+If the produce-operator is `::=`, then the grammar is `g1`.  The tilde `~` can be a produce-operator, in which case it is equivalent to `:l0:=`.
 
 The syntax for an explicit grammar is similar to that for an anonymous function:
 
 ```lua
     g = grammar ()
     local x = 1
-      a ::= b c
-      w ::= x y z
+      a :g:= b c
+      w :g:= x y z
       -- not just BNF, but pure Lua statements are allowed in a grammar
       for i = 2,n do
         x = x * i
@@ -220,23 +221,13 @@ The syntax for an explicit grammar is similar to that for an anonymous function:
     end
 ```
 
-## Default grammar
+## Post-processing
 
-A LUIF script has a top-level default grammar set, if it contains no explicit grammars.
-If the LUIF script has explicit grammars, there is no top-level default grammar,
-but the block of each grammar has a default grammar defined,
-The default grammar of
-a `grammar` expression
-will be returned as the value of the `grammar` expression.
+[ To do ]
 
-## Grammar objects
+## Lexical and structural grammars
 
-Grammar objects in fact may define two Libmarpa grammars: a structural grammar
-and a lexical grammar.
-The structural grammar is defined by those BNF rules which use the `::=` operator,
-and the lexical grammar is defined by those BNF rules which use the `~` operator.
-
-[todo: propose using only `::=` and defining lexemes by action 'lexeme' (slurp to string) ]
+There are in fact two kinds of Libmarpa grammars: structural and lexical grammar.  The post-processing and intended use of each is different.  A grammar is lexical if one or more of its rules have the special `lexeme` action.
 
 ## Example grammars
 
