@@ -221,20 +221,6 @@ BNF.  Its general form is `:grammar:=`, where `grammar` is the name of a grammar
 
 If the produce-operator is `::=`, then the grammar is `g1`.  The tilde `~` can be a produce-operator, in which case it is equivalent to `:l0:=`.
 
-The syntax for an explicit grammar is similar to that for an anonymous function:
-
-```lua
-    g = grammar ()
-    local x = 1
-      a :g:= b c
-      w :g:= x y z
-      -- not just BNF, but pure Lua statements are allowed in a grammar
-      for i = 2,n do
-        x = x * i
-      end
-    end
-```
-
 ## Post-processing
 
 [ To do ]
