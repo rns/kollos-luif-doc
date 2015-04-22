@@ -214,20 +214,22 @@ in names.
 
 #### action
 
+## Post-processing
+
+The output of the KHIL will be a table, with one key for each grammar name.  Keys *must* be strings.  The value of each grammar key will be a table, with entries for external and internal symbols and rules.  Details of the format will be specified later.
+
+This table will be interpreted by the lower layer (KLOL).  Initially post-processing will take a very restricted form in the LUIF grammars.   There are two kinds of Libmarpa grammars: structural and lexical grammar.  A grammar is lexical if one or more of its rules have the special `lexeme` action.  The post-processing will expect a lexical grammar named `l0` and a structural grammar named `g1`, and will check (in the same way that Marpa::R2 currently does) to ensure they are compatible.
+
 ## Grammars
 
 BNF statements are grouped into one or more grammars.  The grammar is indicated by the produce-operator of the 
-BNF.  Its general form is `:grammar:=`, where `grammar` is the name of a grammar.  `grammar` must not contain colons.  The grammar names `g1` and `l0` have special significance to the post-processing.
+BNF.  Its general form is `:grammar:=`, where `grammar` is the name of a grammar.  `grammar` must not contain colons.  Initially, the post-processing will not support anything but `l0` and `g1` used in the default way.
 
 If the produce-operator is `::=`, then the grammar is `g1`.  The tilde `~` can be a produce-operator, in which case it is equivalent to `:l0:=`.
 
-## Post-processing
+A structural grammar will often contain lexical elements, such as strings and character classes, and these will go into its linked lexical grammar.  The start rule specifies its lexical grammar with an adverb (what?).  In a lexical grammar the lexemes are indicated with the `lexeme` adverb -- if a rule has a lexeme adverb, its LHS is a lexeme.
 
-[ To do ]
-
-## Lexical and structural grammars
-
-There are in fact two kinds of Libmarpa grammars: structural and lexical grammar.  The post-processing and intended use of each is different.  A grammar is lexical if one or more of its rules have the special `lexeme` action.
+If a grammar specified lexemes, it is a lexical grammar.  If a grammar specified a linked lexical grammar, it is a structural grammar.  `l0` must always be a lexical grammar.  `g1` must always be a structural grammar and is linked by default to `l0`.  It is a fatal error if a grammar has no indication whether it is structural or lexical, but this indication may be a default.  Enforcement of these restrictions is done by the lower layer (KLOL).  `
 
 ## Example grammars
 
