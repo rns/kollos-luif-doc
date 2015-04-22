@@ -26,11 +26,36 @@ are converted to calls to a KHOL method:
 ```
     -- Line 42, column 0:
     -- x :: a b c
-    luif_self:rule_parse(luif_self.text.location(798,813))
+    luif_self:rule_parse(
+      { lhs = "x"
+        rhs = { "a", "b", "c" }
+      },
+      luif_self.text.location(798,813)
+      )
 ```
-The location is passed as a location object.  The original text is shown
+The first argument is the EBNF rule in an AST form and the second is "location object".
+The original text is shown
 as a comment.  This is not necessary but will be useful when the file is
 for debugging, tracing, etc.
+
+The AST shown here is simplified, and simply for purposes of illustration.  This AST format will
+not be documented -- it's format will be treated as an internal matter.
+
+## "Direct to pure Lua" calls
+
+In the LUIF, there may calls may be of the form
+```
+    luif_self:rule_from_string("x ::= a b c")
+```
+The first subphase should *not* pass these lua calls through,
+but should parse them into the `luif:self:rule_parse().
+These "direct to pure Lua" rules allow the Lua logic to construct LUIF
+EBNF rules "on the fly" in the LUIF.
+A LUIF script may mix EBNF rules, "direct to pure Lua rules",
+and its own logic, including its own parsing.
+This will make it easy to extend the LUIF with new logic,
+while still being able to use the LUIF's special
+features.
 
 ## The Kollos Intermediate Representation
 
