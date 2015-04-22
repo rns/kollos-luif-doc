@@ -24,17 +24,20 @@ LUIF extends the Lua syntax by adding `bnf` and `grammarexp` alternatives to, ac
 [todo: make sure it conforms to other sections]
 
 ```
-stat ::= bnf
-exp  ::= grammarexp
+stat ::= BNF
 
-bnf ::= { bnfrule }
+BNF ::= <BNF rule>+
+
+exp ::= grammarexp
 
 grammarexp ::= <grammar> grambody
 
 grambody ::= <left paren> parlist <right paren> block <end>
 grambody ::= <left paren> <right paren> block <end>
 
-bnfrule ::= lhs '::=' <prioritized alternatives>
+# There is only one BNF statement,
+# combining priorities, sequences, and alternation
+<BNF rule> ::= lhs '::=' <prioritized alternatives>
 <prioritized alternatives> ::= <prioritized alternative>+ separator => <double bar>
 <prioritized alternative> ::= <alternative>+ separator => <bar>
 <alternative> ::= rhs | rhs ',' <alternative fields>
@@ -79,12 +82,21 @@ sequence ::=
    | <named symbol> '*' <nonnegative integer> '..' <nonnegative integer>
    | <named symbol> '*' <nonnegative integer> '..' '*'
 
-# symbol name is any valid Lua name
-
+# symbol name is any valid Lua name, plus those with
+# non-initial hyphens
+# TODO: add angle bracket variation
+#<symbol name> ~ [a-zA-Z_] <symbol name chars>
+#<symbol name chars> ~ [-\w]*
 <symbol name> ::= Name
 
 #<nonnegative integer> ~ [\d]+
 <nonnegative integer> ::= Number
+
+# <symbol name>, <symbol name chars>, <nonnegative integer> rules
+# are commented out from Jeffrey Kegler's BNF because
+# MarpaX::Languages::Lua::AST::extend() doesn't support character classes.
+# For the moment, suitable tokens from Lua grammar (Name and Number) are used instead
+# TODO: charclasses
 
 ```
 
@@ -95,6 +107,8 @@ which imply the repetition of a symbol,
 or a parenthesized series of symbols. The general syntax for sequences is
 
 [todo: add sequence snippet from the LUIF grammar ]
+```
+```
 
 The item to be repeated (the repetend)
 can be either a single symbol,
