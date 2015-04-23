@@ -223,7 +223,25 @@ This table will be interpreted by the lower layer (KLOL).  Initially post-proces
 ## Grammars
 
 BNF statements are grouped into one or more grammars.  The grammar is indicated by the produce-operator of the
-BNF.  Its general form is `:grammar:=`, where `grammar` is the name of a grammar.  `grammar` must not contain colons.  Initially, the post-processing will not support anything but `l0` and `g1` used in the default way.
+BNF.  Its general form is `:grammar:=`, where `grammar` is the name of a grammar.  `grammar` must not contain colons.  Initially, the post-processing will not support anything but `l0` and `g1` used in the default way, like this:
+
+```lua
+-- structural grammar
+a ::= b c       -- using the LHS (b c) of a lexical rule
+                -- on the RHS of a structural rule makes a lexeme
+a ::= w
+aa ::= a a
+
+-- lexical grammar
+w ~ x y z
+b ~ 'b' x
+c ~ 'c' y
+
+x ~ 'x'
+y ~ 'y'
+z ~ [xyz]
+
+```
 
 If the produce-operator is `::=`, then the grammar is `g1`.  The tilde `~` can be a produce-operator, in which case it is equivalent to `:l0:=`.
 
@@ -235,46 +253,42 @@ If a grammar specified lexemes, it is a lexical grammar.  If a grammar specified
 
 ### Calculator
 
-[todo: convert to valid LUIF]
-
 ```
-    Script ::= Expression+ % comma
-    Expression ::=
-      Number
-      | left_paren Expression right_paren
-     || Expression exp Expression
-     || Expression mul Expression
-      | Expression div Expression
-     || Expression add Expression
-      | Expression sub Expression
+Script ::= Expression+ % ','
+Expression ::=
+  Number
+  | '(' Expression ')'
+ || Expression '**' Expression
+ || Expression '*' Expression
+  | Expression '/' Expression
+ || Expression '+' Expression
+  | Expression '-' Expression
 ```
 
 ### JSON
 
-[todo: convert to valid LUIF]
-
 ```
-            json         ::= object
-                           | array
-            object       ::= [lcurly rcurly]
-                           | [lcurly] members [rcurly]
-            members      ::= pair+ % comma
-            pair         ::= string [colon] value
-            value        ::= string
-                           | object
-                           | number
-                           | array
-                           | true
-                           | false
-                           | null
-            array        ::= [lsquare rsquare]
-                           | [lsquare] elements [rsquare]
-            elements     ::= value+ % comma
-            string       ::= lstring
-            lcurly ~ '{'
-            rcurly ~ '}'
-            lsquare ~ '['
-            rsquare ~ ']'
-            lstring
-```
+json     ::= object
+           | array
+object   ::= [ '{' '}' ]
+           | [ '{' ] members [ '}' ]
+members  ::= pair+ % comma
+pair     ::= string [ ':' ] value
+value    ::= string
+           | object
+           | number
+           | array
+           | true
+           | false
+           | null
+array    ::= [ '[' ']' ]
+           | [ '[' ] elements [ ']' ]
+elements ::= value+ % comma
+string   ::= [todo]
 
+comma    ~ ','
+
+true     ~ 'true' # [todo] true and false are Lua keywords: KHIL needs to handle this
+true     ~ 'false'
+null     ~ 'null'
+```

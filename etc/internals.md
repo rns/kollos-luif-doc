@@ -22,7 +22,7 @@ In the pure lua file all BNF rules
 ```
      x ::= a b c
 ```
-are converted to calls to a KHOL method:
+are converted to calls to a KHIL method:
 ```
     -- Line 42, column 0:
     -- x :: a b c
@@ -61,7 +61,7 @@ features.
 ## The Kollos Intermediate Representation
 
 This is a Lua table.  Jeffrey does not have full details yet, but here's the
-general idea.  The KHOL's central job is to translate the LUIF rules from
+general idea.  The KHIL's central job is to translate the LUIF rules from
 an external extended BNF representation to an internal representation which
 is plain BNF.
 
