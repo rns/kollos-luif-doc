@@ -4,13 +4,13 @@ Warning: the below is an unedited draft/skeleton, mostly wrapping up what's been
 
 ## Overview
 
-This document desribes the LUIF (LUa InterFace), 
-the interface language of 
-the [Kollos project](https://github.com/jeffreykegler/kollos/). 
+This document desribes the LUIF (LUa InterFace),
+the interface language of
+the [Kollos project](https://github.com/jeffreykegler/kollos/).
 
 The LUIF is Lua, extended with [BNF](http://en.wikipedia.org/wiki/Backus%E2%80%93Naur_Form) statements.
 
-[todo: consider rearranging the sections after more content is added 
+[todo: consider rearranging the sections after more content is added
 to follow the Lua manual bottom-up pattern of introducing individual constructs with grammar snippets first and presenting the full syntax in the final section. ]
 
 ## BNF statement
@@ -199,7 +199,7 @@ square brackets.
 A LUIF symbol name is any valid Lua name.
 In addition, names with non-initial hyphens are allowed.
 Eventually an angle bracket notation for LUIF symbol names,
-similar to that of 
+similar to that of
 the [SLIF](https://metacpan.org/pod/distribution/Marpa-R2/pod/Scanless/DSL.pod#Symbol-names),
 will allow whitespace
 in names.
@@ -222,7 +222,7 @@ This table will be interpreted by the lower layer (KLOL).  Initially post-proces
 
 ## Grammars
 
-BNF statements are grouped into one or more grammars.  The grammar is indicated by the produce-operator of the 
+BNF statements are grouped into one or more grammars.  The grammar is indicated by the produce-operator of the
 BNF.  Its general form is `:grammar:=`, where `grammar` is the name of a grammar.  `grammar` must not contain colons.  Initially, the post-processing will not support anything but `l0` and `g1` used in the default way.
 
 If the produce-operator is `::=`, then the grammar is `g1`.  The tilde `~` can be a produce-operator, in which case it is equivalent to `:l0:=`.

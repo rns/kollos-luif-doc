@@ -12,7 +12,7 @@ two subphases.
 
 * Run the "pure Lua file" to create the Kollos Intermediate Representation (KIR),
   which is a Lua table.
-  
+
 For each subphase the output can be a editable file.  This is useful for
 maintenance, debugging, etc.
 
@@ -38,8 +38,8 @@ The original text is shown
 as a comment.  This is not necessary but will be useful when the file is
 for debugging, tracing, etc.
 
-The AST shown here is simplified, and simply for purposes of illustration.  
-This AST format will not be documented -- 
+The AST shown here is simplified, and simply for purposes of illustration.
+This AST format will not be documented --
 it's format will be treated as an internal matter.
 
 ## "Direct to pure Lua" calls
