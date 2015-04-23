@@ -1,6 +1,6 @@
 ﻿# The LUIF
 
-Warning: the below is an unedited draft/skeleton, mostly wrapping up what's been done so far for further work.
+Warning: the below is an unfinished draft.
 
 ## Overview
 
@@ -45,9 +45,9 @@ adverb  ::= field |
 
 action ::= **action** funcbody
 
-rhs ::= RH_atom { RH_atom }
+rhs ::= rh_atom { rh_atom }
 
-RH_atom ::= '[]' |                               -- empty symbol
+rh_atom ::= '[]' |                               -- empty symbol
             separated_sequence |
             named_symbol |
             literal |
@@ -59,13 +59,15 @@ separated_sequence ::= sequence  |
                        sequence '%'  separator | -- proper separation
                        sequence '%%' separator
 
-separator ::= Name
+separator ::= symbol_name
 
-sequence ::= Name '+' |
-             Name '*' |
-             Name '?' |
-             Name '*' Number '..' Number |
-             Name '*' Number '..' '*'
+sequence ::= symbol_name '+' |
+             symbol_name '*' |
+             symbol_name '?' |
+             symbol_name '*' Number '..' Number |
+             symbol_name '*' Number '..' '*'
+
+symbol_name :: Name
 
 literal ::= String
 
