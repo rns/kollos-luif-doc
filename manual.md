@@ -1,6 +1,6 @@
 ﻿# The LUIF
 
-Warning: this a draft work in progress.
+Warning: this is a working draft.
 
 ## Overview
 
@@ -17,39 +17,36 @@ to follow the Lua manual bottom-up pattern of introducing individual constructs 
 
 There is only one BNF statement, combining precedence, sequences, and alternation.
 
-LUIF extends the Lua syntax by adding `bnf` alternative to `stat` rule of the [Lua grammar](http://www.lua.org/manual/5.1/manual.html#8) and introducing the new rules. The general syntax for a BNF statement is as follows (`stat`, `funcbody`, `field`, `Name`, and `String` symbols are as defined by the Lua grammar):
+LUIF extends the Lua syntax by adding `bnf` alternative to `stat` rule of the [Lua grammar](http://www.lua.org/manual/5.1/manual.html#8) and introducing the new rules. The general syntax for a BNF statement is as follows (`stat`, `var`, `funcbody`, `field`, `Name`, and `String` symbols are as defined by the Lua grammar):
 
-Note: this is a draft for review describing LUIF structural and lexical grammars 'used in the default way' as defined in [Grammars](#grammars) section below. The first rule will act as the start rule.
-
-start rule is the first rule
+Note: this describes LUIF structural and lexical grammars 'used in the default way' as defined in [Grammars](#grammars) section below. The first rule will act as the start rule.
 
 [todo: make sure it conforms to other sections]
 
 ```
 stat ::= bnf
 
-bnf ::= lhs produce_op precedenced_alternatives
+bnf ::= lhs produce_op rhs  -- to make references LHS/RHS easier to understand
 
 lhs ::= symbol_name
 
-produce_op ::= '::=' | '~'
+produce_op ::= '::=' |
+               '~'
 
-precedenced_alternatives ::= precedenced_alternative { '||' precedenced_alternative }
+rhs ::= precedenced_alternative { '||' precedenced_alternative }
 
-precedenced_alternative  ::= alternative { '|' alternative }
+precedenced_alternative ::= alternative { '|' alternative }
 
-alternative ::= rhs [ ',' adverbs ]
+alternative ::= rhslist { ',' adverb }
 
-adverbs ::= adverb { ',' adverb }
-
-adverb  ::= field |
-            action
+adverb ::= field |
+           action
 
 action ::= 'action' funcbody
 
-rhs ::= rh_atom { rh_atom }
+rhslist ::= { rh_atom }                         -- can be empty, like Lua chunk
 
-rh_atom ::= '[]' |                               -- empty symbol
+rh_atom ::= var |                               -- Lua variable, for programmatic grammar construction
             separated_sequence |
             named_symbol |
             literal |
@@ -172,10 +169,8 @@ square brackets.
 
 ### Symbol names
 
-[todo: update the LUIF grammar according to the below description]
 A LUIF symbol name is any valid Lua name.
-In addition, names with non-initial hyphens are allowed.
-Eventually an angle bracket notation for LUIF symbol names,
+Eventually names with non-initial hyphens will be allowed and an angle bracket notation for LUIF symbol names,
 similar to that of
 the [SLIF](https://metacpan.org/pod/distribution/Marpa-R2/pod/Scanless/DSL.pod#Symbol-names),
 will allow whitespace
