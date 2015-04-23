@@ -1,4 +1,4 @@
-# Internals
+﻿# Internals
 
 Some of the material I am adding is too implementation-ish or internals-ish to really belong in a reference doc,
 even a draft.  This doc is for that stuff.
@@ -38,12 +38,13 @@ The original text is shown
 as a comment.  This is not necessary but will be useful when the file is
 for debugging, tracing, etc.
 
-The AST shown here is simplified, and simply for purposes of illustration.  This AST format will
-not be documented -- it's format will be treated as an internal matter.
+The AST shown here is simplified, and simply for purposes of illustration.  
+This AST format will not be documented -- 
+it's format will be treated as an internal matter.
 
 ## "Direct to pure Lua" calls
 
-In the LUIF, there may calls may be of the form
+In the LUIF, calls may be of the form
 ```
     luif_self:rule_from_string("x ::= a b c")
 ```
@@ -60,8 +61,8 @@ features.
 ## The Kollos Intermediate Representation
 
 This is a Lua table.  Jeffrey does not have full details yet, but here's the
-general idea.  The KHOL's cetnral job is to translate the LUIF rules from
-an external extended BNF representation, to an internal representation which
+general idea.  The KHOL's central job is to translate the LUIF rules from
+an external extended BNF representation to an internal representation which
 is plain BNF.
 
 That table has one key per grammar.  The value for each grammar
