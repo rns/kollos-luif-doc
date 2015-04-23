@@ -42,9 +42,9 @@ adverbs ::= adverb { ',' adverb }
 
 adverb  ::= field |
             action
-
-action ::= **action** funcbody
-
+```
+`action ::= `**action**` funcbody`
+```
 rhs ::= rh_atom { rh_atom }
 
 rh_atom ::= '[]' |                               -- empty symbol
