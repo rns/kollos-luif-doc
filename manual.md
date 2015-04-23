@@ -17,9 +17,7 @@ to follow the Lua manual bottom-up pattern of introducing individual constructs 
 
 There is only one BNF statement, combining precedence, sequences, and alternation.
 
-LUIF extends the Lua syntax by adding `bnf` alternative to `stat` rule of the [Lua grammar](http://www.lua.org/manual/5.1/manual.html#8) and introducing the new rules. The general syntax for a BNF statement is
-
-[todo: convert the below SLIF syntax to extended BNF used by Lua manual]
+LUIF extends the Lua syntax by adding `bnf` alternative to `stat` rule of the [Lua grammar](http://www.lua.org/manual/5.1/manual.html#8) and introducing the new rules. The general syntax for a BNF statement is as follows (`stat`, `funcbody`, `field`, `Name`, and `String` symbols are as defined by the Lua grammar):
 
 [todo: make sure it conforms to other sections]
 
@@ -74,8 +72,6 @@ literal ::= String
 charclass ::= String -- must contain a Lua pattern as per http://www.lua.org/manual/5.1/manual.html#5.4.1
 
 ```
-
-`stat`, `funcbody`, `field`, `Name`, and `String` symbols are as defined by [Lua grammar](http://www.lua.org/manual/5.1/manual.html#8).
 
 ## Sequences
 
