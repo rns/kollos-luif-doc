@@ -71,7 +71,7 @@ symbol_name :: Name
 
 literal ::= String
 
-charclass ::= String -- must contain a Lua patterns as per http://www.lua.org/manual/5.1/manual.html#5.4.1
+charclass ::= String -- must contain a Lua pattern as per http://www.lua.org/manual/5.1/manual.html#5.4.1
 
 ```
 
