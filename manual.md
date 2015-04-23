@@ -1,6 +1,6 @@
 ﻿# The LUIF
 
-Warning: the below is an unfinished draft.
+Warning: this a draft work in progress.
 
 ## Overview
 
@@ -19,6 +19,10 @@ There is only one BNF statement, combining precedence, sequences, and alternatio
 
 LUIF extends the Lua syntax by adding `bnf` alternative to `stat` rule of the [Lua grammar](http://www.lua.org/manual/5.1/manual.html#8) and introducing the new rules. The general syntax for a BNF statement is as follows (`stat`, `funcbody`, `field`, `Name`, and `String` symbols are as defined by the Lua grammar):
 
+Note: this is a draft for review describing LUIF structural and lexical grammars 'used in the default way' as defined in [Grammars](#grammars) section below. The first rule will act as the start rule.
+
+start rule is the first rule
+
 [todo: make sure it conforms to other sections]
 
 ```
@@ -26,7 +30,7 @@ stat ::= bnf
 
 bnf ::= lhs produce_op precedenced_alternatives
 
-lhs ::= Name
+lhs ::= symbol_name
 
 produce_op ::= '::=' | '~'
 
@@ -183,6 +187,8 @@ in names.
 
 ### Comments
 
+See Lua comments at the end of [Lexical Conventions](http://www.lua.org/manual/5.1/manual.html#2.1) in the Lua 5.1 Reference Manual.
+
 ### Adverbs
 
 #### action
@@ -193,13 +199,14 @@ The output of the KHIL will be a table, with one key for each grammar name.  Key
 
 This table will be interpreted by the lower layer (KLOL).  Initially post-processing will take a very restricted form in the LUIF grammars.   There are two kinds of Libmarpa grammars: structural and lexical grammar.  A grammar is lexical if one or more of its rules have the special `lexeme` action.  The post-processing will expect a lexical grammar named `l0` and a structural grammar named `g1`, and will check (in the same way that Marpa::R2 currently does) to ensure they are compatible.
 
-## Grammars
+## Grammars <a id="grammars"></a>
 
 BNF statements are grouped into one or more grammars.  The grammar is indicated by the produce-operator of the BNF. Its general form is `:grammar:=`, where `grammar` is the name of a grammar.  `grammar` must not contain colons.  Initially, the post-processing will not support anything but `l0` and `g1` used in the default way, like this:
 
 ```lua
 -- structural grammar
-a ::= b c       -- using the LHS (b c) of a lexical rule
+a ::= b c       -- the first rule is the start rule
+                -- using the LHS (b c) of a lexical rule
                 -- on the RHS of a structural rule makes a lexeme
 a ::= w
 aa ::= a a
