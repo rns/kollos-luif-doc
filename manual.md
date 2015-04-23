@@ -17,88 +17,63 @@ to follow the Lua manual bottom-up pattern of introducing individual constructs 
 
 There is only one BNF statement, combining precedence, sequences, and alternation.
 
-LUIF extends the Lua syntax by adding `bnf` and `grammarexp` alternatives to, accordingly, `stat` and `exp` rules of the [Lua grammar](http://www.lua.org/manual/5.1/manual.html#8) and introducing the new rules. The general syntax for a BNF statement is
+LUIF extends the Lua syntax by adding `bnf` alternative to `stat` rule of the [Lua grammar](http://www.lua.org/manual/5.1/manual.html#8) and introducing the new rules. The general syntax for a BNF statement is
 
-[todo: convert the below SLIF syntax to EBNF used by Lua manual]
+[todo: convert the below SLIF syntax to extended BNF used by Lua manual]
 
 [todo: make sure it conforms to other sections]
 
 ```
-stat ::= BNF
+stat ::= bnf
 
-BNF ::= <BNF rule>+
+bnf ::= lhs produce_op precedenced_alternatives
 
-exp ::= grammarexp
+lhs ::= Name
 
-grammarexp ::= <grammar> grambody
+produce_op ::= '::=' | '~'
 
-grambody ::= <left paren> parlist <right paren> block <end>
-grambody ::= <left paren> <right paren> block <end>
+precedenced_alternatives ::= precedenced_alternative { '||' precedenced_alternative }
 
-# There is only one BNF statement,
-# combining priorities, sequences, and alternation
-<BNF rule> ::= lhs '::=' <prioritized alternatives>
-<prioritized alternatives> ::= <prioritized alternative>+ separator => <double bar>
-<prioritized alternative> ::= <alternative>+ separator => <bar>
-<alternative> ::= rhs | rhs ',' <alternative fields>
-<alternative fields> ::= <alternative field>+ separator => comma
-<alternative field> ::= field | action
-action ::= 'action' '(' <action parlist> ')' block <end>
-<action parlist> ::= <symbol parameter> | <action parlist> ',' <symbol parameter>
-<symbol parameter> ::= <named RH symbol>
-  | <named RH symbol> '[' <nonnegative integer> ']'
-  | <named RH symbol> '[]'
+precedenced_alternative  ::= alternative { '|' alternative }
 
-<named RH symbol> ::= <named symbol>
-lhs ::= <named symbol>
+alternative ::= rhs [ ',' adverbs ]
 
-<double bar> ~ '||'
-bar ~ '|'
-comma ~ ','
+adverbs ::= adverb { ',' adverb }
 
-rhs ::= <RH atom>+
-<RH atom> ::=
-     '[]' # for empty symbol
-   | <separated sequence>
-   | <named symbol>
-   | '(' alternative ')'
-   | '[' alternative ']'
+adverb  ::= field |
+            action
 
-# The sequence notation is extended to counted sequences,
-# and a separator notation adopted from Perl 6 is used
+action ::= **action** funcbody
 
-<named symbol> ::= <symbol name>
-<separated sequence> ::=
-      sequence
-| sequence '%' separator # proper separation
-| sequence '%%' separator # Perl separation
+rhs ::= RH_atom { RH_atom }
 
-separator ::= <named symbol>
+RH_atom ::= '[]' |                               -- empty symbol
+            separated_sequence |
+            named_symbol |
+            literal |
+            charclass |
+            '(' alternative ')' |
+            '[' alternative ']'
 
-sequence ::=
-     <named symbol> '+'
-   | <named symbol> '*'
-   | <named symbol> '?'
-   | <named symbol> '*' <nonnegative integer> '..' <nonnegative integer>
-   | <named symbol> '*' <nonnegative integer> '..' '*'
+separated_sequence ::= sequence  |
+                       sequence '%'  separator | -- proper separation
+                       sequence '%%' separator
 
-# symbol name is any valid Lua name, plus those with
-# non-initial hyphens
-# TODO: add angle bracket variation
-#<symbol name> ~ [a-zA-Z_] <symbol name chars>
-#<symbol name chars> ~ [-\w]*
-<symbol name> ::= Name
+separator ::= Name
 
-#<nonnegative integer> ~ [\d]+
-<nonnegative integer> ::= Number
+sequence ::= Name '+' |
+             Name '*' |
+             Name '?' |
+             Name '*' Number '..' Number |
+             Name '*' Number '..' '*'
 
-# <symbol name>, <symbol name chars>, <nonnegative integer> rules
-# are commented out from Jeffrey Kegler's BNF because
-# MarpaX::Languages::Lua::AST::extend() doesn't support character classes.
-# For the moment, suitable tokens from Lua grammar (Name and Number) are used instead
-# TODO: charclasses
+literal ::= String
+
+charclass ::= String -- must contain a Lua patterns as per http://www.lua.org/manual/5.1/manual.html#5.4.1
 
 ```
+
+`stat`, `funcbody`, `field`, `Name`, and `String` symbols are as defined by [Lua grammar](http://www.lua.org/manual/5.1/manual.html#8).
 
 ## Sequences
 
@@ -222,8 +197,7 @@ This table will be interpreted by the lower layer (KLOL).  Initially post-proces
 
 ## Grammars
 
-BNF statements are grouped into one or more grammars.  The grammar is indicated by the produce-operator of the
-BNF.  Its general form is `:grammar:=`, where `grammar` is the name of a grammar.  `grammar` must not contain colons.  Initially, the post-processing will not support anything but `l0` and `g1` used in the default way, like this:
+BNF statements are grouped into one or more grammars.  The grammar is indicated by the produce-operator of the BNF. Its general form is `:grammar:=`, where `grammar` is the name of a grammar.  `grammar` must not contain colons.  Initially, the post-processing will not support anything but `l0` and `g1` used in the default way, like this:
 
 ```lua
 -- structural grammar
@@ -288,7 +262,7 @@ string   ::= [todo]
 
 comma    ~ ','
 
-true     ~ 'true' # [todo] true and false are Lua keywords: KHIL needs to handle this
+true     ~ 'true' # [todo: true and false are Lua keywords: KHIL needs to handle this]
 true     ~ 'false'
 null     ~ 'null'
 ```
