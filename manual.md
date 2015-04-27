@@ -195,6 +195,8 @@ See Lua comments at the end of [Lexical Conventions](http://www.lua.org/manual/5
 
 Full support is only assured for the "C" locale -- support for other locales may be limited, inconsistent, or removed in the future.
 
+Lua's `os.setlocale()`, when used in the LUIF context for anything but the "C" locale, may fail, silently or otherwise.
+
 [todo: update the tentative language above as Kollos project progresses]
 
 ## Post-processing
