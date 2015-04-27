@@ -17,7 +17,7 @@ to follow the Lua manual bottom-up pattern of introducing individual constructs 
 
 There is only one BNF statement, combining precedence, sequences, and alternation.
 
-LUIF extends the Lua syntax by adding `bnf` alternative to `stat` rule of the [Lua grammar](http://www.lua.org/manual/5.1/manual.html#8) and introducing the new rules. The general syntax for a BNF statement is as follows (`stat`, `var`, `funcbody`, `field`, `Name`, and `String` symbols are as defined by the Lua grammar):
+LUIF extends the Lua syntax by adding `bnf` alternative to `stat` rule of the [Lua grammar](http://www.lua.org/manual/5.1/manual.html#8) and introducing the new rules. The general syntax for a BNF statement is as follows (`stat`, `block`, `var`, `field`, `Name`, and `String` symbols are as defined by the Lua grammar):
 
 Note: this describes LUIF structural and lexical grammars 'used in the default way' as defined in [Grammars](#grammars) section below. The first rule will act as the start rule.
 
@@ -42,11 +42,14 @@ alternative ::= rhslist { ',' adverb }
 adverb ::= field |
            action
 
-action ::= 'action' funcbody
+action ::= 'action' '=' actionexp
 
-rhslist ::= { rh_atom }                         -- can be empty, like Lua chunk
+actionexp ::= 'function' '(...)' block end
+              -- borrow array descriptors from SLIF?
 
-rh_atom ::= var |                               -- Lua variable, for programmatic grammar construction
+rhslist ::= { rh_atom }                    -- can be empty, like Lua chunk
+
+rh_atom ::= var |                          -- Lua variable, for programmatic grammar construction
             separated_sequence |
             named_symbol |
             literal |
@@ -221,7 +224,7 @@ If the produce-operator is `::=`, then the grammar is `g1`.  The tilde `~` can b
 
 A structural grammar will often contain lexical elements, such as strings and character classes, and these will go into its linked lexical grammar.  The start rule specifies its lexical grammar with an adverb (what?).  In a lexical grammar the lexemes are indicated with the `lexeme` adverb -- if a rule has a lexeme adverb, its LHS is a lexeme.
 
-If a grammar specified lexemes, it is a lexical grammar.  If a grammar specified a linked lexical grammar, it is a structural grammar.  `l0` must always be a lexical grammar.  `g1` must always be a structural grammar and is linked by default to `l0`.  It is a fatal error if a grammar has no indication whether it is structural or lexical, but this indication may be a default.  Enforcement of these restrictions is done by the lower layer (KLOL).  `
+If a grammar specified lexemes, it is a lexical grammar.  If a grammar specified a linked lexical grammar, it is a structural grammar.  `l0` must always be a lexical grammar.  `g1` must always be a structural grammar and is linked by default to `l0`.  It is a fatal error if a grammar has no indication whether it is structural or lexical, but this indication may be a default.  Enforcement of these restrictions is done by the lower layer (KLOL).
 
 ## Example grammars
 
@@ -232,11 +235,11 @@ Script ::= Expression+ % ','
 Expression ::=
   Number
   | '(' Expression ')'
- || Expression '**' Expression
- || Expression '*' Expression
-  | Expression '/' Expression
- || Expression '+' Expression
-  | Expression '-' Expression
+ || Expression '**' Expression, action = function (...) return arg[1] ^ arg[2] end
+ || Expression '*' Expression, action = function (...) return arg[1] * arg[2] end
+  | Expression '/' Expression, action = function (...) return arg[1] / arg[2] end
+ || Expression '+' Expression, action = function (...) return arg[1] + arg[2] end
+  | Expression '-' Expression, action = function (...) return arg[1] - arg[2] end
 ```
 
 ### JSON
