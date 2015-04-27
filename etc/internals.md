@@ -49,7 +49,7 @@ In the LUIF, calls may be of the form
     luif_self:rule_from_string("x ::= a b c")
 ```
 The first subphase should *not* pass these lua calls through,
-but should parse them into the `luif:self:rule_parse().
+but should parse them into the `luif_self:rule_parse()`.
 These "direct to pure Lua" rules allow the Lua logic to construct LUIF
 EBNF rules "on the fly" in the LUIF.
 A LUIF script may mix EBNF rules, "direct to pure Lua rules",
