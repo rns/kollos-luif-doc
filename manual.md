@@ -191,6 +191,12 @@ See Lua comments at the end of [Lexical Conventions](http://www.lua.org/manual/5
 
 #### action
 
+## Locale support
+
+Full support is only assured for the "C" locale -- support for other locales may be limited, inconsistent, or removed in the future.
+
+[todo: update the tentative language above as Kollos project progresses]
+
 ## Post-processing
 
 The output of the KHIL will be a table, with one key for each grammar name.  Keys *must* be strings.  The value of each grammar key will be a table, with entries for external and internal symbols and rules.  Details of the format will be specified later.
