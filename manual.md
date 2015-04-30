@@ -47,11 +47,11 @@ action ::= 'action' '=' actionexp
 actionexp ::= 'function' '(...)' block end
               -- borrow array descriptors from SLIF?
 
-rhslist ::= { rh_atom }                    -- can be empty, like Lua chunk
+rhslist ::= { rh_atom }       -- can be empty, like Lua chunk
 
-rh_atom ::= var |                          -- Lua variable, for programmatic grammar construction
+rh_atom ::= var |             -- Lua variable, for programmatic grammar construction
             separated_sequence |
-            named_symbol |
+            symbol_name |
             literal |
             charclass |
             '(' alternative ')' |
