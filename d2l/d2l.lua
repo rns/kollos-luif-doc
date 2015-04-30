@@ -6,7 +6,8 @@ local luif = {
   L = function(literal) return "L:'" .. literal .. "'" end,
   C = function(charclass) return "C:'" .. charclass .. "'" end,
   Q = function(quantifier) return "Q:'" .. quantifier .. "'" end,
-  hide = function(quantifier) return "hidden[ '" .. quantifier .. " ]" end,
+  hide = function(...) return "hidden[ '" .. table.concat({...}, ' ') .. " ]" end,
+  group = function(...) return "hidden[ '" .. table.concat({...}, ' ') .. " ]" end,
 }
 
 local S = luif.S
