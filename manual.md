@@ -248,6 +248,7 @@ Expression ::=
   | Expression '/' Expression, action = function (...) return arg[1] / arg[2] end
  || Expression '+' Expression, action = function (...) return arg[1] + arg[2] end
   | Expression '-' Expression, action = function (...) return arg[1] - arg[2] end
+ Number ~ [0-9]+
 ```
 
 ### JSON
