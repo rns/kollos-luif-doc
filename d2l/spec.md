@@ -54,6 +54,7 @@ Notes:
 An outline of D2L functions to be used to build
 a Lua table containing LUIF rules for KHIL.
 
+```lua
 s = symbol ('name')
 r = rule (lhs, alternative1, alternative2, ... )
 
@@ -75,6 +76,7 @@ aa = actify (alternative, function(...) end )
 
 l = literal('string')
 c = charclass('[a-z]') --
+```
 
 adverbs
   hidden      true, false
@@ -92,6 +94,7 @@ a Lua table of LUIF rules (can be based on SLIF MetaAST)
 to be passed to KHIL
 for conversion to KIR.
 
+```lua
 {
   {
     lhs = 'Expression'
@@ -130,3 +133,4 @@ for conversion to KIR.
   },
 
 }
+```
