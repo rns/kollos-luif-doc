@@ -254,6 +254,9 @@ Expression ::=
 ### JSON
 
 ```
+
+-- structural
+
 json     ::= object
            | array
 object   ::= [ '{' '}' ]
@@ -270,11 +273,38 @@ value    ::= string
 array    ::= [ '[' ']' ]
            | [ '[' ] elements [ ']' ]
 elements ::= value+ % comma
-string   ::= [todo]
+string   ::= lstring
 
-comma    ~ ','
+-- lexical
 
-true     ~ 'true' # [todo: true and false are Lua keywords: KHIL needs to handle this]
-false    ~ 'false'
-null     ~ 'null'
+comma          ~ ','
+-- [todo: true and false are Lua keywords: KHIL needs to handle this]
+S_true         ~ 'true'
+S_false        ~ 'false'
+null           ~ 'null'
+number         ~ int
+               | int frac
+               | int exp
+               | int frac exp
+int            ~ digits
+               | '-' digits
+digits         ~ [\d]+
+frac           ~ '.' digits
+exp            ~ e digits
+e              ~ 'e'
+               | 'e+'
+               | 'e-'
+               | 'E'
+               | 'E+'
+               | 'E-'
+lstring        ~ quote in_string quote
+quote          ~ ["]
+in_string      ~ in_string_char*
+in_string_char ~ [^"] | '\"'
+
+whitespace     ~ [\s]+
+
+-- [todo: specify equivalent in LUIF ]
+:discard       ~ whitespace
+
 ```
