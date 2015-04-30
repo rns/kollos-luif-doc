@@ -120,8 +120,8 @@ local json = luif.G{
     { S'object' },
     { S'number' },
     { S'array' },
-    { S'true' },
-    { S'false' },
+    { S'S_true' },
+    { S'S_false' },
     { S'null' },
   },
 
@@ -136,8 +136,8 @@ local json = luif.G{
 
   comma = L',',
 
-  ['true']  = L'true', -- true and false are Lua keywords
-  ['false'] = L'false',
+  S_true  = L'true', -- true and false are Lua keywords
+  S_false = L'false',
   null  = L'null',
 
 }
