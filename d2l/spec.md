@@ -6,9 +6,23 @@ To quote Roberto:
 
 > Following the Snobol tradition, LPeg defines patterns as first-class objects. That is, patterns are regular Lua values (represented by userdata). The library offers several functions to create and compose patterns. With the use of metamethods, several of these functions are provided as infix or prefix operators. On the one hand, the result is usually much more verbose than the typical encoding of patterns using the so called regular expressions (which typically are not regular expressions in the formal sense). On the other hand, first-class patterns allow much better documentation (as it is easy to comment the code, to break complex definitions in smaller parts, etc.) and are extensible, as we can define new functions to create and compose patterns.
 
+## Functions
+
+`luif.G{...}` takes a table of LUIF rules expressed as direct-to-Lua calls
+and returns a table representing LUIF rules for KHIL. ([LPeg counterpart]
+(http://www.inf.puc-rio.br/~roberto/lpeg/lpeg.html#grammar)).
+
+`luif.S(string)`, `luif.L(string)`, and `luif.C(string)` prefix strings serving as LUIF symbols, literals and character classes, accordingly.
+
+`luif.Q(string)` marks string as a quantifier for sequence rules.
+
+`luif.hide(...)` and `luif.group(...)` take a list of prefixed D2L strings and provide LUIF hiding and grouping.
+
+'|', '||', '%%', and '%' literals are used in the meaning defined by the LUIF Grammar.
+
 ## Calculator Grammar
 
-### Calaculator LUIF
+### Calculator LUIF
 
 ```
 Script ::= Expression+ % ','
