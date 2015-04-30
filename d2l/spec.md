@@ -62,8 +62,6 @@ Notes:
 
 2. A lexical rule `Number = C'[0-9]'` can be inferred by checking that its RHS contains only literals, charclasses and LHSes of rules having only literals and charclasses on their RHSes.
 
-[Warning: very early draft below]
-
 ## JSON Grammar
 
 ### JSON LUIF
@@ -143,6 +141,8 @@ local json = luif.G{
 }
 ```
 
+[Warning: very early draft below]
+
 ## Interface
 
 An outline of D2L functions to be used to build
@@ -172,14 +172,15 @@ l = literal('string')
 c = charclass('[a-z]') --
 ```
 
-adverbs
-  hidden      true, false
-  group       true, false
-  proper      true, false
-  action      function, descriptor(s)
-  quantifier  '+', '*'
-  precedence  '|', '||'
-  lexical     true, false
+### Adverbs
+
+- hidden      true, false
+- group       true, false
+- proper      true, false
+- action      function, descriptor(s)
+- quantifier  '+', '*'
+- precedence  '|', '||'
+- lexical     true, false
 
 ## External Grammar (LUIF Rules) for KHIL
 
