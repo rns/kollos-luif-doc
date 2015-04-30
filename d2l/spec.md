@@ -178,8 +178,8 @@ c = charclass('[a-z]') --
 - `group`:       `true`, `false`
 - `proper`:      `true, `false`
 - `action`:      `function` -- todo: other descriptors
-- `quantifier`:  `'+', `'*'`
-- `precedence`:  `'|', `'||'`
+- `quantifier`:  `'+'`, `'*'`
+- `precedence`:  `'|'`, `'||'`
 - `lexical`:     `true`, `false`
 
 ## External Grammar (LUIF Rules) for KHIL
