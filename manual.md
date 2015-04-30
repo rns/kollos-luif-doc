@@ -275,6 +275,6 @@ string   ::= [todo]
 comma    ~ ','
 
 true     ~ 'true' # [todo: true and false are Lua keywords: KHIL needs to handle this]
-true     ~ 'false'
+false    ~ 'false'
 null     ~ 'null'
 ```

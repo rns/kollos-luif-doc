@@ -8,7 +8,7 @@ To quote Roberto:
 
 ## Calculator Grammar
 
-### LUIF
+### Calaculator LUIF
 
 ```
 Script ::= Expression+ % ','
@@ -23,7 +23,7 @@ Expression ::=
  Number ~ [0-9]+
 ```
 
-### Direct-to-Lua
+### Calculator Direct-to-Lua
 
 ```lua
 local calc = luif.G{
@@ -48,6 +48,85 @@ Notes:
 2. A lexical rule `Number = C'[0-9]'` can be inferred by checking that its RHS contains only literals, charclasses and LHSes of rules having only literals and charclasses on their RHSes.
 
 [Warning: very early draft below]
+
+## JSON Grammar
+
+### JSON LUIF
+
+```
+json     ::= object
+           | array
+object   ::= [ '{' '}' ]
+           | [ '{' ] members [ '}' ]
+members  ::= pair+ % comma
+pair     ::= string [ ':' ] value
+value    ::= string
+           | object
+           | number
+           | array
+           | true
+           | false
+           | null
+array    ::= [ '[' ']' ]
+           | [ '[' ] elements [ ']' ]
+elements ::= value+ % comma
+string   ::= [todo]
+
+comma    ~ ','
+
+true     ~ 'true' # [todo: true and false are Lua keywords: KHIL needs to handle this]
+false    ~ 'false'
+null     ~ 'null'
+```
+
+### JSON Direct-to-Lua
+
+```lua
+local json = luif.G{
+
+  json = {
+    { S'object' },
+    { S'array' }
+  },
+
+  object = {
+    { luif.hide( L'{', L'}' ) },
+    { luif.hide( L'{' ), S'members', luif.hide( L'}' ) }
+  },
+
+  members = { S'pair', Q'+', '%', S'comma' },
+
+  pair = {
+    { S'string', luif.hide( L':' ), S'value' }
+  },
+
+  value = {
+    { S'string' },
+    { S'object' },
+    { S'number' },
+    { S'array' },
+    { S'true' },
+    { S'false' },
+    { S'null' },
+  },
+
+  array = {
+    { luif.hide( L'[', L']' ) },
+    { luif.hide( L'[' ), S'elements', luif.hide( L']' ) },
+  },
+
+  elements = { S'value', Q'+', '%', S'comma' },
+
+  string = { '[todo]' },
+
+  comma = L',',
+
+  ['true']  = L'true', -- true and false are Lua keywords
+  ['false'] = L'false',
+  null  = L'null',
+
+}
+```
 
 ## Interface
 
