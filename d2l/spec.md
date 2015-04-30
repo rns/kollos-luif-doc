@@ -18,7 +18,8 @@ and returns a table representing LUIF rules for KHIL. ([LPeg counterpart]
 
 `luif.hide(...)` and `luif.group(...)` take a list of prefixed D2L strings and provide LUIF hiding and grouping.
 
-'|', '||', '%%', and '%' literals are used in the meaning defined by the LUIF Grammar.
+`'|'`, `'||'`, `'%%'`, and `'%'` literals are used
+in the meaning defined by the LUIF grammar for `|`, `||`, `%%`, and `%`.
 
 ## Calculator Grammar
 
