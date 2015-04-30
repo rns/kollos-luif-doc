@@ -43,9 +43,9 @@ local calc = luif.G{
 
 Notes:
 
-    1. See `calc.lua` for the complete example.
+1. See `calc.lua` for the complete example.
 
-    2. A lexical rule `Number = C'[0-9]'` can be inferred by checking that its RHS contains only literals, charclasses and LHSes of rules having only literals and charclasses on their RHSes.
+2. A lexical rule `Number = C'[0-9]'` can be inferred by checking that its RHS contains only literals, charclasses and LHSes of rules having only literals and charclasses on their RHSes.
 
 [Warning: very early draft below]
 
