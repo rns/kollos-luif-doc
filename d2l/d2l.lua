@@ -1,5 +1,6 @@
 require 'DataDumper'
 
+-- LUIF D2L calls mockup
 local luif = {
   G = function(grammar) return grammar end,
   S = function(name) return "S:'" .. name .. "'" end,
@@ -15,11 +16,7 @@ local L = luif.L
 local C = luif.C
 local Q = luif.Q
 
-local pow = function (...) local arg={...} return arg[1] ^ arg[2] end
-local mul = function (e1, e2) return e1 * e2 end
-local div = function (...) return arg[1] / arg[2] end
-local add = function (...) return arg[1] + arg[2] end
-local sub = function (...) return arg[1] - arg[2] end
+-- calculator
 
 local calc = luif.G{
   Script = { S'Expression', Q'+', '%', L',' },
@@ -35,7 +32,17 @@ local calc = luif.G{
   Number = C'[0-9]+'
 }
 
+-- semantic actions
+local pow = function (...) local arg={...} return arg[1] ^ arg[2] end
+local mul = function (e1, e2) return e1 * e2 end
+local div = function (e1, e2) return e1 / e2 end
+local add = function (e1, e2) return e1 + e2 end
+local sub = function (e1, e2) return e1 - e2 end
+
 print(DataDumper(calc))
+
+-- json
+-- todo: add l0 rules from manual.md
 
 local json = luif.G{
 
