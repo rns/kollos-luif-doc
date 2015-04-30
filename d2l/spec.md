@@ -174,13 +174,13 @@ c = charclass('[a-z]') --
 
 ### Adverbs
 
-- `hidden`:      true, false
-- `group`:       true, false
-- `proper`:      true, false
-- `action`:      function, descriptor(s)
-- `quantifier`:  '+', '*'
-- `precedence`:  '|', '||'
-- `lexical`:     true, false
+- `hidden`:      `true`, `false`
+- `group`:       `true`, `false`
+- `proper`:      `true, `false`
+- `action`:      `function` -- todo: other descriptors
+- `quantifier`:  `'+', `'*'`
+- `precedence`:  `'|', `'||'`
+- `lexical`:     `true`, `false`
 
 ## External Grammar (LUIF Rules) for KHIL
 
