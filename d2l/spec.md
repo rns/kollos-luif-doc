@@ -175,6 +175,8 @@ Expression ::=
 
 #### Calculator Grammar in D2L
 
+Note: See `d2l.lua` for the complete example.
+
 ```lua
 local calc = luif.G{
   Script = { S'Expression', Q'+', '%', L',' },
@@ -190,8 +192,6 @@ local calc = luif.G{
   Number = C'[0-9]'
 }
 ```
-
-Note: See `d2l.lua` for the complete example.
 
 ### Example 2: JSON Grammar
 
@@ -226,6 +226,8 @@ null     ~ 'null'
 ```
 
 #### JSON Grammar in D2L
+
+Note: See `d2l.lua` for the complete example.
 
 ```lua
 local json = luif.G{
@@ -273,5 +275,3 @@ local json = luif.G{
 
 }
 ```
-
-Note: See `d2l.lua` for the complete example.
