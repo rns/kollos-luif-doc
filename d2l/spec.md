@@ -23,13 +23,11 @@ in the meaning defined by the LUIF grammar for `|`, `||`, `%%`, and `%`.
 If an application needs such literals in its grammar,
 it must prefix them with `luif.L`, e.g. `luif.L'|'`.
 
-`khil.grammar_new_from_table(name, luif.G{...})` adds a grammar returned by `luif.G{...}` call under key `name` to KHIL table of grammars.
+`khil.grammar_new(name, luif.G{...})` adds a grammar returned by `luif.G{...}` call under key `name` to KHIL table of grammars.
 
-[Note: The below function is a suggestion, possibly too forward-looking]
+`khil.grammar_loadstring(name, source)` adds a grammar contained in `source` string under key `name` to KHIL table of grammars. `string` must contain a grammar table serialized so that it evaluates to a valid LUIF grammar representation by `loadstring(string [, chunkname])`. The intended use is binding Kollos from another language by writing direct-to functions specified above in such language.
 
-`khil.grammar_new_from_string(name, source)` adds a grammar contained in `source` string under key `name` to KHIL table of grammars. `string` must contain a grammar table serialized so that it evaluates to a valid LUIF grammar representation by `loadstring(string [, chunkname])`. The intended use is binding Kollos from another language by writing direct-to functions specified above in such language.
-
-The two functions above must infer lexical rules, like `Number = C'[0-9]'`
+The two functions above must infer lexical rules
 by checking that their RHSes contain only literals, charclasses and LHSes of other rules, which have only literals and charclasses on their RHSes. They need to build lexical and structural grammars and check them for compatibility via lexemes.
 
 ## LUIF Rules
@@ -53,7 +51,7 @@ local grammar = luif.G{
 
 #### Sequence Rules
 
-Sequence rules have single RHS alternative
+Sequence rules have single RHS alternative, their syntax is
 
 ```lua
 local S, Q, L = luif.S, luif.Q, luif.L
@@ -90,7 +88,7 @@ local grammar = luif.G{
 ```
 
 The first field of an RHS alternative other than the first can be `'|'` or `'||'`
-that sets the same or looser precedence of such alternative.
+that sets the same or looser precedence for it.
 If the first field is not `'|'` or `'||'`, then `'|'` is implied.
 
 ### Adverbs
@@ -99,10 +97,10 @@ The below adverbs can be specified as a `{ name = value, ... }` field
 at the end of a LUIF rule table.
 
 ```
-hidden:      true, false              -- alternative hidden from semantics
-group:       true, false              -- grouped alternative
+hidden:      true, false              -- alternative is hidden from semantics
+group:       true, false              -- alternative is grouped
 proper:      true, false              -- proper sequence separation
-action:      function (...) block end -- todo: other descriptors
+action:      function (...) block end -- [todo: other descriptors]
 quantifier:  '+', '*'                 -- sequence quantifier
 precedence:  '|', '||'
 ```
