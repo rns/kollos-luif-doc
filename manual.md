@@ -77,6 +77,18 @@ charclass ::= String -- must contain a Lua pattern as per http://www.lua.org/man
 
 ```
 
+[todo: implementation detail: Lua patterns can be much slower than regexes, so we can
+use lua patterns as they are or
+translate them to regexes for speed
+or make this an option ]
+
+[todo: implementation suggestion: Lua patterns include
+[`%bxy`](http://www.lua.org/pil/20.2.html),
+which matches balanced delimiters, LUIF can extend it
+to match nested balanced delimiters
+which seems to be a fairly common use case.
+]
+
 ## Sequences
 
 Sequences are expressions on the RHS of a BNF rule alternative

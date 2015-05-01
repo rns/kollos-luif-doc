@@ -20,8 +20,92 @@ and returns a table representing LUIF rules for KHIL. ([LPeg counterpart]
 
 `'|'`, `'||'`, `'%%'`, and `'%'` literals are used
 in the meaning defined by the LUIF grammar for `|`, `||`, `%%`, and `%`.
+If an application needs such literals in its grammar,
+it must prefix them with `luif.L`, e.g. `luif.L'|'`.
 
-## Calculator Grammar
+`khil.grammar_new_from_table(name, luif.G{...})` adds a grammar returned by `luif.G{...}` call under key `name` to KHIL table of grammars.
+
+[Note: The below function is a suggestion, possibly too forward-looking]
+
+`khil.grammar_new_from_string(name, source)` adds a grammar contained in `source` string under key `name` to KHIL table of grammars. `string` must contain a grammar table serialized so that it evaluates to a valid LUIF grammar representation by `loadstring(string [, chunkname])`. The intended use is binding Kollos from another language by writing direct-to functions specified above in such language.
+
+The two functions above must infer lexical rules, like `Number = C'[0-9]'`
+by checking that their RHSes contain only literals, charclasses and LHSes of other rules, which have only literals and charclasses on their RHSes. They need to build lexical and structural grammars and check them for compatibility via lexemes.
+
+## LUIF Rules
+
+LUIF rules are built as Lua tables, whose fields can be built using direct-to-Lua functions and literals specified above.
+
+### Single RHS alternative
+
+```lua
+local grammar = luif.G{
+  ...
+  -- without adverbs
+  lhs = { luif.S'symbol', luif.S'another_symbol', ... luif.L'literal' }
+  -- with adverbs
+  lhs = {
+    luif.S'symbol', luif.S'another_symbol', ... luif.L'literal',
+    { action = function(...) ... end }
+  }
+}
+```
+
+#### Sequence Rules
+
+Sequence rules have single RHS alternative
+
+```lua
+local grammar = luif.G{
+  ...
+  seq = { S'item', Q'+', '%', S'separator' },
+  seq = { S'item', Q'+', '%%', S'separator' },
+  seq = { S'item', Q'+', '%', L',' }, -- literal as sequence separator
+}
+```
+
+[todo: are we going to support charclasses as sequence separators? ]
+
+### Multiple RHS alternatives
+
+In the case of several RHS alternatives, the LUIF rule table becomes
+
+```lua
+local grammar = luif.G{
+  ...
+  lhs = {
+    -- first alternative, tightest precedence
+    { luif.S'symbol', luif.S'another_symbol', ... luif.L'literal' },
+    -- without precedence, '|' is implied
+    { luif.S'symbol', luif.S'another_symbol', ... luif.L'literal' },
+    -- with looser precedence
+    { '||', luif.S'symbol', luif.S'another_symbol', ... luif.L'literal' },
+    -- with the same precedence
+    { '|', luif.S'symbol', luif.S'another_symbol', ... luif.L'literal' },
+  },
+  ...
+}
+```
+
+The first field of an RHS alternative other than the first can be `'|'` or `'||'`
+that set precedence of such alternative according to LUIF grammar.
+If the first field is not `'|'` or `'||'`, then `'|'` is implied.
+
+### Adverbs
+
+The below adverbs can be specified as a { name = value, ... } field
+at the end of a LUIF rule table.
+
+```
+hidden:      true, false              -- alternative hidden from semantics
+group:       true, false              -- gropued alternative
+proper:      true, false              -- proper sequence separation
+action:      function (...) block end -- todo: other descriptors
+quantifier:  '+', '*'                 -- sequence quantifier
+precedence:  '|', '||'
+```
+
+## Example 1: Calculator Grammar
 
 ### Calculator LUIF
 
@@ -56,13 +140,11 @@ local calc = luif.G{
 }
 ```
 
-Notes:
+Note: See `d2l.lua` for the complete example.
 
-1. See `calc.lua` for the complete example.
+## Example 1: JSON Grammar
 
-2. A lexical rule `Number = C'[0-9]'` can be inferred by checking that its RHS contains only literals, charclasses and LHSes of rules having only literals and charclasses on their RHSes.
-
-## JSON Grammar
+[todo: use the full json grammar from the example in `manual.md` ]
 
 ### JSON LUIF
 
@@ -141,91 +223,50 @@ local json = luif.G{
 }
 ```
 
-[Warning: very early draft below]
+## External Grammar (LUIF Rules) Representation for KHIL
 
-## Interface
+[todo: this the below sketch ]
 
-An outline of D2L functions to be used to build
-a Lua table containing LUIF rules for KHIL.
-
-```lua
-s = symbol ('name')
-r = rule (lhs, alternative1, alternative2, ... )
-
-a = alternative ( rhs1, rhs2, ..., { adverbs })
-
-pa = alternative ( rhs1, rhs2, ..., { precedence = '|', action = function })
-
-s = alternative ( item, separator, { quantifier = '+', proper = true } )
-s = alternative ( item, separator, { quantifier = '*', proper = false } )
-
--- adverb setters
-
-ha = hide (alternative1, alternative2, ...)
-ga = group (alternative1, alternative2, ...)
-la = loosen (alternative)
-ta = tighten (alternative)
-ca = count (alternative, quantifier, proper) -- item, separator
-aa = actify (alternative, function(...) end )
-
-l = literal('string')
-c = charclass('[a-z]') --
-```
-
-### Adverbs
-
-- `hidden`:      `true`, `false`
-- `group`:       `true`, `false`
-- `proper`:      `true, `false`
-- `action`:      `function` -- todo: other descriptors
-- `quantifier`:  `'+'`, `'*'`
-- `precedence`:  `'|'`, `'||'`
-- `lexical`:     `true`, `false`
-
-## External Grammar (LUIF Rules) for KHIL
-
-D2L will build
+D2L calls must build
 a Lua table of LUIF rules (can be based on SLIF MetaAST)
 to be passed to KHIL
 for conversion to KIR.
 
 ```lua
-{
-  {
-    lhs = 'Expression'
-    rhs = {}
-    adverbs = {
-      action = function(...) end
-      priority = '|'
-      lexical =
+luif = {
+  name = {
+    -- structural
+    g1 = {
+      {
+        lhs = 'Expression'
+        rhs = {}
+        adverbs = {
+          action = function(...) end
+          precedence = '|' -- or should it be numeric?
+        },
+      },
+      {
+        lhs = 'Script',
+        rhs = { 'Expression',  },
+        adverbs = {
+          action = function(...) end
+          quantifier =                  -- '+' or '*'
+          proper = true                 -- true or false
+        },
+      },
     },
-  },
-
-  {
-    lhs = 'Script',
-    rhs = { 'Expression',  },
-    adverbs = {
-      action = function(...) end
-      quantifier =                  -- '+' or '*'
-      proper = true                 -- true or false
-    },
-  },
-
-  {
-    lhs = 'Lex-1',
-    rhs = { ',' }
-    adverbs = {
-      lexical = true
-    },
+    -- lexical
+    l0 = {
+      {
+        lhs = 'Lex-1',
+        rhs = { ',' }
+      },
+      {
+        lhs = 'Number'
+        rhs = { [] }
+      },
+    }
   }
-
-  {
-    lhs = 'Number'
-    rhs = {}
-    adverbs = {
-      lexical = true
-    },
-  },
-
 }
 ```
+
