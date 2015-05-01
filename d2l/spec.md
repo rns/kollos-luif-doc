@@ -34,7 +34,7 @@ by checking that their RHSes contain only literals, charclasses and LHSes of oth
 
 ## LUIF Rules
 
-LUIF rules are built as Lua tables, whose fields can be built using direct-to-Lua functions and literals specified above.
+LUIF rules are written as Lua tables, whose fields can be set using D2L functions and literals specified above.
 
 ### Single RHS alternative
 
@@ -56,6 +56,7 @@ local grammar = luif.G{
 Sequence rules have single RHS alternative
 
 ```lua
+local S, Q, L = luif.S, luif.Q, luif.L
 local grammar = luif.G{
   ...
   seq = { S'item', Q'+', '%', S'separator' },
@@ -68,46 +69,96 @@ local grammar = luif.G{
 
 ### Multiple RHS alternatives
 
-In the case of several RHS alternatives, the LUIF rule table becomes
+In the case of several RHS alternatives, the LUIF rule syntax is
 
 ```lua
+local S, L = luif.S, luif.L
 local grammar = luif.G{
   ...
   lhs = {
     -- first alternative, tightest precedence
-    { luif.S'symbol', luif.S'another_symbol', ... luif.L'literal' },
+    { S'symbol', S'another_symbol', ... L'literal' },
     -- without precedence, '|' is implied
-    { luif.S'symbol', luif.S'another_symbol', ... luif.L'literal' },
+    { S'symbol', S'another_symbol', ... L'literal' },
     -- with looser precedence
-    { '||', luif.S'symbol', luif.S'another_symbol', ... luif.L'literal' },
+    { '||', S'symbol', S'another_symbol', ... L'literal' },
     -- with the same precedence
-    { '|', luif.S'symbol', luif.S'another_symbol', ... luif.L'literal' },
+    { '|', S'symbol', S'another_symbol', ... L'literal' },
   },
   ...
 }
 ```
 
 The first field of an RHS alternative other than the first can be `'|'` or `'||'`
-that set precedence of such alternative according to LUIF grammar.
+that sets the same or looser precedence of such alternative.
 If the first field is not `'|'` or `'||'`, then `'|'` is implied.
 
 ### Adverbs
 
-The below adverbs can be specified as a { name = value, ... } field
+The below adverbs can be specified as a `{ name = value, ... }` field
 at the end of a LUIF rule table.
 
 ```
 hidden:      true, false              -- alternative hidden from semantics
-group:       true, false              -- gropued alternative
+group:       true, false              -- grouped alternative
 proper:      true, false              -- proper sequence separation
 action:      function (...) block end -- todo: other descriptors
 quantifier:  '+', '*'                 -- sequence quantifier
 precedence:  '|', '||'
 ```
 
-## Example 1: Calculator Grammar
+## External Grammar (LUIF Rules) Representation for KHIL
 
-### Calculator LUIF
+[todo: this section is unfinished ]
+
+D2L calls must build
+a Lua table of LUIF rules (can be based on SLIF MetaAST)
+to be passed to KHIL
+for conversion to KIR.
+
+```lua
+luif = {
+  name = {
+    -- structural
+    g1 = {
+      {
+        lhs = 'Expression'
+        rhs = {}
+        adverbs = {
+          action = function(...) end
+          precedence = '|' -- should it be converted to numeric?
+        },
+      },
+      {
+        lhs = 'Script',
+        rhs = { 'Expression',  },
+        adverbs = {
+          action = function(...) end
+          quantifier =                  -- '+' or '*'
+          proper = true                 -- true or false
+        },
+      },
+    },
+    -- lexical
+    l0 = {
+      {
+        lhs = 'Lex-1',
+        rhs = { ',' }
+      },
+      {
+        lhs = 'Number'
+        rhs = { [] }
+      },
+    }
+  }
+}
+```
+
+## Examples
+
+### Example 1: Calculator Grammar
+
+#### Calculator Grammar in LUIF
 
 ```
 Script ::= Expression+ % ','
@@ -122,7 +173,7 @@ Expression ::=
  Number ~ [0-9]+
 ```
 
-### Calculator Direct-to-Lua
+#### Calculator Grammar in D2L
 
 ```lua
 local calc = luif.G{
@@ -142,11 +193,11 @@ local calc = luif.G{
 
 Note: See `d2l.lua` for the complete example.
 
-## Example 1: JSON Grammar
+### Example 2: JSON Grammar
 
 [todo: use the full json grammar from the example in `manual.md` ]
 
-### JSON LUIF
+#### JSON Grammar in LUIF
 
 ```
 json     ::= object
@@ -174,7 +225,7 @@ false    ~ 'false'
 null     ~ 'null'
 ```
 
-### JSON Direct-to-Lua
+#### JSON Grammar in D2L
 
 ```lua
 local json = luif.G{
@@ -223,50 +274,4 @@ local json = luif.G{
 }
 ```
 
-## External Grammar (LUIF Rules) Representation for KHIL
-
-[todo: this the below sketch ]
-
-D2L calls must build
-a Lua table of LUIF rules (can be based on SLIF MetaAST)
-to be passed to KHIL
-for conversion to KIR.
-
-```lua
-luif = {
-  name = {
-    -- structural
-    g1 = {
-      {
-        lhs = 'Expression'
-        rhs = {}
-        adverbs = {
-          action = function(...) end
-          precedence = '|' -- or should it be numeric?
-        },
-      },
-      {
-        lhs = 'Script',
-        rhs = { 'Expression',  },
-        adverbs = {
-          action = function(...) end
-          quantifier =                  -- '+' or '*'
-          proper = true                 -- true or false
-        },
-      },
-    },
-    -- lexical
-    l0 = {
-      {
-        lhs = 'Lex-1',
-        rhs = { ',' }
-      },
-      {
-        lhs = 'Number'
-        rhs = { [] }
-      },
-    }
-  }
-}
-```
-
+Note: See `d2l.lua` for the complete example.
