@@ -43,7 +43,7 @@ by editing the KIR directly.
 The basic transformation needed to obtain the KIR from the LUIF is
 translation of the LUIF rules, which may include precedenced and
 counted rules, into a form which allows only BNF rules.
-In separate documents.
+In separate documents,
 Jeffrey will describe the transformations necessary
 for the KHIL to translate from
 precedenced rules to BNF rules,
