@@ -107,7 +107,15 @@ precedence:  '|', '||'
 
 ## External Grammar (LUIF Rules) Representation for KHIL
 
-[todo: this section is unfinished ]
+[todo: this section is unfinished
+We needed an intermediate format between LUIF and Libmarpa,
+and D2L is a 3rd.  But this is a 4th, and I'd like to
+avoid it unless it's really a win from some point of view.
+Would it be too hard to go direct from D2L to KIR?
+In any case, you could perhaps
+treat this 4th format as an very internal implementation artifact,
+and not document it in these design/interface docs.
+]
 
 D2L calls must build
 a Lua table of LUIF rules (can be based on SLIF MetaAST)
