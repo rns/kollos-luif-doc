@@ -231,15 +231,15 @@ is an external rule ID.
 In its property tables,
 the keys are
 
-* 'location` -- Required.
+* `location` -- Required.
   A location object.
 
-* 'type` -- the type of the external rule.
+* `type` -- the type of the external rule.
   Required.
   This is one of `counted`, `precedenced`,
   or `BNF`.
 
-* 'container` --
+* `container` --
   The ID of
   another external rule that contains this
   one.
@@ -252,14 +252,14 @@ Each key is an alternative ID.
 In its property tables,
 the keys are
 
-* 'location` -- Required.
+* `location` -- Required.
   A location object.
 
-* 'container` -- Required.
+* `container` -- Required.
   The external rule that contains this
   alternative.
 
-* 'type` -- the type of the alternative.
+* `type` -- the type of the alternative.
   Required.
   one of `counted`, `precedenced`,
   or `BNF`.
@@ -272,7 +272,7 @@ the keys are
 * `rhs` -- an array of the names of the RHS
   symbols.
 
-* 'semantics` -- Required?
+* `semantics` -- Required?
   Not fully worked out,
   but a property table describing
   the semantics.
