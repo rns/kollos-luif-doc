@@ -79,16 +79,11 @@ local grammar = luif.G{
   seq = { S'item', Q'+', '%', S'separator' },
   seq = { S'item', Q'+', '%%', S'separator' },
   seq = { S'item', Q'+', '%', L',' }, -- literal as sequence separator
+  seq = { S'item', Q'+', '%', C',' }, -- character class as sequence separator
 }
 ```
 
-[todo: are we going to support charclasses as sequence separators?
-My (Jeffrey's) thought is that we should not only support charclasses as separators,
-but all this "shoot yourself in the foot" extensions proposed for the SLIF, so
-that a separator can be a very large nested structure.
-I don't think that is a good idea, but I think it's perhaps
-best to leave that decision to the user.
-]
+[todo: define support SLIF extensions per https://github.com/rns/kollos-luif-doc/issues/17]
 
 ### Multiple RHS alternatives
 
