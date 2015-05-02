@@ -166,7 +166,7 @@ keys are:
 The external symbol database table
 is keyed by symbol name.
 
-* 'location` -- Required.
+* `location` -- Required.
   A location object.
 
 ### The internal symbol database
@@ -176,17 +176,17 @@ is keyed by symbol name.
 In its property tables,
 the keys are
 
-* 'terminal` -- Optional.
+* `terminal` -- Optional.
   Present and true if and only
   if the internal symbol
   is a terminal.
 
-* 'start` -- Optional.
+* `start` -- Optional.
   Present and true if and only
   if the internal symbol
   is the start symbol.
 
-* 'brick` -- Optional.
+* `brick` -- Optional.
   Present and true if and only
   if the internal symbol
   is a brick symbol.
