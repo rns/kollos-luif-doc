@@ -27,7 +27,7 @@ it must prefix them with `luif.L`, e.g. `luif.L'|'`.
 
 `khil.grammar_loadstring(name, source)` adds a grammar contained in `source` string under key `name` to KHIL table of grammars. `string` must contain a grammar table serialized so that it evaluates to a valid LUIF grammar representation by `loadstring(string [, chunkname])`. The intended use is binding Kollos from another language by writing direct-to functions specified above in such language.
 
-The two functions above must infer lexical rules
+The `khil.grammar_new()` and `khil.grammar_loadstring()` functions must infer lexical rules
 by checking that their RHSes contain only literals, charclasses and LHSes of other rules, which have only literals and charclasses on their RHSes. They need to build lexical and structural grammars and check them for compatibility via lexemes.
 
 ## LUIF Rules
