@@ -23,31 +23,12 @@ in the meaning defined by the LUIF grammar for `|`, `||`, `%%`, and `%`.
 If an application needs such literals in its grammar,
 it must prefix them with `luif.L`, e.g. `luif.L'|'`.
 
-`luif.grammar_new(name, table)`
-produces KIR of the grammar contained in `table` and
-adds it under key `name` to KIR's table of grammars.
-The `table` must be produced by `luif.G()`.
+`khil.grammar_new(name, luif.G{...})` adds a grammar returned by `luif.G{...}` call under key `name` to KHIL table of grammars.
 
-`luif.grammar_loadstring(name, string)`
-produces KIR of the grammar contained in `string` and
-adds it under key `name` to KIR's table of grammars.
-`string` must contain a grammar table serialized so
-that it evaluates to a valid LUIF grammar representation
-by `loadstring(string [, chunkname])`.
-The intended use is binding Kollos
-from another language
-by writing 'direct-to' functions
-specified above in such language.
+`khil.grammar_loadstring(name, source)` adds a grammar contained in `source` string under key `name` to KHIL table of grammars. `string` must contain a grammar table serialized so that it evaluates to a valid LUIF grammar representation by `loadstring(string [, chunkname])`. The intended use is binding Kollos from another language by writing direct-to functions specified above in such language.
 
-[todo: write proof-of-concept 'direct-to' code in Perl and other languages]
-
-The `luif.grammar_new()` and `luif.grammar_loadstring()` functions
-must infer lexical rules
-by checking that their RHSes contain only literals, charclasses and
-LHSes of other rules, which have only literals and charclasses on their RHSes.
-They need to build for lexical and structural grammars,
-check them for compatibility via lexemes, and
-produce a KIR table entry with the lexical grammar linked to the structural.
+The `khil.grammar_new()` and `khil.grammar_loadstring()` functions must infer lexical rules
+by checking that their RHSes contain only literals, charclasses and LHSes of other rules, which have only literals and charclasses on their RHSes. They need to build lexical and structural grammars and check them for compatibility via lexemes.
 
 ## LUIF Rules
 
@@ -124,6 +105,64 @@ quantifier:  '+', '*'                 -- sequence quantifier
 precedence:  '|', '||'
 ```
 
+<<<<<<< HEAD
+=======
+## External Grammar (LUIF Rules) Representation for KHIL
+
+[todo: this section is unfinished
+We needed an intermediate format between LUIF and Libmarpa,
+and D2L is a 3rd.  But this is a 4th, and I'd like to
+avoid it unless it's really a win from some point of view.
+Would it be too hard to go direct from D2L to KIR?
+In any case, you could perhaps
+treat this 4th format as an very internal implementation artifact,
+and not document it in these design/interface docs.
+]
+
+D2L calls must build
+a Lua table of LUIF rules (can be based on SLIF MetaAST)
+to be passed to KHIL
+for conversion to KIR.
+
+```lua
+luif = {
+  name = {
+    -- structural
+    g1 = {
+      {
+        lhs = 'Expression'
+        rhs = {}
+        adverbs = {
+          action = function(...) end
+          precedence = '|' -- should it be converted to numeric?
+        },
+      },
+      {
+        lhs = 'Script',
+        rhs = { 'Expression',  },
+        adverbs = {
+          action = function(...) end
+          quantifier =                  -- '+' or '*'
+          proper = true                 -- true or false
+        },
+      },
+    },
+    -- lexical
+    l0 = {
+      {
+        lhs = 'Lex-1',
+        rhs = { ',' }
+      },
+      {
+        lhs = 'Number'
+        rhs = { [] }
+      },
+    }
+  }
+}
+```
+
+>>>>>>> e536438585d4e639eeffb2892622a639da8b0625
 ## Examples
 
 ### Example 1: Calculator Grammar
