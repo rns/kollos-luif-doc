@@ -63,7 +63,13 @@ local grammar = luif.G{
 }
 ```
 
-[todo: are we going to support charclasses as sequence separators? ]
+[todo: are we going to support charclasses as sequence separators?
+My (Jeffrey's) thought is that we should not only support charclasses as separators,
+but all this "shoot yourself in the foot" extensions proposed for the SLIF, so
+that a separator can be a very large nested structure.
+I don't think that is a good idea, but I think it's perhaps
+best to leave that decision to the user.
+]
 
 ### Multiple RHS alternatives
 
