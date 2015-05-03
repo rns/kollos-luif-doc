@@ -207,7 +207,7 @@ LUIF comments are Lua comments as defined at the end of [Lexical Conventions](ht
 The `action` adverb defines the semantics of its RHS alternative.
 Its values are specified in [Semantics](#semantic_action) below.
 
-<a id="semantic_action"></a> ## Semantics
+## Semantics <a id="semantic_action"></a>
 
 The semantics of a BNF statement in the LUIF can be defined with the `action` adverb of its RHS alternative or by using [Abstract-Syntax Forest (ASF)](#semantics_with_asf) functions of the LUIF.
 
