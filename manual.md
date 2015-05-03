@@ -290,49 +290,35 @@ The context accessors are:
 
 returns the integer ID of the symbol which is on the LHS of the matched BNF rule.
 
-```lua
-lhs_id = luif.context.lhs()
-```
+##### `lhs_id = luif.context.lhs()`
 
 returns the integer ID of the symbol which is on the LHS of the matched BNF rule.
 
-```lua
-rule_id = luif.context.rule()
-```
+##### `rule_id = luif.context.rule()`
 
 returns integer integer ID of the matched BNF rule.
 
-```lua
-alt_no = luif.context.alternative()
-```
+##### `alt_no = luif.context.alternative()`
 
 returns the number of the matched alternative in the BNF rule.
 
-```lua
-prec = luif.context.precedence()
-```
+##### `prec = luif.context.precedence()`
 
 returns numeric precedence of the matched alternative relative to other alternatives or nil if no precedence is defined.
 
-```lua
-pos, len = luif.context.span()
-```
+##### `pos, len = luif.context.span()`
 
 returns position and length of the input section matched by the BNF rule.
 
-```lua
-string = luif.context.literal()
-```
+##### `string = luif.context.literal()`
 
 returns the section of the input matched by the BNF rule. It corresponds to the `span` returned by the `luif.context.span()` function above.
 
-`luif.context.pos()
-```
+##### `luif.context.pos()`
 
 returns the position in the input, which correspond to the start of the span matched with the BNF rule.
 
-`luif.context.length()
-```
+##### `luif.context.length()`
 
 returns the length of the span matched with the BNF rule.
 
