@@ -330,7 +330,9 @@ The application can use `luif.value.ambiguous()` function to determine whether t
 
 If the parse is ambiguous,
 LUIF walks the ASF calling the traverser function for its nodes.
-The traverser can call functions in `luif.asf` interface to enumerate and/or prune parse alternatives. This can be done using `luif.asf.traverse(traverser)` fnction.
+The traverser can call functions in `luif.asf` interface to enumerate and/or prune parse alternatives. This is done with `luif.asf.traverse(traverser)` function.
+
+[todo: more details/examples on ASF traversal]
 
 ##### Enumerating Parse Alternatives
 
@@ -338,9 +340,9 @@ The traverser can call functions in `luif.asf` interface to enumerate and/or pru
 
 #### Unambiguous Parse -- Walking the AST <a href="ast_walking"></a>
 
-If the parse is unambiguous, the ASF becomes the AST that makes the application's job much simpler. LUIF will build the AST and will call the visitor function for its nodes in the given order. The application can use [context accessors](#context_accessors) to get the node data, distill the AST, and produce the parse value.
+If the parse is unambiguous, the ASF becomes the AST that makes the application's job much simpler. LUIF will build the AST and will call the visitor function for its nodes in the given order. The application can use [context accessors](#context_accessors) to get the node data, distill the AST, and produce the parse value. This is done by calling `luif.ast.walk(order, visitor)` function.
 
-[todo: specify AST format and call, e.g. `luif.ast.walk(order, visitor)`]
+[todo: more details/examples on AST walking]
 
 ### Actions and ASF's: How to Choose
 
