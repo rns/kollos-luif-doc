@@ -216,7 +216,7 @@ The semantics of a BNF statement in the LUIF can be defined with the `action` ad
 The value of the `action` adverb is a Lua function as defined in [Function Definitions](http://www.lua.org/manual/5.1/manual.html#2.5.9) section of the Lua 5.1 Reference Manual.
 
 An action function can be
-a [bare function](#bare function),
+a [bare function](#bare_function),
 a [namespaced function](#namespaced_function), or
 a [method](#method_function).
 This allows defining semantics in a set of functions, a namespace (Lua package) or an object.
@@ -234,7 +234,7 @@ The general syntax for a bare function action is
 
 ```lua
 action = function f (params) body end
-```.
+```
 
 It will be called as `f (params)`
 with `params` set to
@@ -246,7 +246,7 @@ The general syntax for a namespaced function action is
 
 ```lua
 action = function t.a.b.c.f (params) body end
-```.
+```
 
 It will be called as `t.a.b.c.f (params)`
 with `params` set to
@@ -266,7 +266,7 @@ or
 
 ```lua
 action = function t.a.b.c.f (self, params) body end
-```.
+```
 
 It will be called as `t.a.b.c:f (params)`
 with `params` set to
