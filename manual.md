@@ -205,9 +205,9 @@ LUIF comments are Lua comments as defined at the end of [Lexical Conventions](ht
 #### action <a id="action"></a>
 
 The `action` adverb defines the semantics of its RHS alternative.
-Its values are specified in [Semantics section](#semantic_action) below.
+Its values are specified in [Semantics](#semantic_action) below.
 
-## Semantics
+## Semantics <a id="semantic_action"></a>
 
 The semantics of a BNF statement in the LUIF can be defined with the `action` adverb of its RHS alternative or by using [Abstract-Syntax Forest (ASF)](#semantics_with_asf) functions of the LUIF.
 
@@ -220,17 +220,17 @@ a [bare function](#bare_function),
 a [namespaced function](#namespaced_function), or
 a [method](#method_function).
 This allows defining semantics in a set of functions, a namespace (Lua package) or an object.
-Actions functions will be evaluated in the context, where their respective BNF statements are defined.
+Actions functions will be evaluated in the context where their respective BNF statements are defined.
 
 The match context information, such as
 matched rule data, input string locations and literals
-will be provided by [accessors](#context_accessors) in `luif.context` namespace.
+will be provided by [context accessors](#context_accessors) in `luif.context` namespace.
 
 If the semantics of a BNF statement is defined in a separate file, LUIF functionality must be imported with Lua's [`require`] (http://www.lua.org/manual/5.1/manual.html#pdf-require) function.
 
 #### Bare Function Actions <a id="bare_function"></a>
 
-The general syntax for a bare function action is
+The syntax for a bare function action is
 
 ```lua
 action = function f (params) body end
@@ -242,7 +242,7 @@ the values defined by the semantics of the matched RHS alternative's symbols.
 
 #### Namespaced Function Actions <a id="namespaced_function"></a>
 
-The general syntax for a namespaced function action is
+The syntax for a namespaced function action is
 
 ```lua
 action = function t.a.b.c.f (params) body end
@@ -256,7 +256,7 @@ More details on packages in Lua can be found in [Packages](http://www.lua.org/pi
 
 #### Method Actions <a id="method_function"></a>
 
-The general syntax for a method action is
+The syntax for a method action is
 
 ```lua
 action = function t.a.b.c:f (params) body end
