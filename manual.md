@@ -290,17 +290,13 @@ The context accessors are:
 
 returns the integer ID of the symbol which is on the LHS of the matched BNF rule.
 
-##### `lhs_id = luif.context.lhs()`
-
-returns the integer ID of the symbol which is on the LHS of the matched BNF rule.
-
 ##### `rule_id = luif.context.rule()`
 
-returns integer integer ID of the matched BNF rule.
+returns the integer ID of the matched BNF rule.
 
 ##### `alt_no = luif.context.alternative()`
 
-returns the number of the matched alternative in the BNF rule.
+returns the number of the matched alternative in the RHS of the BNF rule.
 
 ##### `prec = luif.context.precedence()`
 
@@ -314,11 +310,11 @@ returns position and length of the input section matched by the BNF rule.
 
 returns the section of the input matched by the BNF rule. It corresponds to the `span` returned by the `luif.context.span()` function above.
 
-##### `luif.context.pos()`
+##### `pos = luif.context.pos()`
 
 returns the position in the input, which correspond to the start of the span matched with the BNF rule.
 
-##### `luif.context.length()`
+##### `len = luif.context.length()`
 
 returns the length of the span matched with the BNF rule.
 
