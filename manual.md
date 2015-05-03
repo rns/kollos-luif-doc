@@ -215,7 +215,11 @@ The semantics of a BNF statement in the LUIF can be defined with the `action` ad
 
 The value of the `action` adverb is a Lua function as defined in [Function Definitions](http://www.lua.org/manual/5.1/manual.html#2.5.9) section of the Lua 5.1 Reference Manual.
 
-An action function can be a bare function, a namespaced function, or a method. This allows defining semantics in a set of functions, a namespace (Lua package) or an object.
+An action function can be
+a [bare function](#bare function),
+a [namespaced function](#namespaced_function), or
+a [method](#method_function).
+This allows defining semantics in a set of functions, a namespace (Lua package) or an object.
 Actions functions will be evaluated in the context, where their respective BNF statements are defined.
 
 The match context information, such as
@@ -224,7 +228,7 @@ will be provided by [accessors](#context_accessors) in `luif.context` namespace.
 
 If the semantics of a BNF statement is defined in a separate file, LUIF functionality must be imported with Lua's [`require`] (http://www.lua.org/manual/5.1/manual.html#pdf-require) function.
 
-#### Bare Function Actions
+#### Bare Function Actions <a id="bare_function"></a>
 
 The general syntax for a bare function action is
 
@@ -236,7 +240,7 @@ It will be called as `f (params)`
 with `params` set to
 the values defined by the semantics of the matched RHS alternative's symbols.
 
-#### Namespaced Function Actions
+#### Namespaced Function Actions <a id="namespaced_function"></a>
 
 The general syntax for a namespaced function action is
 
@@ -250,7 +254,7 @@ the values defined by the semantics of the matched RHS alternative's symbols.
 
 More details on packages in Lua can be found in [Packages](http://www.lua.org/pil/15.html) section of _Programming in Lua_ book.
 
-#### Method Actions
+#### Method Actions <a id="method_function"></a>
 
 The general syntax for a method action is
 
