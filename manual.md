@@ -340,7 +340,7 @@ The traverser can call functions in `luif.asf` interface to enumerate and/or pru
 #### Unambiguous Parse -- Getting the AST
 
 If the parse is ambiguous, the ASF becomes the AST, which can be accessed by calling
-`luiv.value.ast()` function that returns the AST
+`luif.value.ast()` function that returns the AST.
 
 [todo: specify AST format]
 
