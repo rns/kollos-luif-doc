@@ -212,7 +212,7 @@ LUIF comments are Lua comments as defined at the end of [Lexical Conventions](ht
 The `action` adverb defines the semantics of its RHS alternative.
 Its values are specified in [Semantics](#semantic_action) section below.
 
-#### completed
+#### completed <a id="completed"></a>
 
 The `completed` adverb defines
 the Lua function to be called when the RHS alternative is completed during the parse.
@@ -220,7 +220,7 @@ Its values are the same as those of the `action` adverb.
 
 For more details on parse events, see [Events](#events) section.
 
-#### predicted
+#### predicted <a id="predicted"></a>
 
 The `predicted` adverb defines
 the Lua function to be called when the RHS alternative is predicted during the parse.
@@ -399,7 +399,9 @@ so the full AST (ASF) is required.
 
 ## Events <a href="events"></a>
 
-[TBD -- as `completed` and `predicted` adverbs]
+Parse events are defined using [`completed`](#completed) and [`predicted`](#predicted) adverbs.
+
+[todo: provide getting started info/tutorial on parse events].
 
 ## Locale support
 
