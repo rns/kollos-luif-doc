@@ -26,7 +26,7 @@ Note: this describes LUIF structural and lexical grammars 'used in the default w
 ```
 stat ::= bnf
 
-bnf ::= lhs produce_op rhs  -- to make references LHS/RHS easier to understand
+bnf ::= lhs produce_op rhs  -- to make references to LHS/RHS easier to understand
 
 lhs ::= symbol_name
 
