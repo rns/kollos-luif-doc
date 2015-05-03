@@ -42,6 +42,8 @@ alternative ::= rhslist { ',' adverb }
 adverb ::= field |
            action
 
+-- values other than function(...) -- https://github.com/rns/kollos-luif-doc/issues/12
+-- context in action functions -- https://github.com/rns/kollos-luif-doc/issues/11
 action ::= 'action' '=' actionexp
 
 actionexp ::= 'function' '(...)' block end
@@ -61,6 +63,7 @@ separated_sequence ::= sequence  |
                        sequence '%'  separator | -- proper separation
                        sequence '%%' separator
 
+-- more complex separators -- http://irclog.perlgeek.de/marpa/2015-05-03#i_10538440
 separator ::= symbol_name
 
 sequence ::= symbol_name '+' |
@@ -71,9 +74,11 @@ sequence ::= symbol_name '+' |
 
 symbol_name :: Name
 
-literal ::= String
+literal ::= String    -- long strings not allowed
 
-charclass ::= String -- must contain a Lua pattern as per http://www.lua.org/manual/5.1/manual.html#5.4.1
+-- a Lua pattern as per http://www.lua.org/manual/5.1/manual.html#5.4.1
+-- or a regex character class
+charclass ::= String
 
 ```
 
@@ -82,12 +87,9 @@ use lua patterns as they are or
 translate them to regexes for speed
 or make this an option ]
 
-[todo: implementation suggestion: Lua patterns include
-[`%bxy`](http://www.lua.org/pil/20.2.html),
-which matches balanced delimiters, LUIF can extend it
-to match nested balanced delimiters
-which seems to be a fairly common use case.
-]
+[todo: nested delimiters as sequence separators,
+like [`%bxy`](http://www.lua.org/pil/20.2.html), but with nesting support
+per comment to https://github.com/rns/kollos-luif-doc/issues/17]
 
 ## Sequences
 
