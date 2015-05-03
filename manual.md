@@ -193,11 +193,13 @@ in names.
 
 ### Literals
 
+LUIF literals are Lua literal strings as defined in [Lexical Conventions](http://www.lua.org/manual/5.1/manual.html#2.1) section of the Lua 5.1 Reference Manual.
+
 ### Character classes
 
 ### Comments
 
-See Lua comments at the end of [Lexical Conventions](http://www.lua.org/manual/5.1/manual.html#2.1) in the Lua 5.1 Reference Manual.
+LUIF comments are Lua comments as defined at the end of [Lexical Conventions](http://www.lua.org/manual/5.1/manual.html#2.1) section in the Lua 5.1 Reference Manual.
 
 ### Adverbs
 
