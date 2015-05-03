@@ -46,11 +46,14 @@ adverb ::= action |
 
 -- values other than function(...) -- https://github.com/rns/kollos-luif-doc/issues/12
 -- context in action functions -- https://github.com/rns/kollos-luif-doc/issues/11
-action ::= 'action' '=' 'function' funcname funcbody
+action ::= 'action' '=' functionexp
 
-completed ::= 'completed' '=' 'function' funcname funcbody
+completed ::= 'completed' '=' functionexp
 
-predicted ::= 'predicted' '=' 'function' funcname funcbody
+predicted ::= 'predicted' '=' functionexp
+
+functionexp ::= 'function' funcname funcbody |
+                funcname
 
 assoc ::= 'assoc' '=' assocexp
 
@@ -251,7 +254,7 @@ The semantics of a BNF statement in the LUIF can be defined using either [`actio
 
 ### Defining Semantics with `action` <a id="semantic_action"></a> adverb
 
-The value of the `action` adverb is a Lua function as defined in [Function Definitions](http://www.lua.org/manual/5.1/manual.html#2.5.9) section of the Lua 5.1 Reference Manual.
+The value of the `action` adverb can be a Lua function as defined in [Function Definitions](http://www.lua.org/manual/5.1/manual.html#2.5.9) section of the Lua 5.1 Reference Manual or the name of such function.
 
 An action function can be
 a [bare function](#bare_function),
@@ -471,8 +474,8 @@ If a grammar specifies lexemes, it is a lexical grammar.  If a grammar specifies
 Script ::= Expression+ % ','
 Expression ::=
   Number
-  | '(' Expression ')'
- || Expression '**' Expression, action = function (e1, e2) return e1 ^ e2 end
+  | '(' Expression ')', assoc = group, action = do_parens
+ || Expression '**' Expression, assoc = right, action = function (e1, e2) return e1 ^ e2 end
  || Expression '*' Expression, action = function (e1, e2) return e1 * e2 end
   | Expression '/' Expression, action = function (e1, e2) return e1 / e2 end
  || Expression '+' Expression, action = function (e1, e2) return e1 + e2 end
