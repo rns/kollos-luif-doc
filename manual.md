@@ -459,11 +459,11 @@ Script ::= Expression+ % ','
 Expression ::=
   Number
   | '(' Expression ')'
- || Expression '**' Expression, action = function (...) return arg[1] ^ arg[2] end
- || Expression '*' Expression, action = function (...) return arg[1] * arg[2] end
-  | Expression '/' Expression, action = function (...) return arg[1] / arg[2] end
- || Expression '+' Expression, action = function (...) return arg[1] + arg[2] end
-  | Expression '-' Expression, action = function (...) return arg[1] - arg[2] end
+ || Expression '**' Expression, action = function (e1, e2) return e1 ^ e2 end
+ || Expression '*' Expression, action = function (e1, e2) return e1 * e2 end
+  | Expression '/' Expression, action = function (e1, e2) return e1 / e2 end
+ || Expression '+' Expression, action = function (e1, e2) return e1 + e2 end
+  | Expression '-' Expression, action = function (e1, e2) return e1 - e2 end
  Number ~ [0-9]+
 ```
 
