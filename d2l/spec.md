@@ -18,15 +18,16 @@ and returns a table representing LUIF rules for KHIL. ([LPeg counterpart]
 
 `luif.hide(...)` and `luif.group(...)` take a list of prefixed D2L strings and provide LUIF hiding and grouping.
 
-`'|'`, `'||'`, `'%%'`, and `'%'` literals are used
-in the meaning defined by the LUIF grammar for `|`, `||`, `%%`, and `%`.
+`'|'`, `'||'`, `'%%'`, `'~'` and `'%'` literals are used
+in the meaning defined by the LUIF grammar for `|`, `||`, `%%`, `~` and `%`.
 If an application needs such literals in its grammar,
 it must prefix them with `luif.L`, e.g. `luif.L'|'`.
 
 `luif.grammar_new(name, table)`
-produces KIR of the grammar contained in `table` and
+produces Kollos Intermediate Representation (KIR)
+of the grammar contained in `table` and
 adds it under key `name` to KIR's table of grammars.
-The `table` must be produced by `luif.G()`.
+The `table` must be produced by a call to `luif.G()`.
 
 `luif.grammar_loadstring(name, string)`
 produces KIR of the grammar contained in `string` and
@@ -40,14 +41,6 @@ by writing 'direct-to' functions
 specified above in such language.
 
 [todo: write proof-of-concept 'direct-to' code in Perl and other languages]
-
-The `luif.grammar_new()` and `luif.grammar_loadstring()` functions
-must infer lexical rules
-by checking that their RHSes contain only literals, charclasses and
-LHSes of other rules, which have only literals and charclasses on their RHSes.
-They need to build for lexical and structural grammars,
-check them for compatibility via lexemes, and
-produce a KIR table entry with the lexical grammar linked to the structural.
 
 ## LUIF Rules
 
@@ -114,6 +107,16 @@ local grammar = luif.G{
 The first field of an RHS alternative other than the first can be `'|'` or `'||'`
 that sets the same or looser precedence for it.
 If the first field is not `'|'` or `'||'`, then `'|'` is implied.
+
+### Lexical and Structural Rules
+
+By default, LUIF rules are structural;
+lexical rules can be defined by setting the first field in the rule table to `'~'`:
+
+```
+  cardinal = { '~', C'[0-9]+' },
+  double_quoted_string = { '~', L'"', C'[^"]+', L"'" },
+```
 
 ### Adverbs
 
