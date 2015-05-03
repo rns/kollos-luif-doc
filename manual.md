@@ -209,7 +209,7 @@ Its values are specified in [Semantics](#semantic_action) section below.
 
 ## Semantics <a id="semantic_action"></a>
 
-The semantics of a BNF statement in the LUIF can be defined with the `action` adverb of its RHS alternative or by using [Abstract-Syntax Forest (ASF)](#semantics_with_asf) functions of the LUIF.
+The semantics of a BNF statement in the LUIF can be defined with the [`action` adverb](#semantic_action) of its RHS alternative or by using [Abstract-Syntax Forest (ASF)](#semantics_with_asf) functions of the LUIF.
 
 ### Defining Semantics with `action` <a id="semantic_action"></a> adverb
 
@@ -220,13 +220,13 @@ a [bare function](#bare_function),
 a [namespaced function](#namespaced_function), or
 a [method](#method_function).
 This allows defining semantics in a set of functions, a namespace (Lua package) or an object.
-Actions functions will be evaluated in the context where their respective BNF statements are defined.
+The action functions will be called in the context where their respective BNF statements are defined. Their return values will become the values of the LHS symbols corresponding to the RHS alternatives modified by the `action` adverb.
 
 The match context information, such as
 matched rule data, input string locations and literals
 will be provided by [context accessors](#context_accessors) in `luif.context` namespace.
 
-If the semantics of a BNF statement is defined in a separate file, LUIF functionality must be imported with Lua's [`require`] (http://www.lua.org/manual/5.1/manual.html#pdf-require) function.
+If the semantics of a BNF statement is defined in a separate Lua file, LUIF functionality must be imported with Lua's [`require`] (http://www.lua.org/manual/5.1/manual.html#pdf-require) function.
 
 #### Bare Function Actions <a id="bare_function"></a>
 
@@ -285,6 +285,10 @@ require 'luif.context'
 ```
 
 The context accessors are:
+
+##### `lhs_id = luif.context.lhs()`
+
+returns the integer ID of the symbol which is on the LHS of the matched BNF rule.
 
 ```lua
 lhs_id = luif.context.lhs()
