@@ -204,7 +204,15 @@ LUIF comments are Lua comments as defined at the end of [Lexical Conventions](ht
 
 #### action <a id="action"></a>
 
-The `action` adverb defined the semantics of its RHS alternative.
+The `action` adverb defines the semantics of its RHS alternative.
+Its values are specified in [Semantics section](#semantic_action) below.
+
+## Semantics
+
+The semantics of a BNF statement in the LUIF can be defined with the `action` adverb of its RHS alternative or by using [Abstract-Syntax Forest (ASF)](#semantics_with_asf) functions of the LUIF.
+
+### Defining Semantics with `action` <a id="semantic_action"></a> adverb
+
 The value of the `action` adverb is a Lua function as defined in [Function Definitions](http://www.lua.org/manual/5.1/manual.html#2.5.9) section of the Lua 5.1 Reference Manual.
 
 An action function can be a bare function, a namespaced function, or a method. This allows defining semantics in a set of functions, a namespace (Lua package) or an object.
@@ -220,7 +228,9 @@ If the semantics of a BNF statement is defined in a separate file, LUIF function
 
 The general syntax for a bare function action is
 
-`action = function f (params) body end`.
+```lua
+action = function f (params) body end
+```.
 
 It will be called as `f (params)`
 with `params` set to
@@ -232,7 +242,7 @@ The general syntax for a namespaced function action is
 
 ```lua
 action = function t.a.b.c.f (params) body end
-```
+```.
 
 It will be called as `t.a.b.c.f (params)`
 with `params` set to
@@ -252,15 +262,15 @@ or
 
 ```lua
 action = function t.a.b.c.f (self, params) body end
-```
+```.
 
 It will be called as `t.a.b.c:f (params)`
-with `self` set to `params` set to
+with `params` set to
 the values defined by the semantics of the matched RHS alternative's symbols.
 
 More details on objects and methods in Lua can be found in [Object-Oriented Programming](http://www.lua.org/pil/16.html) section of _Programming in Lua_ book.
 
-##### Context Accessors <a id="context_accessors"></a>
+#### Context Accessors <a id="context_accessors"></a>
 
 Context accessors live in the `luif.context` name space.
 They can be called from semantic actions to get matched rule and locations data.
@@ -272,26 +282,55 @@ require 'luif.context'
 
 The context accessors are:
 
-`lhs_id = luif.context.lhs()` returns the integer ID of the symbol which is on the LHS of the matched BNF rule.
+```lua
+lhs_id = luif.context.lhs()
+```
 
-`rule_id = luif.context.rule()` returns integer integer ID of the matched BNF rule.
+returns the integer ID of the symbol which is on the LHS of the matched BNF rule.
 
-`alt_no = luif.context.alternative()` returns the number of the matched alternative in the BNF rule.
+```lua
+rule_id = luif.context.rule()
+```
 
-`prec = luif.context.precedence()` returns numeric precedence of the matched alternative relative to other alternatives or nil if no precedence is defined.
+returns integer integer ID of the matched BNF rule.
 
-`pos, len = luif.context.span()` returns position and length of the input section matched by the BNF rule.
+```lua
+alt_no = luif.context.alternative()
+```
 
-`string = luif.context.literal()` returns the section of the input matched by the BNF rule. It corresponds to the `span` returned by the `luif.context.span()` function above.
+returns the number of the matched alternative in the BNF rule.
 
-`luif.context.pos()` returns the position in the input, which correspond to the start of the span matched with the BNF rule.
+```lua
+prec = luif.context.precedence()
+```
 
-`luif.context.length()` returns the length of the span matched with the BNF rule.
+returns numeric precedence of the matched alternative relative to other alternatives or nil if no precedence is defined.
 
-## Semantics
+```lua
+pos, len = luif.context.span()
+```
 
-The semantics of a BNF statement in the LUIF
-is defined by its [`action`](#action) adverb.
+returns position and length of the input section matched by the BNF rule.
+
+```lua
+string = luif.context.literal()
+```
+
+returns the section of the input matched by the BNF rule. It corresponds to the `span` returned by the `luif.context.span()` function above.
+
+`luif.context.pos()
+```
+
+returns the position in the input, which correspond to the start of the span matched with the BNF rule.
+
+`luif.context.length()
+```
+
+returns the length of the span matched with the BNF rule.
+
+### Defining Semantics with ASF <a id="semantics_with_asf"></a>
+
+[TBD]
 
 ## Locale support
 
