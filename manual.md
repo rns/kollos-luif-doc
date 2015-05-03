@@ -41,7 +41,8 @@ alternative ::= rhslist { ',' adverb }
 
 adverb ::= action |
            completed |
-           predicted
+           predicted |
+           assoc
 
 -- values other than function(...) -- https://github.com/rns/kollos-luif-doc/issues/12
 -- context in action functions -- https://github.com/rns/kollos-luif-doc/issues/11
@@ -50,6 +51,12 @@ action ::= 'action' '=' 'function' funcname funcbody
 completed ::= 'completed' '=' 'function' funcname funcbody
 
 predicted ::= 'predicted' '=' 'function' funcname funcbody
+
+assoc ::= 'assoc' '=' assocexp
+
+assocexp ::= 'left' |
+             'right' |
+             'group'
 
 rhslist ::= { rh_atom }       -- can be empty, like Lua chunk
 
@@ -211,12 +218,12 @@ LUIF comments are Lua comments as defined at the end of [Lexical Conventions](ht
 
 ### Adverbs
 
-#### action <a id="action"></a>
+#### `action` <a id="action"></a>
 
 The `action` adverb defines the semantics of its RHS alternative.
 Its values are specified in [Semantics](#semantic_action) section below.
 
-#### completed <a id="completed"></a>
+#### `completed` <a id="completed"></a>
 
 The `completed` adverb defines
 the Lua function to be called when the RHS alternative is completed during the parse.
@@ -224,13 +231,19 @@ Its values are the same as those of the `action` adverb.
 
 For more details on parse events, see [Events](#events) section.
 
-#### predicted <a id="predicted"></a>
+#### `predicted` <a id="predicted"></a>
 
 The `predicted` adverb defines
 the Lua function to be called when the RHS alternative is predicted during the parse.
 Its values are the same as those of the `action` adverb.
 
 For more details on parse events, see [Events](#events) section.
+
+#### `assoc`
+
+The `assoc` adverb defines associativity of a precedenced rule.
+Its value can be `left`, `right`, or `group`.
+The function of this adverb is as defined in the [SLIF](https://metacpan.org/pod/distribution/Marpa-R2/pod/Scanless/DSL.pod#assoc).
 
 ## Semantics <a id="semantic_action"></a>
 
@@ -448,7 +461,7 @@ If the produce-operator is `::=`, then the grammar is `g1`.  The tilde `~` can b
 
 A structural grammar will often contain lexical elements, such as strings and character classes, and these will go into its linked lexical grammar.  The start rule specifies its lexical grammar with an adverb (what?).  In a lexical grammar the lexemes are indicated with the `lexeme` adverb -- if a rule has a lexeme adverb, its LHS is a lexeme.
 
-If a grammar specified lexemes, it is a lexical grammar.  If a grammar specified a linked lexical grammar, it is a structural grammar.  `l0` must always be a lexical grammar.  `g1` must always be a structural grammar and is linked by default to `l0`.  It is a fatal error if a grammar has no indication whether it is structural or lexical, but this indication may be a default.  Enforcement of these restrictions is done by the lower layer (KLOL).
+If a grammar specifies lexemes, it is a lexical grammar.  If a grammar specifies a linked lexical grammar, it is a structural grammar.  `l0` must always be a lexical grammar.  `g1` must always be a structural grammar and is linked by default to `l0`.  It is a fatal error if a grammar has no indication whether it is structural or lexical, but this indication may be a default.  Enforcement of these restrictions is done by the lower layer (KLOL).
 
 ## Example grammars
 
