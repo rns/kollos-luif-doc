@@ -201,6 +201,10 @@ LUIF literals are Lua literal strings as defined in [Lexical Conventions](http:/
 
 ### Character classes
 
+[todo: string containing a Lua pattern? ]
+
+[todo: string containing a PCRE regex? rename to Regexes then]
+
 ### Comments
 
 LUIF comments are Lua comments as defined at the end of [Lexical Conventions](http://www.lua.org/manual/5.1/manual.html#2.1) section in the Lua 5.1 Reference Manual.
@@ -358,7 +362,7 @@ The former case is handled with the [Abstract Syntax Forest (ASF) interface](#as
 
 The application can use `luif.value.ambiguous()` function to determine whether the parse is ambiguous. [todo: specify `luif.value.ambiguous()`]
 
-#### Ambiguous Parse -- Traversing the ASF  <a href="asf_traversal"></a>
+#### Ambiguous Parse -- Traversing the ASF  <a id="asf_traversal"></a>
 
 If the parse is ambiguous,
 LUIF walks the ASF calling the traverser function for its nodes.
@@ -370,7 +374,7 @@ The traverser can call functions in `luif.asf` interface to enumerate and/or pru
 
 ##### Pruning the ASF
 
-#### Unambiguous Parse -- Walking the AST <a href="ast_walking"></a>
+#### Unambiguous Parse -- Walking the AST <a id="ast_walking"></a>
 
 If the parse is unambiguous, the ASF becomes the AST that makes the application's job much simpler. LUIF will build the AST and will call the visitor function for its nodes in the given order. The application can use [context accessors](#context_accessors) to get the node data, distill the AST, and produce the parse value. This is done by calling `luif.ast.walk(order, visitor)` function.
 
@@ -397,7 +401,7 @@ On the other hand, nested macro expansion
 can arguably be done more convenient with the full context at hand
 so the full AST (ASF) is required.
 
-## Events <a href="events"></a>
+## Events <a id="events"></a>
 
 Parse events are defined using [`completed`](#completed) and [`predicted`](#predicted) adverbs.
 
