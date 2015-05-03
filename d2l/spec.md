@@ -83,7 +83,11 @@ local grammar = luif.G{
 }
 ```
 
-[todo: define support SLIF extensions per https://github.com/rns/kollos-luif-doc/issues/17]
+Note:
+
+Character classes and nested structures as sequence separators are currently under discussion at http://irclog.perlgeek.de/marpa/2015-05-03#i_10538440
+
+[todo: define support for SLIF extensions per https://github.com/rns/kollos-luif-doc/issues/17]
 
 ### Multiple RHS alternatives
 
