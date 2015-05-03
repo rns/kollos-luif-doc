@@ -205,7 +205,7 @@ LUIF comments are Lua comments as defined at the end of [Lexical Conventions](ht
 #### action <a id="action"></a>
 
 The `action` adverb defines the semantics of its RHS alternative.
-Its values are specified in [Semantics](#semantic_action) below.
+Its values are specified in [Semantics](#semantic_action) section below.
 
 ## Semantics <a id="semantic_action"></a>
 
