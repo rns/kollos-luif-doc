@@ -209,7 +209,7 @@ Its values are specified in [Semantics](#semantic_action) section below.
 
 ## Semantics <a id="semantic_action"></a>
 
-The semantics of a BNF statement in the LUIF can be defined with the [`action` adverb](#semantic_action) of its RHS alternative or by using [Abstract-Syntax Forest (ASF)](#semantics_with_asf) functions of the LUIF.
+The semantics of a BNF statement in the LUIF can be defined using either [`action` adverb](#semantic_action) of its RHS alternative or the [Abstract-Syntax Forest (ASF)](#semantics_with_asf) functions of the LUIF.
 
 ### Defining Semantics with `action` <a id="semantic_action"></a> adverb
 
@@ -308,19 +308,60 @@ returns position and length of the input section matched by the BNF rule.
 
 ##### `string = luif.context.literal()`
 
-returns the section of the input matched by the BNF rule. It corresponds to the `span` returned by the `luif.context.span()` function above.
+returns the section of the input matched by the BNF rule. It corresponds to the input span returned by the `luif.context.span()` function above.
 
 ##### `pos = luif.context.pos()`
 
-returns the position in the input, which correspond to the start of the span matched with the BNF rule.
+returns the position in the input, which correspond to the start of the inout span matched with the BNF rule.
 
 ##### `len = luif.context.length()`
 
-returns the length of the span matched with the BNF rule.
+returns the length of the input span matched with the BNF rule.
 
 ### Defining Semantics with ASF <a id="semantics_with_asf"></a>
 
-[TBD]
+Marpa is designed to support ambiguity out-of-the-box,
+hence the LUIF semantics aims for the general case, where you have several parse values (ambiguous parse) and treats single parse values (unambiguous parse) as its specialization.
+The former case is handled with the Abstract Syntax Forest (ASF) interface, while for the latter the application can simply call
+`luif.value.ast()` to get the Abstract Syntax Tree (AST).
+
+The application can use `luif.value.ambiguous()` function to determine whether the parse is ambiguous. [todo: specify `luif.value.ambiguous()`]
+
+#### Ambiguous Parse -- Traversing the ASF
+
+If the parse is ambiguous,
+LUIF walks the ASF calling the traverser function for its nodes.
+The traverser can call functions in `luif.asf` interface to enumerate and/or prune parse alternatives.
+
+##### Enumerating Parse Alternatives
+
+##### Pruning the ASF
+
+#### Unambiguous Parse -- Getting the AST
+
+If the parse is ambiguous, the ASF becomes the AST, which can be accessed by calling
+`luiv.value.ast()` function that returns the AST
+
+[todo: specify AST format]
+
+### Actions and ASF's: What to Choose
+
+The choice between actions and ASFs is largely defined
+by how context-sensitive the input is, i.e.
+how much context information is needed to build the parse value.
+
+For example, in the case of syntax-driven translation,
+where the value of each symbol is context-independent,
+actions or even events provide a better choice.
+
+On the other hand, nested macro expansion
+is arguably more convenient to be done with the full context at hand
+and
+
+
+## Events
+
+[TBD as `completed` and `predicted` adverbs]
 
 ## Locale support
 
