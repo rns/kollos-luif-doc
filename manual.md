@@ -4,7 +4,7 @@ Warning: this is a working draft.
 
 ## Overview
 
-This document desribes the LUIF (LUa InterFace),
+This document describes the LUIF (LUa InterFace),
 the interface language of
 the [Kollos project](https://github.com/jeffreykegler/kollos/).
 
