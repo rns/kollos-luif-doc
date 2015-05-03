@@ -322,8 +322,7 @@ returns the length of the input span matched with the BNF rule.
 
 Marpa is designed to support ambiguity out-of-the-box,
 hence the LUIF semantics aims for the general case, where you have several parse values (ambiguous parse) and treats single parse values (unambiguous parse) as its specialization.
-The former case is handled with the Abstract Syntax Forest (ASF) interface, while for the latter the application can simply call
-`luif.value.ast()` to get the Abstract Syntax Tree (AST).
+The former case is handled with the Abstract Syntax Forest (ASF) interface, while for the latter the application can simply traverse ASF as a tree.
 
 The application can use `luif.value.ambiguous()` function to determine whether the parse is ambiguous. [todo: specify `luif.value.ambiguous()`]
 
@@ -331,37 +330,42 @@ The application can use `luif.value.ambiguous()` function to determine whether t
 
 If the parse is ambiguous,
 LUIF walks the ASF calling the traverser function for its nodes.
-The traverser can call functions in `luif.asf` interface to enumerate and/or prune parse alternatives.
+The traverser can call functions in `luif.asf` interface to enumerate and/or prune parse alternatives. This can be done using `luif.asf.traverse(traverser)` fnction.
 
 ##### Enumerating Parse Alternatives
 
 ##### Pruning the ASF
 
-#### Unambiguous Parse -- Getting the AST
+#### Unambiguous Parse -- Traversing the AST
 
-If the parse is ambiguous, the ASF becomes the AST, which can be accessed by calling
-`luif.value.ast()` function that returns the AST.
+If the parse is unambiguous, the ASF becomes the AST that makes the traverser's job much simpler. LUIF will build the AST and will call the travserser for its nodes in the given order. The application can use [context accessors](#context_accessors) to get the node data, distill the AST, and produce the parse value.
 
-[todo: specify AST format]
+[todo: specify AST format and call, e.g. `luif.ast.traverse(order, traverser)`]
 
-### Actions and ASF's: What to Choose
+### Actions and ASF's: How to Choose
 
-The choice between actions and ASFs is largely defined
+[todo: more meaningful example/considerations are required
+for this section is it is at all needed]
+
+In addition to user preferences,
+the choice between actions and ASFs can be defined
 by how context-sensitive the input is, i.e.
 how much context information is needed to build the parse value.
 
-For example, in the case of syntax-driven translation,
+As an arguably trivial example, if the parse value must be produced
+by computing an arithmetic expression, actions become the obvious choice.
+
+As a less trivial example, in the case of syntax-driven translation,
 where the value of each symbol is context-independent,
 actions or even events provide a better choice.
 
 On the other hand, nested macro expansion
-is arguably more convenient to be done with the full context at hand
-and
-
+can arguably be done more convenient with the full context at hand
+so the full AST (ASF) is required.
 
 ## Events
 
-[TBD as `completed` and `predicted` adverbs]
+[TBD -- as `completed` and `predicted` adverbs]
 
 ## Locale support
 
