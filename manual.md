@@ -17,7 +17,7 @@ to follow the Lua manual bottom-up pattern of introducing individual constructs 
 
 There is only one BNF statement, combining precedence, sequences, and alternation.
 
-LUIF extends the Lua syntax by adding `bnf` alternative to `stat` rule of the [Lua grammar](http://www.lua.org/manual/5.1/manual.html#8) and introducing the new rules. The general syntax for a BNF statement is as follows (`stat`, `block`, `funcname`, `funcbody`, `var`, `field`, `Name`, and `String` symbols are as defined by the Lua grammar):
+LUIF extends the Lua syntax by adding `bnf` alternative to `stat` rule of the [Lua grammar](http://www.lua.org/manual/5.1/manual.html#8) and introducing the new rules. The general syntax for a BNF statement is as follows (`stat`, `block`, `funcname`, `funcbody`, `var`, `Name`, and `String` symbols are as defined by the Lua grammar):
 
 Note: this describes LUIF structural and lexical grammars 'used in the default way' as defined in [Grammars](#grammars) section below. The first rule will act as the start rule.
 
@@ -39,12 +39,17 @@ precedenced_alternative ::= alternative { '|' alternative }
 
 alternative ::= rhslist { ',' adverb }
 
-adverb ::= field |
-           action
+adverb ::= action |
+           completed |
+           predicted
 
 -- values other than function(...) -- https://github.com/rns/kollos-luif-doc/issues/12
 -- context in action functions -- https://github.com/rns/kollos-luif-doc/issues/11
 action ::= 'action' '=' 'function' funcname funcbody
+
+completed ::= 'completed' '=' 'function' funcname funcbody
+
+predicted ::= 'predicted' '=' 'function' funcname funcbody
 
 rhslist ::= { rh_atom }       -- can be empty, like Lua chunk
 
@@ -207,6 +212,22 @@ LUIF comments are Lua comments as defined at the end of [Lexical Conventions](ht
 The `action` adverb defines the semantics of its RHS alternative.
 Its values are specified in [Semantics](#semantic_action) section below.
 
+#### completed
+
+The `completed` adverb defines
+the Lua function to be called when the RHS alternative is completed during the parse.
+Its values are the same as those of the `action` adverb.
+
+For more details on parse events, see [Events](#events) section.
+
+#### predicted
+
+The `predicted` adverb defines
+the Lua function to be called when the RHS alternative is predicted during the parse.
+Its values are the same as those of the `action` adverb.
+
+For more details on parse events, see [Events](#events) section.
+
 ## Semantics <a id="semantic_action"></a>
 
 The semantics of a BNF statement in the LUIF can be defined using either [`action` adverb](#semantic_action) of its RHS alternative or the [Abstract-Syntax Forest (ASF)](#semantics_with_ast_asf) functions of the LUIF.
@@ -288,35 +309,46 @@ The context accessors are:
 
 ##### `lhs_id = luif.context.lhs()`
 
-returns the integer ID of the symbol which is on the LHS of the matched BNF rule.
+returns the integer ID of the symbol which is on the LHS of the BNF rule matched in the parse value or completed/predicted during the parse.
 
 ##### `rule_id = luif.context.rule()`
 
-returns the integer ID of the matched BNF rule.
+returns the integer ID of the BNF rule matched in the parse value or completed/predicted during the parse.
 
 ##### `alt_no = luif.context.alternative()`
 
-returns the number of the matched alternative in the RHS of the BNF rule.
+returns the number of the the BNF rule's RHS alternative matched in the parse value or completed/predicted during the parse.
 
 ##### `prec = luif.context.precedence()`
 
-returns numeric precedence of the matched alternative relative to other alternatives or nil if no precedence is defined.
+returns numeric precedence of the matched/completed/predicted alternative
+relative to other alternatives or nil if no precedence is defined for the alternative.
 
 ##### `pos, len = luif.context.span()`
 
-returns position and length of the input section matched by the BNF rule.
+returns position and length of the input section corresponding to
+the BNF rule matched in the parse value or
+completed/predicted during the parse.
 
 ##### `string = luif.context.literal()`
 
-returns the section of the input matched by the BNF rule. It corresponds to the input span returned by the `luif.context.span()` function above.
+returns the section of the input corresponding to
+the BNF rule matched in the parse value or
+completed/predicted during the parse.
+It is defined by
+the input span returned by the `luif.context.span()` function above.
 
 ##### `pos = luif.context.pos()`
 
-returns the position in the input, which correspond to the start of the inout span matched with the BNF rule.
+returns the position in the input, which starts the span corresponding to
+the BNF rule matched in the parse value or
+completed/predicted during the parse.
 
 ##### `len = luif.context.length()`
 
-returns the length of the input span matched with the BNF rule.
+returns the length of the input span corresponding to
+the BNF rule matched in the parse value or
+completed/predicted during the parse.
 
 ### Defining Semantics with AST/ASF <a id="semantics_with_ast_asf"></a>
 
@@ -365,7 +397,7 @@ On the other hand, nested macro expansion
 can arguably be done more convenient with the full context at hand
 so the full AST (ASF) is required.
 
-## Events
+## Events <a href="events"></a>
 
 [TBD -- as `completed` and `predicted` adverbs]
 
