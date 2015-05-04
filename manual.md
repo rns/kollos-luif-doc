@@ -223,18 +223,9 @@ LUIF literals are Lua literal strings as defined in [Lexical Conventions](http:/
 
 ### Character classes
 
-[ Character classes are *not* patterns or regexes -- they are
-the portion of the regex/pattern syntax that describes a
-*single* character.  For example `[abc]` and not `a*` or even
-`abc`. ]
-
-[todo: string containing a Lua pattern?  I'd like to restrict the
-charclasses to those allowed by Lua patterns. ]
-
-[todo: string containing a PCRE regex?
-In my (Jeffrey's) opinion, no, *not* PCRE's.  *Way* too big.
-There will be a facility to add your own lexer.  I'd like the default
-one to be minimalist. ]
+A character class is a string, which must contain
+a valid [Lua character class](http://www.lua.org/manual/5.1/manual.html#5.4.1) as defined in the Lua reference manual.
+Strings can be defined with character classes using sequence rules.
 
 ### Comments
 
