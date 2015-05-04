@@ -275,7 +275,7 @@ The semantics of a BNF statement in the LUIF can be defined using [`action` adve
 
 ### Defining Semantics with `action` <a id="semantic_action"></a> adverb
 
-The value of the `action` adverb can be a body of a Lua function (`funcbody`) as defined in [Function Definitions](http://www.lua.org/manual/5.1/manual.html#2.5.9) section of the Lua 5.1 Reference Manual or the name of such function, which must be a bare name (no namespaced or method function's name).
+The value of the `action` adverb can be a body of a Lua function (`funcbody`) as defined in [Function Definitions](http://www.lua.org/manual/5.1/manual.html#2.5.9) section of the Lua 5.1 Reference Manual or the name of such function, which must be a bare name (not a namespaced or a method function's name).
 
 The action functions will be called in the context where their respective BNF statements are defined. Their return values will become the values of the LHS symbols corresponding to the RHS alternatives modified by the `action` adverb.
 
