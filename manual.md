@@ -269,9 +269,9 @@ The `assoc` adverb defines associativity of a precedenced rule.
 Its value can be `left`, `right`, or `group`.
 The function of this adverb is as defined in the [SLIF](https://metacpan.org/pod/distribution/Marpa-R2/pod/Scanless/DSL.pod#assoc).
 
-## Semantics <a id="semantic_action"></a>
+## Semantics <a id="semantics"></a>
 
-The semantics of a BNF statement in the LUIF can be defined using either [`action` adverb](#semantic_action) of its RHS alternative or the [Abstract-Syntax Forest (ASF)](#semantics_with_ast_asf) functions of the LUIF.
+The semantics of a BNF statement in the LUIF can be defined using [`action` adverb](#semantic_action) of its RHS alternative.
 
 ### Defining Semantics with `action` <a id="semantic_action"></a> adverb
 
@@ -390,53 +390,6 @@ completed/predicted during the parse.
 returns the length of the input span corresponding to
 the BNF rule matched in the parse value or
 completed/predicted during the parse.
-
-### Defining Semantics with AST/ASF <a id="semantics_with_ast_asf"></a>
-
-Marpa is designed to support ambiguity out-of-the-box,
-hence the LUIF semantics aims for the general case, where you have several parse values (ambiguous parse) and treats single parse values (unambiguous parse) as its specialization.
-The former case is handled with the [Abstract Syntax Forest (ASF) interface](#asf_traversal), while for the latter the application can simply [walk the AST](#ast_walking).
-
-The application can use `luif.value.ambiguous()` function to determine whether the parse is ambiguous. [todo: specify `luif.value.ambiguous()`]
-
-#### Ambiguous Parse -- Traversing the ASF  <a id="asf_traversal"></a>
-
-If the parse is ambiguous,
-LUIF walks the ASF calling the traverser function for its nodes.
-The traverser can call functions in `luif.asf` interface to enumerate and/or prune parse alternatives. This is done with `luif.asf.traverse(traverser)` function.
-
-[todo: more details/examples on ASF traversal]
-
-##### Enumerating Parse Alternatives
-
-##### Pruning the ASF
-
-#### Unambiguous Parse -- Walking the AST <a id="ast_walking"></a>
-
-If the parse is unambiguous, the ASF becomes the AST that makes the application's job much simpler. LUIF will build the AST and will call the visitor function for its nodes in the given order. The application can use [context accessors](#context_accessors) to get the node data, distill the AST, and produce the parse value. This is done by calling `luif.ast.walk(order, visitor)` function.
-
-[todo: more details/examples on AST walking]
-
-### Actions and ASF's: How to Choose
-
-[todo: more meaningful example/considerations are required
-for this section is it is at all needed]
-
-In addition to user preferences,
-the choice between actions and ASFs can be defined
-by how context-sensitive the input is, i.e.
-how much context information is needed to build the parse value.
-
-As an arguably trivial example, if the parse value must be produced
-by computing an arithmetic expression, actions become the obvious choice.
-
-As a less trivial example, in the case of syntax-driven translation,
-where the value of each symbol is context-independent,
-actions or even events provide a better choice.
-
-On the other hand, nested macro expansion
-can arguably be done more convenient with the full context at hand
-so the full AST (ASF) is required.
 
 ## Events <a id="events"></a>
 
