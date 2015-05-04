@@ -17,7 +17,7 @@ to follow the Lua manual bottom-up pattern of introducing individual constructs 
 
 There is only one BNF statement, combining precedence, sequences, and alternation.
 
-LUIF extends the Lua syntax by adding `bnf` alternative to `stat` rule of the [Lua grammar](http://www.lua.org/manual/5.1/manual.html#8) and introducing the new rules. The general syntax for a BNF statement is as follows (`stat`, `block`, `funcname`, `funcbody`, `var`, `Name`, and `String` symbols are as defined by the Lua grammar):
+LUIF extends the Lua syntax by adding `bnf` alternative to `stat` rule of the [Lua grammar](http://www.lua.org/manual/5.1/manual.html#8) and introducing the new rules. The general syntax for a BNF statement is as follows (`stat`, `block`, `funcname`, `funcbody`, `Name`, and `String` symbols are as defined by the Lua grammar):
 
 Note: this describes LUIF structural and lexical grammars 'used in the default way' as defined in [Grammars](#grammars) section below. The first rule will act as the start rule.
 
@@ -63,8 +63,7 @@ assocexp ::= 'left' |
 
 rhslist ::= { rh_atom }       -- can be empty, like Lua chunk
 
-rh_atom ::= var |             -- Lua variable, for programmatic grammar construction
-            separated_sequence |
+rh_atom ::= separated_sequence |
             symbol_name |
             literal |
             charclass |
