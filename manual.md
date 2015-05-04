@@ -232,7 +232,10 @@ the portion of the regex/pattern syntax that describes a
 [todo: string containing a Lua pattern?  I'd like to restrict the
 charclasses to those allowed by Lua patterns. ]
 
-[todo: string containing a PCRE regex? rename to Regexes then]
+[todo: string containing a PCRE regex?
+In my (Jeffrey's) opinion, no, *not* PCRE's.  *Way* too big.
+There will be a facility to add your own lexer.  I'd like the default
+one to be minimalist. ]
 
 ### Comments
 
