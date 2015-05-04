@@ -121,7 +121,7 @@ as described above.
 A repetiton consists of
 
 + A repetend, followed by
-+ An optional puncuation specifier.
++ An optional punctuation specifier.
 
 A repetition specifier is one of
 
@@ -135,11 +135,24 @@ A repetition specifier is one of
 
 A punctuation specifier is one of
 ```
-    % <sep>     -- use <sep> as a separator
-    %% <sep>     -- use <sep> as a terminator
+    % <sep>     -- use <sep> as a proper separator
+    %% <sep>     -- use <sep> as liberal separator
+    %- <sep>    -- proper separation, same as %
+    %$ <sep>    -- use <sep> as a terminator
 ```
-When a terminator specifier is in use,
-the final terminator is optional.
+When proper separation is in use,
+the separators must actually separate items.
+A separator after the last item is not allowed.
+
+When the separator is used as a terminator,
+it must come after every item.
+In particular, there *must* be a separator
+after the last item.
+
+A "liberal" separator may be used either
+as a proper separator or a terminator.
+That is, the separator after the last item
+is optional.
 
 Here are some examples:
 
@@ -152,14 +165,14 @@ Here are some examples:
     (<A> <B>) ** 3..42 -- between 3 and 42 repetitions of <A> and <B>
     [<A> <B>] ** 3..42 -- between 3 and 42 repetitions of <A> and <B>,
                        --   hidden from the semantics
-    <a>* % ','         -- 0 or more comma-separated <a> symbols
-    <a>+ % ','         -- 1 or more comma-separated <a> symbols
+    <a>* % ','         -- 0 or more properly comma-separated <a> symbols
+    <a>+ % ','         -- 1 or more properly comma-separated <a> symbols
     <a>? % ','         -- 0 or 1 <a> symbols; note that ',' is never used
-    <a> ** 2..* % ','  -- 2 or more comma-separated <a> symbols
-    <A>+ % ','         -- one or more comma-separated <A> symbols
-    <A>* % ','         -- zero or more comma-separated <A> symbols
-    (A B)* % ','       -- A and B, repeated zero or more times, and comma-separated
-    <A>+ %% ','        -- one or more comma-terminated <A> symbols
+    <a> ** 2..* % ','  -- 2 or more properly comma-separated <a> symbols
+    <A>+ % ','         -- one or more properly comma-separated <A> symbols
+    <A>* % ','         -- zero or more properly comma-separated <A> symbols
+    (A B)* % ','       -- A and B, repeated zero or more times, and properly comma-separated
+    <A>+ %% ','        -- one or more comma-separated or comma-terminated <A> symbols
 
 ```
 
