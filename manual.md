@@ -87,8 +87,6 @@ symbol_name :: Name
 
 literal ::= String    -- long strings not allowed
 
--- a Lua pattern as per http://www.lua.org/manual/5.1/manual.html#5.4.1
--- or a regex character class
 charclass ::= String
 
 ```
