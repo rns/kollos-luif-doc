@@ -224,7 +224,13 @@ LUIF literals are Lua literal strings as defined in [Lexical Conventions](http:/
 
 ### Character classes
 
-[todo: string containing a Lua pattern? ]
+[ Character classes are *not* patterns or regexes -- they are
+the portion of the regex/pattern syntax that describes a
+*single* character.  For example `[abc]` and not `a*` or even
+`abc`. ]
+
+[todo: string containing a Lua pattern?  I'd like to restrict the
+charclasses to those allowed by Lua patterns. ]
 
 [todo: string containing a PCRE regex? rename to Regexes then]
 
