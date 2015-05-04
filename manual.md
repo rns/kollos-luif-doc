@@ -487,6 +487,10 @@ A structural grammar will often contain lexical elements, such as strings and ch
 
 If a grammar specifies lexemes, it is a lexical grammar.  If a grammar specifies a linked lexical grammar, it is a structural grammar.  `l0` must always be a lexical grammar.  `g1` must always be a structural grammar and is linked by default to `l0`.  It is a fatal error if a grammar has no indication whether it is structural or lexical, but this indication may be a default.  Enforcement of these restrictions is done by the lower layer (KLOL).
 
+## Programmatic Grammar Construction (PGC)
+
+[stub: BNF statements are not for PGC, use D2L; this can change in future. ]
+
 ## Example grammars
 
 ### Calculator
