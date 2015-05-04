@@ -17,7 +17,7 @@ to follow the Lua manual bottom-up pattern of introducing individual constructs 
 
 There is only one BNF statement, combining precedence, sequences, and alternation.
 
-LUIF extends the Lua syntax by adding `bnf` alternative to `stat` rule of the [Lua grammar](http://www.lua.org/manual/5.1/manual.html#8) and introducing the new rules. The general syntax for a BNF statement is as follows (`stat`, `block`, `funcname`, `funcbody`, `Name`, and `String` symbols are as defined by the Lua grammar):
+LUIF extends the Lua syntax by adding `bnf` alternative to `stat` rule of the [Lua grammar](http://www.lua.org/manual/5.1/manual.html#8) and introducing the new rules. The general syntax for a BNF statement is as follows (`stat`, `block`, `funcbody`, `Name`, and `String` symbols are as defined by the Lua grammar):
 
 Note: this describes LUIF structural and lexical grammars 'used in the default way' as defined in [Grammars](#grammars) section below. The first rule will act as the start rule.
 
@@ -52,8 +52,8 @@ completed ::= 'completed' '=' functionexp
 
 predicted ::= 'predicted' '=' functionexp
 
-functionexp ::= 'function' funcname funcbody |
-                funcname
+functionexp ::= 'function' funcbody |
+                Name
 
 assoc ::= 'assoc' '=' assocexp
 
@@ -275,13 +275,8 @@ The semantics of a BNF statement in the LUIF can be defined using [`action` adve
 
 ### Defining Semantics with `action` <a id="semantic_action"></a> adverb
 
-The value of the `action` adverb can be a Lua function as defined in [Function Definitions](http://www.lua.org/manual/5.1/manual.html#2.5.9) section of the Lua 5.1 Reference Manual or the name of such function.
+The value of the `action` adverb can be a body of a Lua function (`funcbody`) as defined in [Function Definitions](http://www.lua.org/manual/5.1/manual.html#2.5.9) section of the Lua 5.1 Reference Manual or the name of such function, which must be a bare name (no namespaced or method function's name).
 
-An action function can be
-a [bare function](#bare_function),
-a [namespaced function](#namespaced_function), or
-a [method](#method_function).
-This allows defining semantics in a set of functions, a namespace (Lua package) or an object.
 The action functions will be called in the context where their respective BNF statements are defined. Their return values will become the values of the LHS symbols corresponding to the RHS alternatives modified by the `action` adverb.
 
 The match context information, such as
@@ -290,51 +285,15 @@ will be provided by [context accessors](#context_accessors) in `luif.context` na
 
 If the semantics of a BNF statement is defined in a separate Lua file, LUIF functionality must be imported with Lua's [`require`] (http://www.lua.org/manual/5.1/manual.html#pdf-require) function.
 
-#### Bare Function Actions <a id="bare_function"></a>
-
-The syntax for a bare function action is
+The syntax for a semantic action function is
 
 ```lua
-action = function f (params) body end
+action = function (params) body end
 ```
 
 It will be called as `f (params)`
 with `params` set to
 the values defined by the semantics of the matched RHS alternative's symbols.
-
-#### Namespaced Function Actions <a id="namespaced_function"></a>
-
-The syntax for a namespaced function action is
-
-```lua
-action = function t.a.b.c.f (params) body end
-```
-
-It will be called as `t.a.b.c.f (params)`
-with `params` set to
-the values defined by the semantics of the matched RHS alternative's symbols.
-
-More details on packages in Lua can be found in [Packages](http://www.lua.org/pil/15.html) section of _Programming in Lua_ book.
-
-#### Method Actions <a id="method_function"></a>
-
-The syntax for a method action is
-
-```lua
-action = function t.a.b.c:f (params) body end
-```
-
-or
-
-```lua
-action = function t.a.b.c.f (self, params) body end
-```
-
-It will be called as `t.a.b.c:f (params)`
-with `params` set to
-the values defined by the semantics of the matched RHS alternative's symbols.
-
-More details on objects and methods in Lua can be found in [Object-Oriented Programming](http://www.lua.org/pil/16.html) section of _Programming in Lua_ book.
 
 #### Context Accessors <a id="context_accessors"></a>
 
