@@ -72,7 +72,9 @@ rh_atom ::= separated_sequence |
 
 separated_sequence ::= sequence  |
                        sequence '%'  separator | -- proper separation
-                       sequence '%%' separator
+                       sequence '%%' separator |
+                       sequence '%-' separator |
+                       sequence '%$' separator
 
 -- more complex separators -- http://irclog.perlgeek.de/marpa/2015-05-03#i_10538440
 separator ::= symbol_name
