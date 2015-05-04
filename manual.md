@@ -213,7 +213,10 @@ LUIF literals are Lua literal strings as defined in [Lexical Conventions](http:/
 
 [todo: string containing a Lua pattern? ]
 
-[todo: string containing a PCRE regex? rename to Regexes then]
+[todo: string containing a PCRE regex?
+In my (Jeffrey's) opinion, no, *not* PCRE's.  *Way* too big.
+There will be a facility to add your own lexer.  I'd like the default
+one to be minimalist. ]
 
 ### Comments
 
