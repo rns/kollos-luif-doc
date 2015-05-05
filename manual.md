@@ -16,19 +16,19 @@ before so specifying them top-down (rule to symbol)]
 ## Table of Contents
 
 <a id="toc_bnf_statement"></a>[BNF Statement](#bnf_statement)<br/>
-<a id="toc_structural_and_lexical_rules"></a>[Structural and Lexical Rules](#structural_and_lexical_rules)<br/>
-<a id="toc_precedenced_rules"></a>[Precedenced Rules](#precedenced_rules)<br/>
-<a id="toc_sequences"></a>[Sequences](#sequences)<br/>
-<a id="toc_grouping_and_hiding_symbols"></a>[Grouping and Hiding Symbols](#grouping_and_hiding_symbols)<br/>
-<a id="toc_symbol_names"></a>[Symbol Names](#symbol_names)<br/>
-<a id="toc_literals"></a>[Literals](#literals)<br/>
-<a id="toc_character_classes"></a>[Character Classes](#character_classes)<br/>
-<a id="toc_comments"></a>[Comments](#comments)<br/>
-<a id="toc_adverbs"></a>[Adverbs](#adverbs)<br/>
-- <a id="toc_action"></a>[`action`](#action)<br/>
-- <a id="toc_completed"></a>[`completed`](#completed)<br/>
-- <a id="toc_predicted"></a>[`predicted`](#predicted)<br/>
-- <a id="toc_assoc"></a>[`assoc`](#assoc)
+- <a id="toc_structural_and_lexical_rules"></a>[Structural and Lexical Rules](#structural_and_lexical_rules)<br/>
+- <a id="toc_precedenced_rules"></a>[Precedenced Rules](#precedenced_rules)<br/>
+- <a id="toc_sequences"></a>[Sequences](#sequences)<br/>
+- <a id="toc_grouping_and_hiding_symbols"></a>[Grouping and Hiding Symbols](#grouping_and_hiding_symbols)<br/>
+- <a id="toc_symbol_names"></a>[Symbol Names](#symbol_names)<br/>
+- <a id="toc_literals"></a>[Literals](#literals)<br/>
+- <a id="toc_character_classes"></a>[Character Classes](#character_classes)<br/>
+- <a id="toc_comments"></a>[Comments](#comments)<br/>
+- <a id="toc_adverbs"></a>[Adverbs](#adverbs)<br/>
+  - <a id="toc_action"></a>[`action`](#action)<br/>
+  - <a id="toc_completed"></a>[`completed`](#completed)<br/>
+  - <a id="toc_predicted"></a>[`predicted`](#predicted)<br/>
+  - <a id="toc_assoc"></a>[`assoc`](#assoc)
 
 <a id="toc_semantics"></a>[Semantics](#semantics)<br/>
 <a id="toc_defining_semantics_with_action_adverb"></a>[Defining Semantics with `action` adverb](#defining_semantics_with_action_adverb)<br/>
