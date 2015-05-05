@@ -6,7 +6,6 @@ the [Kollos project](https://github.com/jeffreykegler/kollos/).
 
 The LUIF is [Lua](http://www.lua.org/), extended with [BNF](http://en.wikipedia.org/wiki/Backus%E2%80%93Naur_Form) statements.
 
-[todo]
 [todo: a (link to) a brief BNF introduction/tutotial?]
 
 [todo: briefly define symbol, terminal, non-terminal, rule, LHS, RHS, alternative

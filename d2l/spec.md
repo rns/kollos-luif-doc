@@ -1,10 +1,12 @@
-﻿# LUIF Direct-to-Lua (D2L, d2l) calls
+﻿# LUIF Direct-to-Lua (D2L) Calls and Format
 
-This is a write-up on defining LUIF BNF statements as first-class Lua objects along the lines of [LPeg](http://www.inf.puc-rio.br/~roberto/lpeg/lpeg.html#intro).
+Direct-to-Lua (D2L) calls allow working with LUIF statements as first-class Lua objects along the lines of [LPeg](http://www.inf.puc-rio.br/~roberto/lpeg/lpeg.html#intro).
 
 To quote Roberto:
 
 > Following the Snobol tradition, LPeg defines patterns as first-class objects. That is, patterns are regular Lua values (represented by userdata). The library offers several functions to create and compose patterns. With the use of metamethods, several of these functions are provided as infix or prefix operators. On the one hand, the result is usually much more verbose than the typical encoding of patterns using the so called regular expressions (which typically are not regular expressions in the formal sense). On the other hand, first-class patterns allow much better documentation (as it is easy to comment the code, to break complex definitions in smaller parts, etc.) and are extensible, as we can define new functions to create and compose patterns.
+
+In the LUIF, Direct-to-Lua (D2L) calls are used to transform LUIF statements into Kollos Intermediate Representation (KIR) table, provide programmatic grammar construction and, with the use of special table constructors, serve as a representation format for LUIF grammars.
 
 ## Functions
 
