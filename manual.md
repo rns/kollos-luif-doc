@@ -473,14 +473,15 @@ rhs_primary ::= separated_sequence |
                 grouped_alternative |
                 hidden_alternative
 
-grouped_alternative ::= '(' alternative ')'
-hidden_alternative ::= '[' alternative ']'
-
 separated_sequence ::= sequence  |
                        sequence '%'  separator | -- proper separation
                        sequence '%%' separator |
                        sequence '%-' separator |
                        sequence '%$' separator
+
+grouped_alternative ::= '(' alternative ')'
+
+hidden_alternative ::= '[' alternative ']'
 
 sequence ::= sequence_item '+' |
              sequence_item '*' |
