@@ -25,10 +25,10 @@ before so specifying them top-down (rule to symbol)]
 <a id="toc_character_classes"></a>[Character Classes](#character_classes)<br/>
 <a id="toc_comments"></a>[Comments](#comments)<br/>
 <a id="toc_adverbs"></a>[Adverbs](#adverbs)<br/>
-<a id="toc_action"></a>[action](#action)<br/>
-<a id="toc_completed"></a>[completed](#completed)<br/>
-<a id="toc_predicted"></a>[predicted](#predicted)<br/>
-<a id="toc_assoc"></a>[assoc](#assoc)<br/>
+- <a id="toc_action"></a>[`action`](#action)<br/>
+- <a id="toc_completed"></a>[`completed`](#completed)<br/>
+- <a id="toc_predicted"></a>[`predicted`](#predicted)<br/>
+- <a id="toc_assoc"></a>[`assoc`](#assoc)<br/>
 <a id="toc_semantics"></a>[Semantics](#semantics)<br/>
 <a id="toc_defining_semantics_with_action_adverb"></a>[Defining Semantics with `action` adverb](#defining_semantics_with_action_adverb)<br/>
 <a id="toc_context_accessors"></a>[Context Accessors](#context_accessors)<br/>
