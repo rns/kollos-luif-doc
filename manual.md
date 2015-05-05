@@ -121,7 +121,7 @@ For a usage example of precedenced rules, see the [Calculator](#calculator) gram
 <a id="sequences"></a>
 ### Sequences
 
-[Sequences](#separated_sequence) are expressions on the RHS of a BNF rule alternative
+Sequences are expressions on the RHS of a BNF rule alternative
 which imply the repetition of a symbol,
 or a parenthesized series of symbols. The general syntax for sequences is
 
@@ -472,9 +472,7 @@ rhs_primary ::= separated_sequence |
 
 grouped_alternative ::= '(' alternative ')'
 hidden_alternative ::= '[' alternative ']'
-```
-<a style="display:none" id="separated_sequence"></a>
-```
+
 separated_sequence ::= sequence  |
                        sequence '%'  separator | -- proper separation
                        sequence '%%' separator |
