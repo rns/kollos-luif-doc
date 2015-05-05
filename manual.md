@@ -37,8 +37,8 @@ before so specifying them top-down (rule to symbol)]
 
 [Events](#events)<br/>
 [Locale Support](#locale_support)<br/>
-[Programmatic Grammar Construction](#programmatic_grammar_construction)<br/>
 [Post-Processing](#post_processing)<br/>
+[Programmatic Grammar Construction](#programmatic_grammar_construction)<br/>
 [Complete Syntax of BNF Statement](#complete_syntax_of_bnf_statement)<br/>
 [Example Grammars](#example_grammars)<br/>
 - [calculator](#calculator)<br/>
@@ -368,16 +368,6 @@ Lua's `os.setlocale()`, when used in the LUIF context for anything but the "C" l
 
 [todo: update the tentative language above as Kollos project progresses]
 
-<a id="programmatic_grammar_construction"></a>
-## Programmatic Grammar Construction (PGC)
-
-LUIF grammars can be constructed programmatically
-by using Direct-to-Lua (D2L) calls. The details are specified
-in a [separate document](d2l/spec.md).
-
-At the moment, LUIF statements cannot be affected by Lua statements directly,
-but this can change in future.
-
 <a id="post_processing"></a>
 ## Post-processing
 
@@ -390,6 +380,15 @@ This table will be interpreted by the lower layer (KLOL).  Initially post-proces
 [under discussion https://github.com/rns/kollos-luif-doc/issues/9#issuecomment-98691086]
 
 [stub: KHIL uses D2L calls to transform LUIF to KIR]
+
+<a id="programmatic_grammar_construction"></a>
+## Programmatic Grammar Construction (PGC)
+
+Direct-to-Lua (D2L) calls can be used to build LUIF grammars programmatically.
+The details are specified in a [separate document](d2l/spec.md).
+
+At the moment, LUIF statements cannot be affected by Lua statements directly,
+but this can change in future.
 
 <a id="complete_syntax_of_bnf_statement"></a>
 ## Complete Syntax of BNF Statement
