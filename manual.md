@@ -71,7 +71,7 @@ Lexemes can also be defined explicitely by modifying an RHS alternative with the
 <a id="grammars"></a>
 ## Grammars
 
-BNF statements are grouped into one or more grammars.  There are two kinds of LUIF grammars: structural and lexical.
+BNF statements are grouped into one or more grammars.  There are two kinds of LUIF grammars: [structural and lexical](#structural_and_lexical_rules).
 
 A grammar is lexical if one or more of its rules have the special `lexeme` action.
 [todo: specify `lexeme` action]
