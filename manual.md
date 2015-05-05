@@ -222,6 +222,10 @@ In other words,
 there is no way to "unhide" a symbol that is inside
 square brackets.
 
+A grouped or hidden series of RHS symbols can be followed by
+a quantifier (`?`, `*` or `+`)
+to define zero or one, zero or more, or one or more repetitions of such series.
+
 <a id="symbol_names"></a>
 ### Symbol names
 
