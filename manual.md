@@ -59,7 +59,12 @@ A rule specified by a BNF statement can be either structural or lexical.
 <a id="grammars"></a>
 ## Grammars
 
-BNF statements are grouped into one or more grammars.  The grammar is indicated by the produce-operator of the BNF. Its general form is `:grammar:=`, where `grammar` is the name of a grammar.  `grammar` must not contain colons.  Initially, the post-processing will not support anything but `l0` and `g1` used in the default way, like this:
+BNF statements are grouped into one or more grammars.  There are two kinds of LUIF grammars: structural and lexical.
+
+A grammar is lexical if one or more of its rules have the special `lexeme` action.
+[todo: specify `lexeme` action]
+
+The grammar is indicated by the produce-operator of the BNF. Its general form is `:grammar:=`, where `grammar` is the name of a grammar.  `grammar` must not contain colons.  Initially, the [post-processing](#post_processing) will not support anything but `l0` and `g1` used in the default way, like this:
 
 ```lua
 -- structural grammar
@@ -362,15 +367,12 @@ Parse events are defined using [`completed`](#completed) and [`predicted`](#pred
 <a id="post_processing"></a>
 ## Post-processing
 
+KHIL uses Direct-to-Lua (D2L) calls specified in a [separate document](d2l/spec.md) to transform LUIF to KIR.
+
 The output of the KHIL will be a table, with one key for each grammar name.  Keys *must* be strings.  The value of each grammar key will be a table, with entries for external and internal symbols and rules.  Details of the format will be specified later.
 
-This table will be interpreted by the lower layer (KLOL).  Initially post-processing will take a very restricted form in the LUIF grammars.   There are two kinds of Libmarpa grammars: structural and lexical grammar.  A grammar is lexical if one or more of its rules have the special `lexeme` action.  The post-processing will expect a lexical grammar named `l0` and a structural grammar named `g1`, and will check (in the same way that Marpa::R2 currently does) to ensure they are compatible.
-
-### Direct-to-Lua calls
-
-[under discussion https://github.com/rns/kollos-luif-doc/issues/9#issuecomment-98691086]
-
-[stub: KHIL uses D2L calls to transform LUIF to KIR]
+This table will be interpreted by the lower layer (KLOL).  Initially post-processing will take a very restricted form in the LUIF structural and lexical grammars.
+The post-processing will expect a lexical grammar named `l0` and a structural grammar named `g1`, and will check (in the same way that Marpa::R2 currently does) to ensure they are compatible.
 
 <a id="programmatic_grammar_construction"></a>
 ## Programmatic Grammar Construction (PGC)
