@@ -13,94 +13,19 @@ The LUIF is Lua, extended with [BNF](http://en.wikipedia.org/wiki/Backus%E2%80%9
 [todo: consider rearranging the sections after more content is added
 to follow the Lua manual bottom-up pattern of introducing individual constructs with grammar snippets first and presenting the full syntax in the final section. ]
 
-## BNF statement
+## BNF Statement
 
-There is only one BNF statement, combining precedence, sequences, and alternation.
+LUIF extends the Lua syntax by adding `bnf` alternative to `stat` rule of the [Lua grammar](http://www.lua.org/manual/5.1/manual.html#8) and introducing the new rules for BNF statements. There is only one BNF statement, combining precedence, sequences, and alternation.
 
-LUIF extends the Lua syntax by adding `bnf` alternative to `stat` rule of the [Lua grammar](http://www.lua.org/manual/5.1/manual.html#8) and introducing the new rules. The general syntax for a BNF statement is as follows (`stat`, `block`, `funcbody`, `Name`, and `String` symbols are as defined by the Lua grammar):
+### Structural and Lexical Rules
 
-Note: this describes LUIF structural and lexical grammars 'used in the default way' as defined in [Grammars](#grammars) section below. The first rule will act as the start rule.
+A rule specified by a BNF statement can be either structural or lexical.
 
-[todo: make sure it conforms to other sections]
+[todo:]
 
-```
-stat ::= bnf
+### Precedenced Rules
 
-bnf ::= lhs produce_op rhs  -- to make references to LHS/RHS easier to understand
-
-lhs ::= symbol_name
-
-produce_op ::= '::=' |
-               '~'
-
-rhs ::= precedenced_alternative { '||' precedenced_alternative }
-
-precedenced_alternative ::= alternative { '|' alternative }
-
-alternative ::= rhslist { ',' adverb }
-
-adverb ::= action |
-           completed |
-           predicted |
-           assoc
-
--- values other than function(...) -- https://github.com/rns/kollos-luif-doc/issues/12
--- context in action functions -- https://github.com/rns/kollos-luif-doc/issues/11
-action ::= 'action' '=' functionexp
-
-completed ::= 'completed' '=' functionexp
-
-predicted ::= 'predicted' '=' functionexp
-
-functionexp ::= 'function' funcbody |
-                Name
-
-assoc ::= 'assoc' '=' assocexp
-
-assocexp ::= 'left' |
-             'right' |
-             'group'
-
-rhslist ::= { rh_atom }       -- can be empty, like Lua chunk
-
-rh_atom ::= separated_sequence |
-            symbol_name |
-            literal |
-            charclass |
-            '(' alternative ')' |
-            '[' alternative ']'
-
-separated_sequence ::= sequence  |
-                       sequence '%'  separator | -- proper separation
-                       sequence '%%' separator |
-                       sequence '%-' separator |
-                       sequence '%$' separator
-
--- more complex separators -- http://irclog.perlgeek.de/marpa/2015-05-03#i_10538440
-separator ::= symbol_name
-
-sequence ::= symbol_name '+' |
-             symbol_name '*' |
-             symbol_name '?' |
-             symbol_name '*' Number '..' Number |
-             symbol_name '*' Number '..' '*'
-
-symbol_name :: Name
-
-literal ::= String    -- long strings not allowed
-
-charclass ::= String
-
-```
-
-[todo: implementation detail: Lua patterns can be much slower than regexes, so we can
-use lua patterns as they are or
-translate them to regexes for speed
-or make this an option ]
-
-[todo: nested delimiters as sequence separators,
-like [`%bxy`](http://www.lua.org/pil/20.2.html), but with nesting support
-per comment to https://github.com/rns/kollos-luif-doc/issues/17]
+[TBD]
 
 ### Sequences
 
@@ -393,6 +318,93 @@ If a grammar specifies lexemes, it is a lexical grammar.  If a grammar specifies
 ## Programmatic Grammar Construction (PGC)
 
 [stub: BNF statements are not for PGC, use D2L; this can change in future. ]
+
+## Complete Syntax of BNF Statement
+
+The general syntax for a BNF statement is as follows (`stat`, `block`, `funcbody`, `Name`, and `String` symbols are as defined by the Lua grammar):
+
+Note: this describes LUIF structural and lexical grammars 'used in the default way' as defined in [Grammars](#grammars) section below. The first rule will act as the start rule.
+
+[todo: make sure it conforms to other sections]
+
+```
+stat ::= bnf
+
+bnf ::= lhs produce_op rhs  -- to make references to LHS/RHS easier to understand
+
+lhs ::= symbol_name
+
+produce_op ::= '::=' |
+               '~'
+
+rhs ::= precedenced_alternative { '||' precedenced_alternative }
+
+precedenced_alternative ::= alternative { '|' alternative }
+
+alternative ::= rhslist { ',' adverb }
+
+adverb ::= action |
+           completed |
+           predicted |
+           assoc
+
+-- values other than function(...) -- https://github.com/rns/kollos-luif-doc/issues/12
+-- context in action functions -- https://github.com/rns/kollos-luif-doc/issues/11
+action ::= 'action' '=' functionexp
+
+completed ::= 'completed' '=' functionexp
+
+predicted ::= 'predicted' '=' functionexp
+
+functionexp ::= 'function' funcbody |
+                Name
+
+assoc ::= 'assoc' '=' assocexp
+
+assocexp ::= 'left' |
+             'right' |
+             'group'
+
+rhslist ::= { rh_atom }       -- can be empty, like Lua chunk
+
+rh_atom ::= separated_sequence |
+            symbol_name |
+            literal |
+            charclass |
+            '(' alternative ')' |
+            '[' alternative ']'
+
+separated_sequence ::= sequence  |
+                       sequence '%'  separator | -- proper separation
+                       sequence '%%' separator |
+                       sequence '%-' separator |
+                       sequence '%$' separator
+
+-- more complex separators -- http://irclog.perlgeek.de/marpa/2015-05-03#i_10538440
+separator ::= symbol_name
+
+sequence ::= symbol_name '+' |
+             symbol_name '*' |
+             symbol_name '?' |
+             symbol_name '*' Number '..' Number |
+             symbol_name '*' Number '..' '*'
+
+symbol_name :: Name
+
+literal ::= String    -- long strings not allowed
+
+charclass ::= String
+
+```
+
+[todo: implementation detail: Lua patterns can be much slower than regexes, so we can
+use lua patterns as they are or
+translate them to regexes for speed
+or make this an option ]
+
+[todo: nested delimiters as sequence separators,
+like [`%bxy`](http://www.lua.org/pil/20.2.html), but with nesting support
+per comment to https://github.com/rns/kollos-luif-doc/issues/17]
 
 ## Example grammars
 
