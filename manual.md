@@ -243,7 +243,8 @@ LUIF comments are Lua comments as defined at the end of [Lexical Conventions](ht
 <a id="adverbs"></a>
 ### Adverbs
 
-A LUIF rule can be modified by one or more adverbs, which are `name = value` pairs separated with commas. Comma is also used to separate an adverb from the RHS alternative it modifies.
+A LUIF rule can be modified by one or more adverbs. A
+Adverbs are `name = value` pairs separated with commas. Comma is also used to separate an adverb from the RHS alternative it modifies.
 
 [todo: example]
 
@@ -455,8 +456,11 @@ rhs_primary ::= separated_sequence |
                 symbol_name |
                 literal |
                 charclass |
-               '(' alternative ')' |
-               '[' alternative ']'
+                grouped_alternative |
+                hidden_alternative
+
+grouped_alternative ::= '(' alternative ')'
+hidden_alternative ::= '[' alternative ']'
 
 separated_sequence ::= sequence  |
                        sequence '%'  separator | -- proper separation
@@ -467,11 +471,15 @@ separated_sequence ::= sequence  |
 -- more complex separators -- http://irclog.perlgeek.de/marpa/2015-05-03#i_10538440
 separator ::= symbol_name
 
-sequence ::= symbol_name '+' |
-             symbol_name '*' |
-             symbol_name '?' |
-             symbol_name '*' Number '..' Number |
-             symbol_name '*' Number '..' '*'
+sequence ::= sequence_item '+' |
+             sequence_item '*' |
+             sequence_item '?' |
+             sequence_item '**' Number '..' Number |
+             sequence_item '**' Number '..' '*'
+
+sequence_item ::= symbol_name |
+                  grouped_alternative |
+                  hidden_alternative
 
 symbol_name :: Name
 
