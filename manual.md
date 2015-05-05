@@ -9,13 +9,38 @@ the [Kollos project](https://github.com/jeffreykegler/kollos/).
 The LUIF is Lua, extended with [BNF](http://en.wikipedia.org/wiki/Backus%E2%80%93Naur_Form) statements.
 
 [todo: a (link to) a brief BNF introduction/tutotial?]
-[ briefly defining symbol, terminal, non-terminal, rule, LHS, RHS, alternative ]
+
+[todo: briefly define symbol, terminal, non-terminal, rule, LHS, RHS, alternative
+before so specifying them top-down (rule to symbol)]
 
 ## Table of Contents
 
-<a id="toc_bnf_statement"></a>[BNF Statement](#bnf_statement)
-
-<a id="toc_structural_and_lexical_rules"></a>[Structural and Lexical Rules](#structural_and_lexical_rules)
+<a id="toc_bnf_statement"></a>[BNF Statement](#bnf_statement)<br/>
+<a id="toc_structural_and_lexical_rules"></a>[Structural and Lexical Rules](#structural_and_lexical_rules)<br/>
+<a id="toc_precedenced_rules"></a>[Precedenced Rules](#precedenced_rules)<br/>
+<a id="toc_sequences"></a>[Sequences](#sequences)<br/>
+<a id="toc_grouping_and_hiding_symbols"></a>[Grouping and Hiding Symbols](#grouping_and_hiding_symbols)<br/>
+<a id="toc_symbol_names"></a>[Symbol Names](#symbol_names)<br/>
+<a id="toc_literals"></a>[Literals](#literals)<br/>
+<a id="toc_character_classes"></a>[Character Classes](#character_classes)<br/>
+<a id="toc_comments"></a>[Comments](#comments)<br/>
+<a id="toc_adverbs"></a>[Adverbs](#adverbs)<br/>
+<a id="toc_action"></a>[action](#action)<br/>
+<a id="toc_completed"></a>[completed](#completed)<br/>
+<a id="toc_predicted"></a>[predicted](#predicted)<br/>
+<a id="toc_assoc"></a>[assoc](#assoc)<br/>
+<a id="toc_semantics"></a>[Semantics](#semantics)<br/>
+<a id="toc_defining_semantics_with_action_adverb"></a>[Defining Semantics with `action` adverb](#defining_semantics_with_action_adverb)<br/>
+<a id="toc_context_accessors"></a>[Context Accessors](#context_accessors)<br/>
+<a id="toc_events"></a>[Events](#events)<br/>
+<a id="toc_locale_support"></a>[Locale Support](#locale_support)<br/>
+<a id="toc_grammars"></a>[Grammars](#grammars)<br/>
+<a id="toc_programmatic_grammar_construction"></a>[Programmatic Grammar Construction](#programmatic_grammar_construction)<br/>
+<a id="toc_post_processing"></a>[Post Processing](#post_processing)<br/>
+<a id="toc_complete_syntax_of_bnf_statement"></a>[Complete Syntax of BNF Statement](#complete_syntax_of_bnf_statement)<br/>
+<a id="toc_example_grammars"></a>[Example Grammars](#example_grammars)<br/>
+<a id="toc_calculator"></a>[calculator](#calculator)<br/>
+<a id="toc_json"></a>[json](#json)<br/>
 
 <a id="bnf_statement"></a>
 ## BNF Statement [^](#toc_bnf_statement)
@@ -31,10 +56,12 @@ A rule specified by a BNF statement can be either structural or lexical.
 
 [todo: specify how lexemes are defined ]
 
+<a id="precedenced_rules"></a>
 ### Precedenced Rules
 
 [TBD]
 
+<a id="sequences"></a>
 ### Sequences
 
 Sequences are expressions on the RHS of a BNF rule alternative
@@ -118,7 +145,8 @@ An application which really wants to specify rules involving nullable repetition
 can specify them directly in BNF,
 and these will make the programmer's intent clear.
 
-### Grouping and hidden symbols
+<a id="grouping_and_hiding_symbols"></a>
+### Grouping and hiding symbols
 
 To group a series of RHS symbols use parentheses:
 
@@ -141,6 +169,7 @@ In other words,
 there is no way to "unhide" a symbol that is inside
 square brackets.
 
+<a id="symbol_names"></a>
 ### Symbol names
 
 A LUIF symbol name is any valid Lua name.
@@ -150,20 +179,24 @@ the [SLIF](https://metacpan.org/pod/distribution/Marpa-R2/pod/Scanless/DSL.pod#S
 will allow whitespace
 in names.
 
+<a id="literals"></a>
 ### Literals
 
 LUIF literals are Lua literal strings as defined in [Lexical Conventions](http://www.lua.org/manual/5.1/manual.html#2.1) section of the Lua 5.1 Reference Manual.
 
+<a id="character_classes"></a>
 ### Character classes
 
 A character class is a string, which must contain
 a valid [Lua character class](http://www.lua.org/manual/5.1/manual.html#5.4.1) as defined in the Lua reference manual.
 Strings can be defined with character classes using sequence rules.
 
+<a id="comments"></a>
 ### Comments
 
 LUIF comments are Lua comments as defined at the end of [Lexical Conventions](http://www.lua.org/manual/5.1/manual.html#2.1) section in the Lua 5.1 Reference Manual.
 
+<a id="adverbs"></a>
 ### Adverbs
 
 A LUIF rule can be modified by one or more adverbs, `name = value` pairs separated with commas.
@@ -194,6 +227,7 @@ Its values are the same as those of the `action` adverb.
 
 For more details on parse events, see [Events](#events) section.
 
+<a id="assoc"></a>
 #### `assoc`
 
 The `assoc` adverb defines associativity of a precedenced rule.
@@ -291,6 +325,7 @@ Parse events are defined using [`completed`](#completed) and [`predicted`](#pred
 
 [todo: provide getting started info/tutorial on parse events].
 
+<a id="locale_support"></a>
 ## Locale support
 
 Full support is only assured for the "C" locale -- support for other locales may be limited, inconsistent, or removed in the future.
@@ -298,12 +333,6 @@ Full support is only assured for the "C" locale -- support for other locales may
 Lua's `os.setlocale()`, when used in the LUIF context for anything but the "C" locale, may fail, silently or otherwise.
 
 [todo: update the tentative language above as Kollos project progresses]
-
-## Post-processing
-
-The output of the KHIL will be a table, with one key for each grammar name.  Keys *must* be strings.  The value of each grammar key will be a table, with entries for external and internal symbols and rules.  Details of the format will be specified later.
-
-This table will be interpreted by the lower layer (KLOL).  Initially post-processing will take a very restricted form in the LUIF grammars.   There are two kinds of Libmarpa grammars: structural and lexical grammar.  A grammar is lexical if one or more of its rules have the special `lexeme` action.  The post-processing will expect a lexical grammar named `l0` and a structural grammar named `g1`, and will check (in the same way that Marpa::R2 currently does) to ensure they are compatible.
 
 <a id="grammars"></a>
 ## Grammars
@@ -335,10 +364,19 @@ A structural grammar will often contain lexical elements, such as strings and ch
 
 If a grammar specifies lexemes, it is a lexical grammar.  If a grammar specifies a linked lexical grammar, it is a structural grammar.  `l0` must always be a lexical grammar.  `g1` must always be a structural grammar and is linked by default to `l0`.  It is a fatal error if a grammar has no indication whether it is structural or lexical, but this indication may be a default.  Enforcement of these restrictions is done by the lower layer (KLOL).
 
+<a id="programmatic_grammar_construction"></a>
 ## Programmatic Grammar Construction (PGC)
 
 [stub: BNF statements are not for PGC, use D2L; this can change in future. ]
 
+<a id="post_processing"></a>
+## Post-processing
+
+The output of the KHIL will be a table, with one key for each grammar name.  Keys *must* be strings.  The value of each grammar key will be a table, with entries for external and internal symbols and rules.  Details of the format will be specified later.
+
+This table will be interpreted by the lower layer (KLOL).  Initially post-processing will take a very restricted form in the LUIF grammars.   There are two kinds of Libmarpa grammars: structural and lexical grammar.  A grammar is lexical if one or more of its rules have the special `lexeme` action.  The post-processing will expect a lexical grammar named `l0` and a structural grammar named `g1`, and will check (in the same way that Marpa::R2 currently does) to ensure they are compatible.
+
+<a id="complete_syntax_of_bnf_statement"></a>
 ## Complete Syntax of BNF Statement
 
 The general syntax for a BNF statement is as follows (`stat`, `block`, `funcbody`, `Name`, and `String` symbols are as defined by the Lua grammar):
@@ -426,8 +464,10 @@ or make this an option ]
 like [`%bxy`](http://www.lua.org/pil/20.2.html), but with nesting support
 per comment to https://github.com/rns/kollos-luif-doc/issues/17]
 
+<a id="example_grammars"></a>
 ## Example grammars
 
+<a id="calculator"></a>
 ### Calculator
 
 ```
@@ -443,6 +483,7 @@ Expression ::=
  Number ~ [0-9]+
 ```
 
+<a id="json"></a>
 ### JSON
 
 ```
