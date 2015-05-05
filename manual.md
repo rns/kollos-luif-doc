@@ -10,9 +10,6 @@ the [Kollos project](https://github.com/jeffreykegler/kollos/).
 
 The LUIF is Lua, extended with [BNF](http://en.wikipedia.org/wiki/Backus%E2%80%93Naur_Form) statements.
 
-[todo: consider rearranging the sections after more content is added
-to follow the Lua manual bottom-up pattern of introducing individual constructs with grammar snippets first and presenting the full syntax in the final section. ]
-
 ## BNF Statement
 
 LUIF extends the Lua syntax by adding `bnf` alternative to `stat` rule of the [Lua grammar](http://www.lua.org/manual/5.1/manual.html#8) and introducing the new rules for BNF statements. There is only one BNF statement, combining precedence, sequences, and alternation.
@@ -21,7 +18,7 @@ LUIF extends the Lua syntax by adding `bnf` alternative to `stat` rule of the [L
 
 A rule specified by a BNF statement can be either structural or lexical.
 
-[todo:]
+[TBD]
 
 ### Precedenced Rules
 
