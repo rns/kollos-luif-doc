@@ -123,9 +123,7 @@ For a usage example of precedenced rules, see the [Calculator](#calculator) gram
 
 Sequences are expressions on the RHS of a BNF rule alternative
 which imply the repetition of a symbol,
-or a parenthesized series of symbols. The general syntax for sequences is
-
-[todo: add sequence snippet from the LUIF grammar, when done ]
+or a parenthesized series of symbols.
 
 The item to be repeated (the repetend)
 can be either a single symbol,
@@ -421,8 +419,6 @@ The general syntax for a BNF statement is as follows (`stat`, `block`, `funcbody
 
 Note: this describes LUIF structural and lexical grammars 'used in the default way' as defined in [Grammars](#grammars) section below. The first rule will act as the start rule.
 
-[todo: make sure it conforms to snippets in other sections]
-
 ```
 stat ::= bnf
 
@@ -479,11 +475,6 @@ separated_sequence ::= sequence  |
                        sequence '%-' separator |
                        sequence '%$' separator
 
--- [under discussion: https://github.com/rns/kollos-luif-doc/issues/17#issuecomment-98474355]
-separator ::= symbol_name |
-              literal |
-              character_class
-
 sequence ::= sequence_item '+' |
              sequence_item '*' |
              sequence_item '?' |
@@ -493,6 +484,10 @@ sequence ::= sequence_item '+' |
 sequence_item ::= symbol_name |
                   grouped_alternative |
                   hidden_alternative
+
+separator ::= symbol_name |
+              literal |
+              character_class -- [[under discussion](https://github.com/rns/kollos-luif-doc/issues/17#issuecomment-98474355)]
 
 symbol_name :: Name
 
