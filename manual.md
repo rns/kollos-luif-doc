@@ -17,6 +17,7 @@ before so specifying them top-down (rule to symbol)]
 
 <a id="toc_bnf_statement"></a>[BNF Statement](#bnf_statement)<br/>
 - <a id="toc_structural_and_lexical_rules"></a>[Structural and Lexical Rules](#structural_and_lexical_rules)<br/>
+- <a id="toc_grammars"></a>[Grammars](#grammars)<br/>
 - <a id="toc_precedenced_rules"></a>[Precedenced Rules](#precedenced_rules)<br/>
 - <a id="toc_sequences"></a>[Sequences](#sequences)<br/>
 - <a id="toc_grouping_and_hiding_symbols"></a>[Grouping and Hiding Symbols](#grouping_and_hiding_symbols)<br/>
@@ -36,7 +37,6 @@ before so specifying them top-down (rule to symbol)]
 
 <a id="toc_events"></a>[Events](#events)<br/>
 <a id="toc_locale_support"></a>[Locale Support](#locale_support)<br/>
-<a id="toc_grammars"></a>[Grammars](#grammars)<br/>
 <a id="toc_programmatic_grammar_construction"></a>[Programmatic Grammar Construction](#programmatic_grammar_construction)<br/>
 <a id="toc_post_processing"></a>[Post Processing](#post_processing)<br/>
 <a id="toc_complete_syntax_of_bnf_statement"></a>[Complete Syntax of BNF Statement](#complete_syntax_of_bnf_statement)<br/>
@@ -53,6 +53,36 @@ LUIF extends the Lua syntax by adding `bnf` alternative to `stat` rule of the [L
 ### Structural and Lexical Rules [^](#toc_structural_and_lexical_rules)
 
 A rule specified by a BNF statement can be either structural or lexical.
+
+<a id="grammars"></a>
+## Grammars
+
+BNF statements are grouped into one or more grammars.  The grammar is indicated by the produce-operator of the BNF. Its general form is `:grammar:=`, where `grammar` is the name of a grammar.  `grammar` must not contain colons.  Initially, the post-processing will not support anything but `l0` and `g1` used in the default way, like this:
+
+```lua
+-- structural grammar
+a ::= b c       -- the first rule is the start rule
+                -- using the LHS (b c) of a lexical rule
+                -- on the RHS of a structural rule makes a lexeme
+a ::= w
+aa ::= a a
+
+-- lexical grammar
+w ~ x y z
+b ~ 'b' x
+c ~ 'c' y
+
+x ~ 'x'
+y ~ 'y'
+z ~ [xyz]
+
+```
+
+If the produce-operator is `::=`, then the grammar is `g1`.  The tilde `~` can be a produce-operator, in which case it is equivalent to `:l0:=`.
+
+A structural grammar will often contain lexical elements, such as strings and character classes, and these will go into its linked lexical grammar.  The start rule specifies its lexical grammar with an adverb (what?).  In a lexical grammar the lexemes are indicated with the `lexeme` adverb -- if a rule has a lexeme adverb, its LHS is a lexeme.
+
+If a grammar specifies lexemes, it is a lexical grammar.  If a grammar specifies a linked lexical grammar, it is a structural grammar.  `l0` must always be a lexical grammar.  `g1` must always be a structural grammar and is linked by default to `l0`.  It is a fatal error if a grammar has no indication whether it is structural or lexical, but this indication may be a default.  Enforcement of these restrictions is done by the lower layer (KLOL).
 
 [TBD]
 
@@ -335,36 +365,6 @@ Full support is only assured for the "C" locale -- support for other locales may
 Lua's `os.setlocale()`, when used in the LUIF context for anything but the "C" locale, may fail, silently or otherwise.
 
 [todo: update the tentative language above as Kollos project progresses]
-
-<a id="grammars"></a>
-## Grammars
-
-BNF statements are grouped into one or more grammars.  The grammar is indicated by the produce-operator of the BNF. Its general form is `:grammar:=`, where `grammar` is the name of a grammar.  `grammar` must not contain colons.  Initially, the post-processing will not support anything but `l0` and `g1` used in the default way, like this:
-
-```lua
--- structural grammar
-a ::= b c       -- the first rule is the start rule
-                -- using the LHS (b c) of a lexical rule
-                -- on the RHS of a structural rule makes a lexeme
-a ::= w
-aa ::= a a
-
--- lexical grammar
-w ~ x y z
-b ~ 'b' x
-c ~ 'c' y
-
-x ~ 'x'
-y ~ 'y'
-z ~ [xyz]
-
-```
-
-If the produce-operator is `::=`, then the grammar is `g1`.  The tilde `~` can be a produce-operator, in which case it is equivalent to `:l0:=`.
-
-A structural grammar will often contain lexical elements, such as strings and character classes, and these will go into its linked lexical grammar.  The start rule specifies its lexical grammar with an adverb (what?).  In a lexical grammar the lexemes are indicated with the `lexeme` adverb -- if a rule has a lexeme adverb, its LHS is a lexeme.
-
-If a grammar specifies lexemes, it is a lexical grammar.  If a grammar specifies a linked lexical grammar, it is a structural grammar.  `l0` must always be a lexical grammar.  `g1` must always be a structural grammar and is linked by default to `l0`.  It is a fatal error if a grammar has no indication whether it is structural or lexical, but this indication may be a default.  Enforcement of these restrictions is done by the lower layer (KLOL).
 
 <a id="programmatic_grammar_construction"></a>
 ## Programmatic Grammar Construction (PGC)
