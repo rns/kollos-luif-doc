@@ -1,8 +1,14 @@
 ﻿# The LUIF
 
-Warning: this is a working draft.
+Warning: this is a work in progress.
 
-## Overview
+## Table of Contents
+<a id="toc_overview"></a>[Overview](#overview)
+<a id="toc_bnf_statement"></a>[BNF Statement](#bnf_statement)
+<a id="toc_structural_and_lexical_rules"></a>[Structural and Lexical Rules](#structural_and_lexical_rules)
+
+<a id="overview"></a>
+## Overview [^](#overview)
 
 This document describes the LUIF (LUa InterFace),
 the interface language of
@@ -10,11 +16,15 @@ the [Kollos project](https://github.com/jeffreykegler/kollos/).
 
 The LUIF is Lua, extended with [BNF](http://en.wikipedia.org/wiki/Backus%E2%80%93Naur_Form) statements.
 
-## BNF Statement
+[todo: a (link to) a brief BNF introduction/tutotial?]
+
+<a id="bnf_statement"></a>
+## BNF Statement [^](#toc_bnf_statement)
 
 LUIF extends the Lua syntax by adding `bnf` alternative to `stat` rule of the [Lua grammar](http://www.lua.org/manual/5.1/manual.html#8) and introducing the new rules for BNF statements. There is only one BNF statement, combining precedence, sequences, and alternation.
 
-### Structural and Lexical Rules
+<a id="structural_and_lexical_rules"></a>
+### Structural and Lexical Rules [^](#toc_structural_and_lexical_rules)
 
 A rule specified by a BNF statement can be either structural or lexical.
 
@@ -155,12 +165,14 @@ LUIF comments are Lua comments as defined at the end of [Lexical Conventions](ht
 
 ### Adverbs
 
-#### `action` <a id="action"></a>
+<a id="action"></a>
+#### `action`
 
 The `action` adverb defines the semantics of its RHS alternative.
-Its values are specified in [Semantics](#semantic_action) section below.
+Its values are specified in [Semantics](#semantics) section below.
 
-#### `completed` <a id="completed"></a>
+<a id="completed"></a>
+#### `completed`
 
 The `completed` adverb defines
 the Lua function to be called when the RHS alternative is completed during the parse.
@@ -168,7 +180,8 @@ Its values are the same as those of the `action` adverb.
 
 For more details on parse events, see [Events](#events) section.
 
-#### `predicted` <a id="predicted"></a>
+<a id="predicted"></a>
+#### `predicted`
 
 The `predicted` adverb defines
 the Lua function to be called when the RHS alternative is predicted during the parse.
@@ -182,11 +195,13 @@ The `assoc` adverb defines associativity of a precedenced rule.
 Its value can be `left`, `right`, or `group`.
 The function of this adverb is as defined in the [SLIF](https://metacpan.org/pod/distribution/Marpa-R2/pod/Scanless/DSL.pod#assoc).
 
-## Semantics <a id="semantics"></a>
+<a id="semantics"></a>
+## Semantics
 
-The semantics of a BNF statement in the LUIF can be defined using [`action` adverb](#semantic_action) of its RHS alternative.
+The semantics of a BNF statement in the LUIF can be defined using [`action` adverb](#defining_semantics_with_action_adverb) of its RHS alternative.
 
-### Defining Semantics with `action` <a id="semantic_action"></a> adverb
+<a id="defining_semantics_with_action_adverb"></a>
+### Defining Semantics with `action` adverb
 
 The value of the `action` adverb can be a body of a Lua function (`funcbody`) as defined in [Function Definitions](http://www.lua.org/manual/5.1/manual.html#2.5.9) section of the Lua 5.1 Reference Manual or the name of such function, which must be a bare name (not a namespaced or a method function's name).
 
@@ -208,7 +223,8 @@ It will be called as `f (params)`
 with `params` set to
 the values defined by the semantics of the matched RHS alternative's symbols.
 
-#### Context Accessors <a id="context_accessors"></a>
+<a id="context_accessors"></a>
+#### Context Accessors
 
 Context accessors live in the `luif.context` name space.
 They can be called from semantic actions to get matched rule and locations data.
@@ -263,7 +279,8 @@ returns the length of the input span corresponding to
 the BNF rule matched in the parse value or
 completed/predicted during the parse.
 
-## Events <a id="events"></a>
+<a id="events"></a>
+## Events
 
 Parse events are defined using [`completed`](#completed) and [`predicted`](#predicted) adverbs.
 
@@ -283,7 +300,8 @@ The output of the KHIL will be a table, with one key for each grammar name.  Key
 
 This table will be interpreted by the lower layer (KLOL).  Initially post-processing will take a very restricted form in the LUIF grammars.   There are two kinds of Libmarpa grammars: structural and lexical grammar.  A grammar is lexical if one or more of its rules have the special `lexeme` action.  The post-processing will expect a lexical grammar named `l0` and a structural grammar named `g1`, and will check (in the same way that Marpa::R2 currently does) to ensure they are compatible.
 
-## Grammars <a id="grammars"></a>
+<a id="grammars"></a>
+## Grammars
 
 BNF statements are grouped into one or more grammars.  The grammar is indicated by the produce-operator of the BNF. Its general form is `:grammar:=`, where `grammar` is the name of a grammar.  `grammar` must not contain colons.  Initially, the post-processing will not support anything but `l0` and `g1` used in the default way, like this:
 
