@@ -226,7 +226,7 @@ in names.
 <a id="literals"></a>
 ### Literals
 
-LUIF literals are Lua literal strings as defined in [Lexical Conventions](http://www.lua.org/manual/5.1/manual.html#2.1) section of the Lua 5.1 Reference Manual.
+LUIF literals are Lua _literal strings_ as defined in [Lexical Conventions](http://www.lua.org/manual/5.1/manual.html#2.1) section of the Lua 5.1 Reference Manual.
 
 <a id="character_classes"></a>
 ### Character classes
