@@ -103,7 +103,7 @@ If a grammar specifies lexemes, it is a lexical grammar.  If a grammar specifies
 <a id="precedenced_rules"></a>
 ### Precedenced Rules
 
-A precedenced rule contains a series of one or more RHS alternatives, separated by either the alternation operator (`|`) or the loosen operators (`||`). In a typical grammar, most rules are precedenced rules, but they are often trivially precedenced, consisting of one or several RHS alternatives having equal precedence. For brevity, RHS alternatives are often called alternatives.
+A precedenced rule contains a series of one or more RHS alternatives, separated by either the alternation operator (`|`) or the loosen operators (`||`). In a typical grammar, most rules are precedenced rules, but they are often trivially precedenced, consisting of one or several RHS alternatives with equal precedence. For brevity, RHS alternatives are often called alternatives.
 
 Each alternative may be followed by a list of [adverbs](#adverbs).
 
