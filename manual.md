@@ -76,9 +76,6 @@ Lexemes can also be defined explicitely by modifying an RHS alternative with `ac
 BNF statements are grouped into one or more grammars.  There are two kinds of LUIF grammars: [structural and lexical](#structural_and_lexical_rules).
 
 A grammar is lexical if one or more of its rules have the special `lexeme` action.
-[todo: specify `lexeme` action]
-
-[todo: ]
 
 The grammar is indicated by the produce-operator of the BNF. Its general form is `:grammar:=`, where `grammar` is the name of a grammar.  `grammar` must not contain colons.  Initially, the [post-processing](#post_processing) will not support anything but `l0` and `g1` used in the default way, like this:
 
@@ -265,6 +262,8 @@ A comma is also used to separate an adverb from the RHS alternative it modifies.
 
 The `action` adverb defines the semantics of the RHS alternative it modifies.
 Its value is specified in [Semantics](#semantics) section below.
+
+The `action` adverb can also have a special `lexeme` value [descrived above](#structural_and_lexical_rules).
 
 <a id="completed"></a>
 #### `completed`
