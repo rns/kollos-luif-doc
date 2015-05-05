@@ -51,7 +51,8 @@ A BNF statement specifies a rule, which consists of, in order:
 
 - A produce-operator (`::=` or `~`).
 
-- A right-hand side (RHS), which contains one or more RHS alternatives.
+- A right-hand side (RHS), which contains one or more RHS alternatives. A RHS alternative is a series of RHS primaries, where a RHS primary may be
+a [symbol name](#symbol_names), a [character class](#character_classes), a [literal](#literal), a [sequence](#sequences) or another, [grouped or hidden](#grouping_and_hiding_symbols), RHS alternative.
 
 <a id="structural_and_lexical_rules"></a>
 ### Structural and Lexical Rules
@@ -424,7 +425,7 @@ rhs ::= precedenced_alternative { '||' precedenced_alternative }
 
 precedenced_alternative ::= alternative { '|' alternative }
 
-alternative ::= rhslist { ',' adverb }
+alternative ::= rhs_primaries { ',' adverb }
 
 adverb ::= action |
            completed |
@@ -448,14 +449,14 @@ assocexp ::= 'left' |
              'right' |
              'group'
 
-rhslist ::= { rh_atom }       -- can be empty, like Lua chunk
+rhs_primaries ::= { rhs_primary }       -- can be empty, like Lua chunk
 
-rh_atom ::= separated_sequence |
-            symbol_name |
-            literal |
-            charclass |
-            '(' alternative ')' |
-            '[' alternative ']'
+rhs_primary ::= separated_sequence |
+                symbol_name |
+                literal |
+                charclass |
+               '(' alternative ')' |
+               '[' alternative ']'
 
 separated_sequence ::= sequence  |
                        sequence '%'  separator | -- proper separation
