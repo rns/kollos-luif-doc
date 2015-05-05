@@ -367,11 +367,12 @@ Parse events are defined using [`completed`](#completed) and [`predicted`](#pred
 <a id="post_processing"></a>
 ## Post-processing
 
-KHIL uses Direct-to-Lua (D2L) calls specified in a [separate document](d2l/spec.md) to transform LUIF to KIR.
+LUIF grammars are transformed into KIR (Kollos Intermediate Runtime) tables using Direct-to-Lua (D2L) calls and format specified in a [separate document](d2l/spec.md).
 
-The output of the KHIL will be a table, with one key for each grammar name.  Keys *must* be strings.  The value of each grammar key will be a table, with entries for external and internal symbols and rules.  Details of the format will be specified later.
+The output will be a table, with one key for each grammar name.  Keys *must* be strings.  The value of each grammar key will be a table, with entries for external and internal symbols and rules.  Details of the format will be specified later.
 
-This table will be interpreted by the lower layer (KLOL).  Initially post-processing will take a very restricted form in the LUIF structural and lexical grammars.
+The KIR table will be interpreted by the lower layer (KLOL).  Initially post-processing will take a very restricted form in the LUIF structural and lexical grammars.
+
 The post-processing will expect a lexical grammar named `l0` and a structural grammar named `g1`, and will check (in the same way that Marpa::R2 currently does) to ensure they are compatible.
 
 <a id="programmatic_grammar_construction"></a>
