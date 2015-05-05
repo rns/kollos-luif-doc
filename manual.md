@@ -243,15 +243,15 @@ A LUIF rule can be modified by one or more adverbs, `name = value` pairs separat
 <a id="action"></a>
 #### `action`
 
-The `action` adverb defines the semantics of its RHS alternative.
-Its values are specified in [Semantics](#semantics) section below.
+The `action` adverb defines the semantics of the RHS alternative it modifies.
+Its value is specified in [Semantics](#semantics) section below.
 
 <a id="completed"></a>
 #### `completed`
 
 The `completed` adverb defines
 the Lua function to be called when the RHS alternative is completed during the parse.
-Its values are the same as those of the `action` adverb.
+Its value is the same as that of the `action` adverb.
 
 For more details on parse events, see [Events](#events) section.
 
@@ -260,7 +260,7 @@ For more details on parse events, see [Events](#events) section.
 
 The `predicted` adverb defines
 the Lua function to be called when the RHS alternative is predicted during the parse.
-Its values are the same as those of the `action` adverb.
+Its value is the same as that of the `action` adverb.
 
 For more details on parse events, see [Events](#events) section.
 
