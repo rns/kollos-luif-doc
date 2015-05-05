@@ -499,7 +499,7 @@ separator ::= symbol_name |
 
 symbol_name :: Name
 
-literal ::= String    -- long strings not allowed
+literal ::= String    -- sans the long strings
 
 character_class ::= String
 
