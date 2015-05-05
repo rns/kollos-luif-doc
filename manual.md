@@ -296,7 +296,9 @@ For a usage example, see the [Calculator](#calculator) grammar below.
 <a id="semantics"></a>
 ## Semantics
 
-The semantics of a BNF statement in the LUIF can be defined using [`action` adverb](#defining_semantics_with_action_adverb) of its RHS alternative.
+The semantics of a BNF statement in the LUIF can be defined
+by modifying its RHS alternatives
+with [`action`](#defining_semantics_with_action_adverb) adverb.
 
 <a id="defining_semantics_with_action_adverb"></a>
 ### Defining Semantics with `action` adverb
