@@ -44,7 +44,7 @@ The LUIF is [Lua](http://www.lua.org/), extended with
 ## BNF Statement
 
 LUIF extends the Lua syntax by adding `bnf` alternative to `stat` rule of the [Lua grammar](http://www.lua.org/manual/5.1/manual.html#8) and introducing the new rules for BNF statements. There is only one BNF statement, combining [precedence](#precedenced_rules),
-[sequences](#sequences), and alternation as specified below.
+[sequences](#sequences), and alternation as specified above.
 
 A BNF statement specifies a rule, which consists of, in order:
 
