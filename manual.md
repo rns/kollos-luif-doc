@@ -409,7 +409,7 @@ The general syntax for a BNF statement is as follows (`stat`, `block`, `funcbody
 
 Note: this describes LUIF structural and lexical grammars 'used in the default way' as defined in [Grammars](#grammars) section below. The first rule will act as the start rule.
 
-[todo: make sure it conforms to other sections]
+[todo: make sure it conforms to snippets in other sections]
 
 ```
 stat ::= bnf
