@@ -52,7 +52,7 @@ A BNF statement specifies a rule, which consists of, in order:
 - A produce-operator (`::=` or `~`).
 
 - A right-hand side (RHS), which contains one or more RHS alternatives. A RHS alternative is a series of RHS primaries, where a RHS primary may be
-a [symbol name](#symbol_names), a [character class](#character_classes), a [literal](#literal), a [sequence](#sequences) or another, [grouped or hidden](#grouping_and_hiding_symbols), RHS alternative.
+a [symbol name](#symbol_names), a [character class](#character_classes), a [literal](#literals), a [sequence](#sequences) or another, [grouped or hidden](#grouping_and_hiding_symbols), RHS alternative.
 
 <a id="structural_and_lexical_rules"></a>
 ### Structural and Lexical Rules
@@ -190,7 +190,7 @@ can specify them directly in BNF,
 and these will make the programmer's intent clear.
 
 <a id="grouping_and_hiding_symbols"></a>
-### Grouping and hiding symbols
+### Grouping and Hiding Symbols
 
 To group a series of RHS symbols use parentheses:
 
