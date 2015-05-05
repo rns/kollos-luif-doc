@@ -301,6 +301,8 @@ It will be called as `f (params)`
 with `params` set to
 the values defined by the semantics of the matched RHS alternative's symbols.
 
+[parameter list is under discussion at https://github.com/rns/kollos-luif-doc/issues/26#issuecomment-98681263]
+
 <a id="context_accessors"></a>
 #### Context Accessors
 
