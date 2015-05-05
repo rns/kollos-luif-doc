@@ -388,6 +388,8 @@ Parse events are defined using [`completed`](#completed) and [`predicted`](#pred
 
 [todo: provide getting started info/tutorial on parse events].
 
+[todo: example/prototyping based on https://gist.github.com/rns/ba250ed6a5ed1c82ce7b]
+
 <a id="post_processing"></a>
 ## Post-processing
 
