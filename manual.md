@@ -371,7 +371,12 @@ Lua's `os.setlocale()`, when used in the LUIF context for anything but the "C" l
 <a id="programmatic_grammar_construction"></a>
 ## Programmatic Grammar Construction (PGC)
 
-[stub: BNF statements are not for PGC, use D2L; this can change in future. ]
+LUIF grammars can be constructed programmatically
+by using Direct-to-Lua (D2L) calls. The details are specified
+in a [separate document](d2l/spec.md).
+
+At the moment, LUIF statements cannot be affected by Lua statements directly,
+but this can change in future.
 
 <a id="post_processing"></a>
 ## Post-processing
