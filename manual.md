@@ -472,8 +472,10 @@ separated_sequence ::= sequence  |
                        sequence '%-' separator |
                        sequence '%$' separator
 
--- more complex separators -- http://irclog.perlgeek.de/marpa/2015-05-03#i_10538440
-separator ::= symbol_name
+-- [under discussion: https://github.com/rns/kollos-luif-doc/issues/17#issuecomment-98474355]
+separator ::= symbol_name |
+              literal |
+              character_class
 
 sequence ::= sequence_item '+' |
              sequence_item '*' |
@@ -489,7 +491,7 @@ symbol_name :: Name
 
 literal ::= String    -- long strings not allowed
 
-charclass ::= String
+character_class ::= String
 
 ```
 
