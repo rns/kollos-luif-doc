@@ -1,13 +1,12 @@
 ﻿# The LUIF
 
-Warning: this is a work in progress.
-
-This document describes the LUIF (LUa InterFace),
+This document (which is currently a work-in-progress) describes the LUIF (LUa InterFace),
 the interface language of
 the [Kollos project](https://github.com/jeffreykegler/kollos/).
 
-The LUIF is Lua, extended with [BNF](http://en.wikipedia.org/wiki/Backus%E2%80%93Naur_Form) statements.
+The LUIF is [Lua](http://www.lua.org/), extended with [BNF](http://en.wikipedia.org/wiki/Backus%E2%80%93Naur_Form) statements.
 
+[todo]
 [todo: a (link to) a brief BNF introduction/tutotial?]
 
 [todo: briefly define symbol, terminal, non-terminal, rule, LHS, RHS, alternative
