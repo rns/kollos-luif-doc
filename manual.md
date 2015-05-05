@@ -2,17 +2,6 @@
 
 Warning: this is a work in progress.
 
-## Table of Contents
-
-<a id="toc_overview"></a>[Overview](#overview)
-
-<a id="toc_bnf_statement"></a>[BNF Statement](#bnf_statement)
-
-<a id="toc_structural_and_lexical_rules"></a>[Structural and Lexical Rules](#structural_and_lexical_rules)
-
-<a id="overview"></a>
-## Overview [^](#overview)
-
 This document describes the LUIF (LUa InterFace),
 the interface language of
 the [Kollos project](https://github.com/jeffreykegler/kollos/).
@@ -20,6 +9,12 @@ the [Kollos project](https://github.com/jeffreykegler/kollos/).
 The LUIF is Lua, extended with [BNF](http://en.wikipedia.org/wiki/Backus%E2%80%93Naur_Form) statements.
 
 [todo: a (link to) a brief BNF introduction/tutotial?]
+
+## Table of Contents
+
+<a id="toc_bnf_statement"></a>[BNF Statement](#bnf_statement)
+
+<a id="toc_structural_and_lexical_rules"></a>[Structural and Lexical Rules](#structural_and_lexical_rules)
 
 <a id="bnf_statement"></a>
 ## BNF Statement [^](#toc_bnf_statement)
@@ -32,6 +27,8 @@ LUIF extends the Lua syntax by adding `bnf` alternative to `stat` rule of the [L
 A rule specified by a BNF statement can be either structural or lexical.
 
 [TBD]
+
+[todo: specify how lexemes are defined ]
 
 ### Precedenced Rules
 
