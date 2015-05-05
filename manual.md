@@ -1,6 +1,7 @@
 ﻿# The LUIF
 
-This document (which is currently a work-in-progress) describes the LUIF (LUa InterFace),
+This document (which is currently a work-in-progress for further discussion) describes
+the **LUIF** (**LU**a **I**nter**F**ace),
 the interface language of
 the [Kollos project](https://github.com/jeffreykegler/kollos/).
 
