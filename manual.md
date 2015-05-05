@@ -9,6 +9,7 @@ the [Kollos project](https://github.com/jeffreykegler/kollos/).
 The LUIF is Lua, extended with [BNF](http://en.wikipedia.org/wiki/Backus%E2%80%93Naur_Form) statements.
 
 [todo: a (link to) a brief BNF introduction/tutotial?]
+[ briefly defining symbol, terminal, non-terminal, rule, LHS, RHS, alternative ]
 
 ## Table of Contents
 
@@ -164,6 +165,10 @@ Strings can be defined with character classes using sequence rules.
 LUIF comments are Lua comments as defined at the end of [Lexical Conventions](http://www.lua.org/manual/5.1/manual.html#2.1) section in the Lua 5.1 Reference Manual.
 
 ### Adverbs
+
+A LUIF rule can be modified by one or more adverbs, `name = value` pairs separated with commas.
+
+[todo: example]
 
 <a id="action"></a>
 #### `action`
