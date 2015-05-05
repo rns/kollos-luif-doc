@@ -39,8 +39,8 @@ before so specifying them top-down (rule to symbol)]
 [Locale Support](#locale_support)<br/>
 [Complete Syntax of BNF Statement](#complete_syntax_of_bnf_statement)<br/>
 [Example Grammars](#example_grammars)<br/>
-- [calculator](#calculator)<br/>
-- [json](#json)<br/>
+- [Calculator](#calculator)<br/>
+- [JSON](#json)<br/>
 
 <a id="bnf_statement"></a>
 ## BNF Statement
