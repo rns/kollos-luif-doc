@@ -71,12 +71,14 @@ Lexemes can also be defined explicitely by modifying an RHS alternative with `ac
 <a id="grammars"></a>
 ## Grammars
 
+[todo: rewrite according to the above and the discussion about grammar start statement at https://github.com/rns/kollos-luif-doc/issues/10]
+
 BNF statements are grouped into one or more grammars.  There are two kinds of LUIF grammars: [structural and lexical](#structural_and_lexical_rules).
 
 A grammar is lexical if one or more of its rules have the special `lexeme` action.
 [todo: specify `lexeme` action]
 
-[todo: grammar start statement under discussion at https://github.com/rns/kollos-luif-doc/issues/10#issuecomment-98696337]
+[todo: ]
 
 The grammar is indicated by the produce-operator of the BNF. Its general form is `:grammar:=`, where `grammar` is the name of a grammar.  `grammar` must not contain colons.  Initially, the [post-processing](#post_processing) will not support anything but `l0` and `g1` used in the default way, like this:
 
@@ -104,10 +106,6 @@ If the produce-operator is `::=`, then the grammar is `g1`.  The tilde `~` can b
 A structural grammar will often contain lexical elements, such as strings and character classes, and these will go into its linked lexical grammar.  The start rule specifies its lexical grammar with an adverb (what?).  In a lexical grammar the lexemes are indicated with the `lexeme` adverb -- if a rule has a lexeme adverb, its LHS is a lexeme.
 
 If a grammar specifies lexemes, it is a lexical grammar.  If a grammar specifies a linked lexical grammar, it is a structural grammar.  `l0` must always be a lexical grammar.  `g1` must always be a structural grammar and is linked by default to `l0`.  It is a fatal error if a grammar has no indication whether it is structural or lexical, but this indication may be a default.  Enforcement of these restrictions is done by the lower layer (KLOL).
-
-[under discussion: https://github.com/rns/kollos-luif-doc/issues/10]
-
-[TBD]
 
 <a id="precedenced_rules"></a>
 ### Precedenced Rules
