@@ -59,8 +59,14 @@ a [symbol name](#symbol_names), a [character class](#character_classes), a [lite
 ### Structural and Lexical Rules
 
 A rule specified by a BNF statement can be either structural or lexical.
+Structural or lexical rules are declared by using `::=` and `~` produce-operators.
+Lexical rules form a [grammar](#grammars) of their own called, unsurprisingly, a "lexical grammar".
 
-[todo: specify how lexemes are defined ]
+Using an LHS of a lexical rule on an RHS of a structural rule makes it a _lexeme_.
+A _lexeme_ is a sequence of characters in the input matched by a rule in a lexical grammar.
+A lexeme and the LHS of the lexical rule it matches form a _token_. The LHS of the lexical rule is called a _token name_ and the lexeme forms a _token value_. The recognizer reads the token names as its input symbols ([Purple Book](http://en.wikipedia.org/wiki/Compilers%3a_Principles,_Techniques,_and_Tools#Second_edition)).
+
+Lexemes can also be defined explicitely by modifying an RHS alternative with the special `action = lexeme` adverb.
 
 <a id="grammars"></a>
 ## Grammars
