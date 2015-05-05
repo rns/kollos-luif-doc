@@ -15,44 +15,46 @@ before so specifying them top-down (rule to symbol)]
 
 ## Table of Contents
 
-<a id="toc_bnf_statement"></a>[BNF Statement](#bnf_statement)<br/>
-- <a id="toc_structural_and_lexical_rules"></a>[Structural and Lexical Rules](#structural_and_lexical_rules)<br/>
-- <a id="toc_grammars"></a>[Grammars](#grammars)<br/>
-- <a id="toc_precedenced_rules"></a>[Precedenced Rules](#precedenced_rules)<br/>
-- <a id="toc_sequences"></a>[Sequences](#sequences)<br/>
-- <a id="toc_grouping_and_hiding_symbols"></a>[Grouping and Hiding Symbols](#grouping_and_hiding_symbols)<br/>
-- <a id="toc_symbol_names"></a>[Symbol Names](#symbol_names)<br/>
-- <a id="toc_literals"></a>[Literals](#literals)<br/>
-- <a id="toc_character_classes"></a>[Character Classes](#character_classes)<br/>
-- <a id="toc_comments"></a>[Comments](#comments)<br/>
-- <a id="toc_adverbs"></a>[Adverbs](#adverbs)<br/>
-  - <a id="toc_action"></a>[`action`](#action)<br/>
-  - <a id="toc_completed"></a>[`completed`](#completed)<br/>
-  - <a id="toc_predicted"></a>[`predicted`](#predicted)<br/>
-  - <a id="toc_assoc"></a>[`assoc`](#assoc)
+[BNF Statement](#bnf_statement)<br/>
+- [Structural and Lexical Rules](#structural_and_lexical_rules)<br/>
+- [Grammars](#grammars)<br/>
+- [Precedenced Rules](#precedenced_rules)<br/>
+- [Sequences](#sequences)<br/>
+- [Grouping and Hiding Symbols](#grouping_and_hiding_symbols)<br/>
+- [Symbol Names](#symbol_names)<br/>
+- [Literals](#literals)<br/>
+- [Character Classes](#character_classes)<br/>
+- [Comments](#comments)<br/>
+- [Adverbs](#adverbs)<br/>
+  - [`action`](#action)<br/>
+  - [`completed`](#completed)<br/>
+  - [`predicted`](#predicted)<br/>
+  - [`assoc`](#assoc)
 
-<a id="toc_semantics"></a>[Semantics](#semantics)<br/>
-- <a id="toc_defining_semantics_with_action_adverb"></a>[Defining Semantics with `action` adverb](#defining_semantics_with_action_adverb)<br/>
-- <a id="toc_context_accessors"></a>[Context Accessors](#context_accessors)<br/>
+[Semantics](#semantics)<br/>
+- [Defining Semantics with `action` adverb](#defining_semantics_with_action_adverb)<br/>
+- [Context Accessors](#context_accessors)<br/>
 
-<a id="toc_events"></a>[Events](#events)<br/>
-<a id="toc_locale_support"></a>[Locale Support](#locale_support)<br/>
-<a id="toc_programmatic_grammar_construction"></a>[Programmatic Grammar Construction](#programmatic_grammar_construction)<br/>
-<a id="toc_post_processing"></a>[Post Processing](#post_processing)<br/>
-<a id="toc_complete_syntax_of_bnf_statement"></a>[Complete Syntax of BNF Statement](#complete_syntax_of_bnf_statement)<br/>
-<a id="toc_example_grammars"></a>[Example Grammars](#example_grammars)<br/>
-- <a id="toc_calculator"></a>[calculator](#calculator)<br/>
-- <a id="toc_json"></a>[json](#json)<br/>
+[Events](#events)<br/>
+[Locale Support](#locale_support)<br/>
+[Programmatic Grammar Construction](#programmatic_grammar_construction)<br/>
+[Post Processing](#post_processing)<br/>
+[Complete Syntax of BNF Statement](#complete_syntax_of_bnf_statement)<br/>
+[Example Grammars](#example_grammars)<br/>
+- [calculator](#calculator)<br/>
+- [json](#json)<br/>
 
 <a id="bnf_statement"></a>
-## BNF Statement [^](#toc_bnf_statement)
+## BNF Statement
 
 LUIF extends the Lua syntax by adding `bnf` alternative to `stat` rule of the [Lua grammar](http://www.lua.org/manual/5.1/manual.html#8) and introducing the new rules for BNF statements. There is only one BNF statement, combining precedence, sequences, and alternation.
 
 <a id="structural_and_lexical_rules"></a>
-### Structural and Lexical Rules [^](#toc_structural_and_lexical_rules)
+### Structural and Lexical Rules
 
 A rule specified by a BNF statement can be either structural or lexical.
+
+[todo: specify how lexemes are defined ]
 
 <a id="grammars"></a>
 ## Grammars
@@ -84,9 +86,9 @@ A structural grammar will often contain lexical elements, such as strings and ch
 
 If a grammar specifies lexemes, it is a lexical grammar.  If a grammar specifies a linked lexical grammar, it is a structural grammar.  `l0` must always be a lexical grammar.  `g1` must always be a structural grammar and is linked by default to `l0`.  It is a fatal error if a grammar has no indication whether it is structural or lexical, but this indication may be a default.  Enforcement of these restrictions is done by the lower layer (KLOL).
 
-[TBD]
+[under discussion: https://github.com/rns/kollos-luif-doc/issues/10]
 
-[todo: specify how lexemes are defined ]
+[TBD]
 
 <a id="precedenced_rules"></a>
 ### Precedenced Rules
