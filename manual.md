@@ -339,48 +339,45 @@ The context accessors are:
 
 ##### `lhs_id = luif.context.lhs()`
 
-returns the integer ID of the symbol which is on the LHS of the BNF rule matched in the parse value or completed/predicted during the parse.
+returns the integer ID of the symbol which is on the LHS of the BNF rule
+whose semantic action or completed/predicted event handler is being called during the parse.
 
 ##### `rule_id = luif.context.rule()`
 
-returns the integer ID of the BNF rule matched in the parse value or completed/predicted during the parse.
+returns the integer ID of the BNF rule
+whose semantic action or completed/predicted event handler is being called during the parse.
 
 ##### `alt_no = luif.context.alternative()`
 
-returns the number of the BNF rule's RHS alternative matched in the parse value or completed/predicted during the parse.
+returns the number of the BNF rule's RHS alternative
+whose semantic action or completed/predicted event handler is being called during the parse.
 
 ##### `prec = luif.context.precedence()`
 
-returns numeric precedence of the matched/completed/predicted alternative
-relative to other alternatives or nil if no precedence is defined for the alternative.
+returns numeric precedence of
+the alternative, whose semantic action or completed/predicted event handler is being called during the parse, relative to other alternatives or nil if no precedence is defined for the alternative.
 
 ##### `pos, len = luif.context.span()`
 
 returns position and length of the input section corresponding to
-the BNF rule matched in the parse value or
-completed/predicted during the parse.
+the BNF rule whose semantic action or completed/predicted event handler is being called during the parse.
 
 ##### `string = luif.context.literal()`
 
 returns the section of the input corresponding to
-the BNF rule matched in the parse value or
-completed/predicted during the parse.
+the BNF rule whose semantic action or completed/predicted event handler is being called during the parse.
 It is defined by
 the input span returned by the `luif.context.span()` function above.
 
 ##### `pos = luif.context.pos()`
 
 returns the position in the input, which starts the span corresponding to
-the BNF rule matched in the parse value or
-completed/predicted during the parse.
+the BNF rule whose semantic action or completed/predicted event handler is being called during the parse.
 
 ##### `len = luif.context.length()`
 
 returns the length of the input span corresponding to
-the BNF rule matched in the parse value or
-completed/predicted during the parse.
-
-[todo: clarify "matched in the parse value"]
+the BNF rule whose semantic action or completed/predicted event handler is being called during the parse.
 
 <a id="events"></a>
 ## Events
