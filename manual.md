@@ -105,7 +105,7 @@ If a grammar specifies lexemes, it is a lexical grammar.  If a grammar specifies
 
 A precedenced rule contains a series of one or more RHS alternatives, separated by either the alternation operator (`|`) or the loosen operators (`||`). In a typical grammar, most rules are precedenced rules, but they are often trivially precedenced, consisting of one or several RHS alternatives with equal precedence. For brevity, RHS alternatives are often called alternatives.
 
-Each alternative may be followed by a list of [adverbs](#adverbs).
+An alternative may be followed by a list of [adverbs](#adverbs).
 
 The RHS alternatives in a precedenced right hand side proceed from tightest (highest) priority to loosest. The double "or" symbol (`||`) is the "loosen" operator -- the alternatives after it have a looser (lower) priority than the alternatives before it. The single "or" symbol (`|`) is the ordinary "alternative" operator -- alternatives on each side of it have the same priority. Associativity is specified using the [`assoc`](#assoc) adverb, as described below.
 
