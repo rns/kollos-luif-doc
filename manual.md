@@ -35,7 +35,7 @@ The LUIF is [Lua](http://www.lua.org/), extended with
 [Post-Processing](#post_processing)<br/>
 [Programmatic Grammar Construction](#programmatic_grammar_construction)<br/>
 [Locale Support](#locale_support)<br/>
-[Complete Syntax of BNF Statement](#complete_syntax_of_bnf_statement)<br/>
+[The Complete Syntax of BNF Statement](#complete_syntax_of_bnf_statement)<br/>
 [Example Grammars](#example_grammars)<br/>
 - [Calculator](#calculator)<br/>
 - [JSON](#json)<br/>
@@ -393,6 +393,8 @@ Parse events are defined using [`completed`](#completed) and [`predicted`](#pred
 
 LUIF grammars are transformed into KIR (Kollos Intermediate Runtime) tables using Direct-to-Lua (D2L) calls and format specified in a [separate document](d2l/spec.md).
 
+[todo: rewrite to the end of the section]
+
 The output will be a table, with one key for each grammar name.  Keys *must* be strings.  The value of each grammar key will be a table, with entries for external and internal symbols and rules.  Details of the format will be specified later.
 
 The KIR table will be interpreted by the lower layer (KLOL).  Initially post-processing will take a very restricted form in the LUIF structural and lexical grammars.
@@ -418,7 +420,7 @@ Lua's `os.setlocale()`, when used in the LUIF context for anything but the "C" l
 [todo: update the tentative language above as Kollos project progresses]
 
 <a id="complete_syntax_of_bnf_statement"></a>
-## Complete Syntax of BNF Statement
+## The Complete Syntax of BNF Statement
 
 The general syntax for a BNF statement is as follows (`stat`, `block`, `funcbody`, `Name`, and `String` symbols are as defined by the Lua grammar):
 
