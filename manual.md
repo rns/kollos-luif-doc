@@ -495,7 +495,7 @@ sequence_item ::= symbol_name |
 
 separator ::= symbol_name |
               literal |
-              character_class -- [[under discussion](https://github.com/rns/kollos-luif-doc/issues/17#issuecomment-98474355)]
+              character_class
 
 symbol_name :: Name
 
@@ -504,15 +504,12 @@ literal ::= String    -- long strings not allowed
 character_class ::= String
 
 ```
+[todo: `character_class` as sequence separator is [under discussion](https://github.com/rns/kollos-luif-doc/issues/17#issuecomment-98474355)]
 
 [todo: implementation detail: Lua patterns can be much slower than regexes, so we can
 use lua patterns as they are or
 translate them to regexes for speed
 or make this an option ]
-
-[todo: nested delimiters as sequence separators,
-like [`%bxy`](http://www.lua.org/pil/20.2.html), but with nesting support
-per comment to https://github.com/rns/kollos-luif-doc/issues/17]
 
 <a id="example_grammars"></a>
 ## Example grammars
