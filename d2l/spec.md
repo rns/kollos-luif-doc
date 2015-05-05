@@ -6,7 +6,7 @@ To quote Roberto:
 
 > Following the Snobol tradition, LPeg defines patterns as first-class objects. That is, patterns are regular Lua values (represented by userdata). The library offers several functions to create and compose patterns. With the use of metamethods, several of these functions are provided as infix or prefix operators. On the one hand, the result is usually much more verbose than the typical encoding of patterns using the so called regular expressions (which typically are not regular expressions in the formal sense). On the other hand, first-class patterns allow much better documentation (as it is easy to comment the code, to break complex definitions in smaller parts, etc.) and are extensible, as we can define new functions to create and compose patterns.
 
-In the LUIF, Direct-to-Lua (D2L) calls are used to transform LUIF statements into Kollos Intermediate Representation (KIR) table, provide programmatic grammar construction and, with the use of special table constructors, serve as a representation format for LUIF grammars.
+In the LUIF, Direct-to-Lua (D2L) calls are used to transform LUIF statements into Kollos Intermediate Representation (KIR) table, provide programmatic grammar construction, and, with the use of special table constructors, serve as a representation format for LUIF grammars.
 
 ## Functions
 
@@ -74,13 +74,13 @@ local grammar = luif.G{
   seq = { S'item', Q'+', '%', S'separator' },
   seq = { S'item', Q'+', '%%', S'separator' },
   seq = { S'item', Q'+', '%', L',' }, -- literal as sequence separator
-  seq = { S'item', Q'+', '%', C',' }, -- character class as sequence separator
+  seq = { S'item', Q'+', '%', C'[;,]' }, -- character class as sequence separator
 }
 ```
 
 Note:
 
-Character classes and nested structures as sequence separators are currently under discussion at http://irclog.perlgeek.de/marpa/2015-05-03#i_10538440
+Character classes as sequence separators are currently under discussion at http://irclog.perlgeek.de/marpa/2015-05-03#i_10538440
 
 [todo: define support for SLIF extensions per https://github.com/rns/kollos-luif-doc/issues/17]
 
