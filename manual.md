@@ -6,10 +6,10 @@ the [Kollos project](https://github.com/jeffreykegler/kollos/).
 
 The LUIF is [Lua](http://www.lua.org/), extended with [BNF](http://en.wikipedia.org/wiki/Backus%E2%80%93Naur_Form) statements.
 
-[todo: a (link to) a brief BNF introduction/tutotial?]
+[todo: a (link to) a brief BNF introduction/tutorial?]
 
 [todo: briefly define symbol, terminal, non-terminal, rule, LHS, RHS, alternative
-before so specifying them top-down (rule to symbol)]
+before specifying them top-down (rule to symbol to adverb)]
 
 ## Table of Contents
 
@@ -114,7 +114,7 @@ can be either a single symbol,
 or a sequence of symbols grouped by
 parentheses or square brackets,
 as described above.
-A repetiton consists of
+A repetition consists of
 
 + A repetend, followed by
 + An optional punctuation specifier.
@@ -326,7 +326,7 @@ returns the integer ID of the BNF rule matched in the parse value or completed/p
 
 ##### `alt_no = luif.context.alternative()`
 
-returns the number of the the BNF rule's RHS alternative matched in the parse value or completed/predicted during the parse.
+returns the number of the BNF rule's RHS alternative matched in the parse value or completed/predicted during the parse.
 
 ##### `prec = luif.context.precedence()`
 
