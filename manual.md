@@ -3,7 +3,7 @@
 This document (which is currently a work-in-progress for further discussion) describes
 the **LUIF** (**LU**a **I**nter**F**ace),
 the interface language of
-the [Kollos project](https://github.com/jeffreykegler/kollos/).
+the [Kollos project](https://github.com/jeffreykegler/kollos/blob/master/README.md#about-kollos).
 
 The LUIF is [Lua](http://www.lua.org/), extended with
 [BNF](http://en.wikipedia.org/wiki/Backus%E2%80%93Naur_Form) statements
