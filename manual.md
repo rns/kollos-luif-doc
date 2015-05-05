@@ -44,7 +44,7 @@ The LUIF is [Lua](http://www.lua.org/), extended with
 ## BNF Statement
 
 LUIF extends the Lua syntax by adding `bnf` alternative to `stat` rule of the [Lua grammar](http://www.lua.org/manual/5.1/manual.html#8) and introducing the new rules for BNF statements. There is only one BNF statement, combining [precedence](#precedenced_rules),
-[sequences](#sequences), and alternation as specified above.
+[sequences](#sequences), and alternation as specified below.
 
 A BNF statement specifies a rule, which consists of, in order:
 
@@ -425,7 +425,7 @@ Lua's `os.setlocale()`, when used in the LUIF context for anything but the "C" l
 
 The general syntax for a BNF statement is as follows (`stat`, `block`, `funcbody`, `Name`, and `String` symbols are as defined by the Lua grammar):
 
-Note: this describes LUIF structural and lexical grammars 'used in the default way' as defined in [Grammars](#grammars) section below. The first rule will act as the start rule.
+Note: this describes LUIF structural and lexical grammars 'used in the default way' as defined in [Grammars](#grammars) section above. The first rule will act as the start rule.
 
 ```
 stat ::= bnf
