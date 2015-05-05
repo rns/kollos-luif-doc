@@ -8,9 +8,6 @@ The LUIF is [Lua](http://www.lua.org/), extended with [BNF](http://en.wikipedia.
 
 [todo: a (link to) a brief BNF introduction/tutorial?]
 
-[todo: briefly define symbol, terminal, non-terminal, rule, LHS, RHS, alternative
-before specifying them top-down (rule to symbol to adverb)]
-
 ## Table of Contents
 
 [BNF Statement](#bnf_statement)<br/>
@@ -45,7 +42,16 @@ before specifying them top-down (rule to symbol to adverb)]
 <a id="bnf_statement"></a>
 ## BNF Statement
 
-LUIF extends the Lua syntax by adding `bnf` alternative to `stat` rule of the [Lua grammar](http://www.lua.org/manual/5.1/manual.html#8) and introducing the new rules for BNF statements. There is only one BNF statement, combining precedence, sequences, and alternation.
+LUIF extends the Lua syntax by adding `bnf` alternative to `stat` rule of the [Lua grammar](http://www.lua.org/manual/5.1/manual.html#8) and introducing the new rules for BNF statements. There is only one BNF statement, combining [precedence](#precedenced_rules),
+[sequences](#sequences), and alternation as specified below.
+
+A BNF statement specifies a rule, which consists of, in order:
+
+- A left hand side (LHS), which will be a [symbol](#symbol_name).
+
+- A produce-operator (`::=` or `~`).
+
+- A right-hand side (RHS), which contains one or more RHS alternatives.
 
 <a id="structural_and_lexical_rules"></a>
 ### Structural and Lexical Rules
