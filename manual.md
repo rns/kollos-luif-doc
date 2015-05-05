@@ -70,6 +70,8 @@ BNF statements are grouped into one or more grammars.  There are two kinds of LU
 A grammar is lexical if one or more of its rules have the special `lexeme` action.
 [todo: specify `lexeme` action]
 
+[todo: grammar start statement under discussion at https://github.com/rns/kollos-luif-doc/issues/10#issuecomment-98696337]
+
 The grammar is indicated by the produce-operator of the BNF. Its general form is `:grammar:=`, where `grammar` is the name of a grammar.  `grammar` must not contain colons.  Initially, the [post-processing](#post_processing) will not support anything but `l0` and `g1` used in the default way, like this:
 
 ```lua
