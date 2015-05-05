@@ -38,7 +38,7 @@ before so specifying them top-down (rule to symbol)]
 [Events](#events)<br/>
 [Locale Support](#locale_support)<br/>
 [Programmatic Grammar Construction](#programmatic_grammar_construction)<br/>
-[Post Processing](#post_processing)<br/>
+[Post-Processing](#post_processing)<br/>
 [Complete Syntax of BNF Statement](#complete_syntax_of_bnf_statement)<br/>
 [Example Grammars](#example_grammars)<br/>
 - [calculator](#calculator)<br/>
@@ -379,6 +379,12 @@ Lua's `os.setlocale()`, when used in the LUIF context for anything but the "C" l
 The output of the KHIL will be a table, with one key for each grammar name.  Keys *must* be strings.  The value of each grammar key will be a table, with entries for external and internal symbols and rules.  Details of the format will be specified later.
 
 This table will be interpreted by the lower layer (KLOL).  Initially post-processing will take a very restricted form in the LUIF grammars.   There are two kinds of Libmarpa grammars: structural and lexical grammar.  A grammar is lexical if one or more of its rules have the special `lexeme` action.  The post-processing will expect a lexical grammar named `l0` and a structural grammar named `g1`, and will check (in the same way that Marpa::R2 currently does) to ensure they are compatible.
+
+### Direct-to-Lua calls
+
+[under discussion https://github.com/rns/kollos-luif-doc/issues/9#issuecomment-98691086]
+
+[stub: KHIL uses D2L calls to transform LUIF to KIR]
 
 <a id="complete_syntax_of_bnf_statement"></a>
 ## Complete Syntax of BNF Statement
