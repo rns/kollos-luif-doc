@@ -4,9 +4,7 @@ This document (which is currently a work-in-progress) describes the LUIF (LUa In
 the interface language of
 the [Kollos project](https://github.com/jeffreykegler/kollos/).
 
-The LUIF is [Lua](http://www.lua.org/), extended with [BNF](http://en.wikipedia.org/wiki/Backus%E2%80%93Naur_Form) statements.
-
-[todo: a (link to) a brief BNF introduction/tutorial?]
+The LUIF is [Lua](http://www.lua.org/), extended with [BNF](http://en.wikipedia.org/wiki/Backus%E2%80%93Naur_Form) statements [as specified below](#bnf_statement).
 
 ## Table of Contents
 
