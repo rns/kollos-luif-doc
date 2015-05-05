@@ -472,8 +472,9 @@ rhs_primary ::= separated_sequence |
 
 grouped_alternative ::= '(' alternative ')'
 hidden_alternative ::= '[' alternative ']'
-
+```
 <a id="separated_sequence"></a>
+```
 separated_sequence ::= sequence  |
                        sequence '%'  separator | -- proper separation
                        sequence '%%' separator |
