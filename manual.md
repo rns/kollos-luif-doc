@@ -39,8 +39,8 @@ before so specifying them top-down (rule to symbol)]
 <a id="toc_post_processing"></a>[Post Processing](#post_processing)<br/>
 <a id="toc_complete_syntax_of_bnf_statement"></a>[Complete Syntax of BNF Statement](#complete_syntax_of_bnf_statement)<br/>
 <a id="toc_example_grammars"></a>[Example Grammars](#example_grammars)<br/>
-<a id="toc_calculator"></a>[calculator](#calculator)<br/>
-<a id="toc_json"></a>[json](#json)<br/>
+- <a id="toc_calculator"></a>[calculator](#calculator)<br/>
+- <a id="toc_json"></a>[json](#json)<br/>
 
 <a id="bnf_statement"></a>
 ## BNF Statement [^](#toc_bnf_statement)
