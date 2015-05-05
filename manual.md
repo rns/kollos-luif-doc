@@ -236,7 +236,7 @@ LUIF comments are Lua comments as defined at the end of [Lexical Conventions](ht
 <a id="adverbs"></a>
 ### Adverbs
 
-A LUIF rule can be modified by one or more adverbs, `name = value` pairs separated with commas.
+A LUIF rule can be modified by one or more adverbs, which are `name = value` pairs separated with commas. Comma is also used to separate an adverb from the RHS alternative it modifies.
 
 [todo: example]
 
@@ -267,7 +267,7 @@ For more details on parse events, see [Events](#events) section.
 <a id="assoc"></a>
 #### `assoc`
 
-The `assoc` adverb defines associativity of a precedenced rule.
+The `assoc` adverb defines associativity of a [precedenced rule](#precedenced_rules).
 Its value can be `left`, `right`, or `group`.
 The function of this adverb is as defined in the [SLIF](https://metacpan.org/pod/distribution/Marpa-R2/pod/Scanless/DSL.pod#assoc).
 
