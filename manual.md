@@ -47,7 +47,7 @@ LUIF extends the Lua syntax by adding `bnf` alternative to `stat` rule of the [L
 
 A BNF statement specifies a rule, which consists of, in order:
 
-- A left hand side (LHS), which will be a [symbol](#symbol_name).
+- A left hand side (LHS), which will be a [symbol](#symbol_names).
 
 - A produce-operator (`::=` or `~`).
 
