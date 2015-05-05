@@ -3,8 +3,11 @@
 Warning: this is a work in progress.
 
 ## Table of Contents
+
 <a id="toc_overview"></a>[Overview](#overview)
+
 <a id="toc_bnf_statement"></a>[BNF Statement](#bnf_statement)
+
 <a id="toc_structural_and_lexical_rules"></a>[Structural and Lexical Rules](#structural_and_lexical_rules)
 
 <a id="overview"></a>
