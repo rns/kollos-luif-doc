@@ -256,10 +256,9 @@ LUIF comments are Lua comments as defined at the end of [Lexical Conventions](ht
 <a id="adverbs"></a>
 ### Adverbs
 
-A LUIF rule can be modified by one or more adverbs. A
-Adverbs are `name = value` pairs separated with commas. Comma is also used to separate an adverb from the RHS alternative it modifies.
-
-[todo: example]
+A LUIF rule can be modified by one or more adverbs.
+Adverbs are `name = value` pairs separated with commas.
+Comma is also used to separate an adverb from the RHS alternative it modifies.
 
 <a id="action"></a>
 #### `action`
