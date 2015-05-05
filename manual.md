@@ -103,7 +103,11 @@ If a grammar specifies lexemes, it is a lexical grammar.  If a grammar specifies
 <a id="precedenced_rules"></a>
 ### Precedenced Rules
 
-[TBD]
+A precedenced rule contains a series of one or more RHS alternatives, separated by either the alternation operator (`|`) or the loosen operators (`||`). In a typical grammar, most rules are precedenced rules, but they are often trivially precedenced, consisting of only one RHS alternative. For brevity, RHS alternatives are often called alternatives.
+
+Each alternative may be followed by a list of [adverbs](#adverbs).
+
+The RHS alternatives in a precedenced right hand side proceed from tightest (highest) priority to loosest. The double "or" symbol (`||`) is the "loosen" operator -- the alternatives after it have a looser (lower) priority than the alternatives before it. The single "or" symbol (`|`) is the ordinary "alternative" operator -- alternatives on each side of it have the same priority. Associativity is specified using the [`assoc`](#assoc) adverb, as described below.
 
 <a id="sequences"></a>
 ### Sequences
@@ -112,9 +116,7 @@ Sequences are expressions on the RHS of a BNF rule alternative
 which imply the repetition of a symbol,
 or a parenthesized series of symbols. The general syntax for sequences is
 
-[todo: add sequence snippet from the LUIF grammar ]
-```
-```
+[todo: add sequence snippet from the LUIF grammar, when done ]
 
 The item to be repeated (the repetend)
 can be either a single symbol,
@@ -139,7 +141,7 @@ A repetition specifier is one of
 A punctuation specifier is one of
 ```
     % <sep>     -- use <sep> as a proper separator
-    %% <sep>     -- use <sep> as liberal separator
+    %% <sep>    -- use <sep> as a liberal separator
     %- <sep>    -- proper separation, same as %
     %$ <sep>    -- use <sep> as a terminator
 ```
