@@ -36,9 +36,9 @@ before so specifying them top-down (rule to symbol)]
 - [Context Accessors](#context_accessors)<br/>
 
 [Events](#events)<br/>
-[Locale Support](#locale_support)<br/>
 [Post-Processing](#post_processing)<br/>
 [Programmatic Grammar Construction](#programmatic_grammar_construction)<br/>
+[Locale Support](#locale_support)<br/>
 [Complete Syntax of BNF Statement](#complete_syntax_of_bnf_statement)<br/>
 [Example Grammars](#example_grammars)<br/>
 - [calculator](#calculator)<br/>
@@ -359,15 +359,6 @@ Parse events are defined using [`completed`](#completed) and [`predicted`](#pred
 
 [todo: provide getting started info/tutorial on parse events].
 
-<a id="locale_support"></a>
-## Locale support
-
-Full support is only assured for the "C" locale -- support for other locales may be limited, inconsistent, or removed in the future.
-
-Lua's `os.setlocale()`, when used in the LUIF context for anything but the "C" locale, may fail, silently or otherwise.
-
-[todo: update the tentative language above as Kollos project progresses]
-
 <a id="post_processing"></a>
 ## Post-processing
 
@@ -389,6 +380,15 @@ The details are specified in a [separate document](d2l/spec.md).
 
 At the moment, LUIF statements cannot be affected by Lua statements directly,
 but this can change in future.
+
+<a id="locale_support"></a>
+## Locale support
+
+Full support is only assured for the "C" locale -- support for other locales may be limited, inconsistent, or removed in the future.
+
+Lua's `os.setlocale()`, when used in the LUIF context for anything but the "C" locale, may fail, silently or otherwise.
+
+[todo: update the tentative language above as Kollos project progresses]
 
 <a id="complete_syntax_of_bnf_statement"></a>
 ## Complete Syntax of BNF Statement
