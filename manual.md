@@ -327,8 +327,8 @@ the values defined by the semantics of the matched RHS alternative's symbols.
 <a id="context_accessors"></a>
 #### Context Accessors
 
-Context accessors live in the `luif.context` name space.
-They can be called from semantic actions to get matched rule and locations data.
+Context accessors live in the `luif.context` namespace.
+They can be called from semantic actions to get matched rule and location data.
 To import them into a separate file, use Lua's [`require`](http://www.lua.org/manual/5.1/manual.html#pdf-require) function, i.e.
 
 ```lua
@@ -379,6 +379,8 @@ completed/predicted during the parse.
 returns the length of the input span corresponding to
 the BNF rule matched in the parse value or
 completed/predicted during the parse.
+
+[todo: clarify "matched in the parse value"]
 
 <a id="events"></a>
 ## Events
