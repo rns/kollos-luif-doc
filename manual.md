@@ -271,6 +271,8 @@ The `assoc` adverb defines associativity of a [precedenced rule](#precedenced_ru
 Its value can be `left`, `right`, or `group`.
 The function of this adverb is as defined in the [SLIF](https://metacpan.org/pod/distribution/Marpa-R2/pod/Scanless/DSL.pod#assoc).
 
+For a usage example, see the [Calculator](#calculator) grammar below.
+
 <a id="semantics"></a>
 ## Semantics
 
