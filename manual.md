@@ -68,7 +68,7 @@ A grammar is structural if
 
 * Its start rule contains the `structural` adverb.
 * Its start rule contains the `lexer` adverb.  (The value of the `lexer` adverb
-  the name of a lexical grammar.)
+  must tbe the name of a lexical grammar.)
 
 By default, the LUIF start with two grammar in its grammar set:
 `g1` and `l0`.
@@ -88,7 +88,7 @@ A rule is lexical if it belongs to a lexical grammar.
 Structural or lexical rules are declared by using produce-operators.
 
 In a lexical grammar, a lexeme is a top-level symbol,
-which can specified with the `lexeme` adverb.
+which can be specified with the `lexeme` adverb.
 In a lexical grammar, a lexeme can never appear on a RHS.
 
 In a structural grammar, a lexeme is a symbol which never appears
