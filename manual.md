@@ -547,10 +547,33 @@ character_class ::= String
 ```
 [todo: `character_class` as sequence separator is [under discussion](https://github.com/rns/kollos-luif-doc/issues/17#issuecomment-98474355)]
 
-[todo: implementation detail: Lua patterns can be much slower than regexes, so we can
+## Implementation considerations
+
+Where feasible, discussion of implementation
+is in separate documents.
+This section is for those implementation considerations
+that are so closely tied to
+to interface considerations that it makes sense
+to include them here.
+These is useful while this document is in progress.
+These discussions
+may not be appropriate to keep in the reference
+manual once implementation is complete.
+
+### Lua patterns
+
+[todo: Lua patterns can be much slower than regexes, so we can
 use lua patterns as they are or
 translate them to regexes for speed
 or make this an option ]
+
+### Fatal errors
+
+Fatal errors, if they affect the KIR,
+are always caught at the lower-level (KLOL).
+They may be caught at the higher-level (KHIL) as well,
+if that is convenient,
+or if it is necessary for the logic.
 
 <a id="example_grammars"></a>
 ## Example grammars
