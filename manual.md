@@ -59,22 +59,16 @@ a [symbol name](#symbol_names), a [character class](#character_classes), a [lite
 ### Structural and Lexical Grammars
 
 A grammar can be either structural or lexical.
-A grammar is lexical if
-
-* One of its rules contains the `lexeme` adverb.
-* Its start rule contains the `lexical` adverb.
-
-A grammar is structural if
-
-* Its start rule contains the `structural` adverb.
-* Its start rule contains the `lexer` adverb.  (The value of the `lexer` adverb
-  must tbe the name of a lexical grammar.)
+A grammar is lexical if one of its rules contains the `lexeme` adverb.
+A grammar is structural if it has a start rule.
 
 By default, the LUIF start with two grammar in its grammar set:
 `g1` and `l0`.
 By default, `g1` is a structural grammar.
 By default, `l0` is a lexical grammar,
 and is the lexer for `g1`.
+A structural grammar may specify its lexer
+by using the `lexer` adverb in its start rule.
 
 A grammar is always structural or lexical, but never both.
 It is a fatal error if, according to the stipulations above,
@@ -88,11 +82,19 @@ A rule is lexical if it belongs to a lexical grammar.
 Structural or lexical rules are declared by using produce-operators.
 
 In a lexical grammar, a lexeme is a top-level symbol,
-which can be specified with the `lexeme` adverb.
+and must be specified with the `lexeme` adverb.
 In a lexical grammar, a lexeme can never appear on a RHS.
 
 In a structural grammar, a lexeme is a symbol which never appears
 on the LHS of a rule.
+
+Structural rules may imply lexical rules in the structural grammar's
+associated lexer.
+Charclasses and strings in structural rules, for example,
+create lexemes in the associated lexical grammar.
+It is a fatal error if a structural rule implies a lexical rule,
+but the structural grammar has no
+associated lexical grammar.
 
 A _lexeme_ is a sequence of characters in the input matched by a rule in a lexical grammar.
 Marpa's usage of the term "lexeme" is special to it.
