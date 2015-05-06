@@ -12,7 +12,7 @@ The LUIF is [Lua](http://www.lua.org/), extended with
 ## Table of Contents
 
 [BNF Statement](#bnf_statement)<br/>
-- [Structural and Lexical Rules](#structural_and_lexical_rules)<br/>
+- [Structural and Lexical Grammars](#structural_and_lexical_grammars)<br/>
 - [Grammars](#grammars)<br/>
 - [Precedenced Rules](#precedenced_rules)<br/>
 - [Sequences](#sequences)<br/>
@@ -55,7 +55,7 @@ A BNF statement specifies a rule, which consists of, in order:
 - A right-hand side (RHS), which contains one or more RHS alternatives. A RHS alternative is a series of RHS primaries, where a RHS primary may be
 a [symbol name](#symbol_names), a [character class](#character_classes), a [literal](#literals), a [sequence](#sequences) or another, [grouped or hidden](#grouping_and_hiding_symbols), RHS alternative.
 
-<a id="structural_and_lexical_rules"></a>
+<a id="structural_and_lexical_grammars"></a>
 ### Structural and Lexical Grammars
 
 A grammar can be either structural or lexical.
@@ -302,7 +302,7 @@ A comma is also used to separate an adverb from the RHS alternative it modifies.
 The `action` adverb defines the semantics of the RHS alternative it modifies.
 Its value is specified in [Semantics](#semantics) section below.
 
-The `action` adverb can also have a special `lexeme` value [descrived above](#structural_and_lexical_rules).
+The `action` adverb can also have a special `lexeme` value [descrived above](#structural_and_lexical_grammars).
 
 <a id="completed"></a>
 #### `completed`
