@@ -477,11 +477,11 @@ lhs ::= symbol_name
 produce_op ::= '::=' |
                '~'
 
-rhs ::= precedenced_alternative { '||' precedenced_alternative }
+rhs ::= precedenced_alternative ( '||' precedenced_alternative )*
 
-precedenced_alternative ::= alternative { '|' alternative }
+precedenced_alternative ::= alternative ( '|' alternative )*
 
-alternative ::= rhs_primaries { ',' adverb }
+alternative ::= rhs_primaries ( ',' adverb )*
 
 adverb ::= action |
            completed |
@@ -505,7 +505,7 @@ assocexp ::= 'left' |
              'right' |
              'group'
 
-rhs_primaries ::= { rhs_primary }       -- can be empty, like Lua chunk
+rhs_primaries ::= ( rhs_primary )*       -- can be empty, like Lua chunk
 
 rhs_primary ::= separated_sequence |
                 symbol_name |
