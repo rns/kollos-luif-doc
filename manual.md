@@ -565,7 +565,7 @@ manual once implementation is complete.
 [todo: Lua patterns can be much slower than regexes, so we can
 use lua patterns as they are or
 translate them to regexes for speed
-or make this an option ]
+or make this an option, discussion -- https://github.com/rns/kollos-luif-doc/issues/24#issuecomment-99699997]
 
 ### Fatal errors
 
