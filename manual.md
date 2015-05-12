@@ -302,7 +302,7 @@ are Kollos external symbol names.
 `< symbol one ! sequence lhs >` and `symbol-one!seq-lhs`
 are KHIL internal symbol names.
 `<symbol one ! sequence lhs?part one>`,
-`?chaf49`, ``expression?nulled`,
+`?chaf49`, `expression?nulled`,
 `symbol-one!seq-lhs?part1`,
 and `expression!seq-lhs?nulled`
 are all KLOL internal symbol names.
