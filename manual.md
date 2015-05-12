@@ -267,12 +267,56 @@ to define zero or one, zero or more, or one or more repetitions of such series.
 <a id="symbol_names"></a>
 ### Symbol names
 
-A LUIF symbol name is any valid Lua name.
-Eventually names with non-initial hyphens will be allowed and an angle bracket notation for LUIF symbol names,
+A Kollos external symbol name is any valid Lua name.
+When the meaning is clear, as it is in
+most contexts, a Kollos external symbol name
+is simply called a *Kollos symbol name*,
+or just a *symbol name*.
+Eventually Kollos external symbol names
+with non-initial hyphens will be allowed and an angle bracket notation for LUIF symbol names,
 similar to that of
 the [SLIF](https://metacpan.org/pod/distribution/Marpa-R2/pod/Scanless/DSL.pod#Symbol-names),
 will allow whitespace
 in names.
+
+In some contexts,
+such as tracing and error messages,
+Kollos internal names may be visible.
+Kollos internal names are either KHIL symbol
+names, or KLOL symbol names, depending
+on whether they were created by the KHIL
+or KLOL.
+
+Internal names are those which
+include exclamation points (`!`),
+and question marks (`?`).
+If a Kollos internal name includes a
+question mark, it is a KLOL internal
+name.
+If a Kollos internal name is not a KLOL
+internal name, and includes an exclamation
+mark, it is a KHIL internal name.
+
+As examples, `sym1`, `sym_1`, `sym-1` and `<symbol one>`
+are Kollos external symbol names.
+`< symbol one ! sequence lhs >` and `symbol-one!seq-lhs`
+are KHIL internal symbol names.
+`<symbol one ! sequence lhs?part one>`,
+`?chaf49`, ``expression?nulled`,
+`symbol-one!seq-lhs?part1`,
+and `expression!seq-lhs?nulled`
+are all KLOL internal symbol names.
+
+In normal usage of the LUIF,
+the application code sees only
+external symbol names.
+In normal processing,
+the KHIL code sees only external
+symbol names and KHIL symbol names.
+The KLOL code sees all external and internal symbol names.
+When tracing or debugging internals,
+the KHIL code and even the application code may see
+all external and internal symbol names.
 
 <a id="literals"></a>
 ### Literals
