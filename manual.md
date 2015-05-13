@@ -609,7 +609,6 @@ literal ::= String    -- sans the long strings
 character_class ::= String
 
 ```
-[todo: `character_class` as sequence separator is [under discussion](https://github.com/rns/kollos-luif-doc/issues/17#issuecomment-98474355)]
 
 <a id="implementation_considerations"></a>
 ## Implementation considerations
