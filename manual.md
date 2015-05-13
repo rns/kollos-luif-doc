@@ -62,7 +62,7 @@ A grammar can be either structural or lexical.
 A grammar is lexical if one of its rules contains the `lexeme` adverb.
 A grammar is structural if it has a start rule.
 
-By default, the LUIF start with two grammar in its grammar set:
+By default, the LUIF starts with two grammar in its grammar set:
 `g1` and `l0`.
 By default, `g1` is a structural grammar.
 By default, `l0` is a lexical grammar,
