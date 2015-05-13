@@ -35,10 +35,12 @@ The LUIF is [Lua](http://www.lua.org/), extended with
 [Post-Processing](#post_processing)<br/>
 [Programmatic Grammar Construction](#programmatic_grammar_construction)<br/>
 [The Complete Syntax of BNF Statement](#complete_syntax_of_bnf_statement)<br/>
+
 [Implementation Considerations](#implementation_considerations)<br/>
 - [Lua patterns](#lua_patterns)<br/>
 - [Fatal Errors](#fatal_errors)<br/>
 - [Locale Support](#locale_support)<br/>
+
 [Example Grammars](#example_grammars)<br/>
 - [Calculator](#calculator)<br/>
 - [JSON](#json)<br/>
