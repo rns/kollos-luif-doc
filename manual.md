@@ -72,7 +72,7 @@ If the produce-operator is `::=`, then the grammar is `g1`.  The tilde `~` can b
 
 A grammar can be either [structural or lexical](#structural_and_lexical_grammars).
 
-A structural grammar will often contain lexical elements, such as strings and character classes, and these will go into its linked lexical grammar.  The [start rule](#start_rule) of a structural grammar specifies its lexical grammar with `lexical` or `lexer` adverb.  In a lexical grammar the lexemes are indicated with the `lexeme` adverb -- if a rule has a lexeme adverb, its LHS is a lexeme.
+A structural grammar will often contain lexical elements, such as strings and character classes, and these will go into its linked lexical grammar.  The [start rule](#start_rule) of a structural grammar specifies its lexical grammar with `lexer` adverb.  In a lexical grammar the lexemes are indicated with the `lexeme` adverb -- if a rule has a lexeme adverb, its LHS is a lexeme.
 
 Initially, the [post-processing](#post_processing) will not support anything but `l0` and `g1` used in the default way, like this:
 
@@ -151,7 +151,29 @@ the lower layer (KLOL) processes the KIR.
 <a id="start_rule"></a>
 ### Start Rule
 
-[TBD]
+The start rule of a LUIF structural grammar sets
+
+- the name,
+
+- the start symbol, and
+
+- the lexical grammar of a structural grammar.
+
+If a start rule is omitted
+
+- the name of the grammar will be `g1` and all subsequent rules will be defined in that grammar or, if they are lexical, in its linked lexical grammar `l0`,
+
+- the start symbol will be the LHS of the structural rule, which occurs first in the source file, and
+
+- the lexical grammar will be `l0`.
+
+The syntax of a start rule is
+
+```
+start :grammar:= <start symbol name> ( lexer = <lexical grammar name> )?
+```
+
+The `lexer` adverb defines the lexical grammar for the structural grammar specified in the start rule.
 
 <a id="precedenced_rules"></a>
 ### Precedenced Rules
