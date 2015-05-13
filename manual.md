@@ -660,8 +660,8 @@ value    ::= string
            | object
            | number
            | array
-           | true
-           | false
+           | _true
+           | _false
            | null
 array    ::= [ '[' ']' ]
            | [ '[' ] elements [ ']' ]
@@ -671,9 +671,8 @@ string   ::= lstring
 -- lexical
 
 comma          ~ ','
--- [todo: true and false are Lua keywords: KHIL needs to handle this]
-S_true         ~ 'true'
-S_false        ~ 'false'
+_true          ~ 'true'   -- true is a Lua keyword
+_false         ~ 'false'  -- and so is false
 null           ~ 'null'
 number         ~ int
                | int frac
