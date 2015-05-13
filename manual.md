@@ -88,7 +88,7 @@ In a lexical grammar, a lexeme can never appear on a RHS.
 In a structural grammar, a lexeme is a symbol which never appears
 on the LHS of a rule.
 
-Structural rules may imply lexical rules in the structural grammar's
+Structural rules may imply lexical rules in the structural grammar’s
 associated lexer.
 Charclasses and strings in structural rules, for example,
 create lexemes in the associated lexical grammar.
@@ -97,7 +97,7 @@ but the structural grammar has no
 associated lexical grammar.
 
 A _lexeme_ is a sequence of characters in the input matched by a rule in a lexical grammar.
-Marpa's usage of the term "lexeme" is special to it.
+Marpa’s usage of the term "lexeme" is special to it.
 
 For all pairings of structural grammars and their lexers,
 both grammars in the pair must have a consistent idea of
@@ -234,7 +234,7 @@ I think the reason for these restrictions will be clear --
 such a repetition is very ambiguous.
 An application which really wants to specify rules involving nullable repetition,
 can specify them directly in BNF,
-and these will make the programmer's intent clear.
+and these will make the programmer’s intent clear.
 
 <a id="grouping_and_hiding_symbols"></a>
 ### Grouping and Hiding Symbols
@@ -387,7 +387,7 @@ with [`action`](#defining_semantics_with_action_adverb) adverb.
 <a id="defining_semantics_with_action_adverb"></a>
 ### Defining Semantics with `action` adverb
 
-The value of an `action` adverb can be a body of a Lua function (`funcbody`) as defined in [Function Definitions](http://www.lua.org/manual/5.1/manual.html#2.5.9) section of the Lua 5.1 Reference Manual or the name of such function, which must be a bare name (not a namespaced or a method function's name).
+The value of an `action` adverb can be a body of a Lua function (`funcbody`) as defined in [Function Definitions](http://www.lua.org/manual/5.1/manual.html#2.5.9) section of the Lua 5.1 Reference Manual or the name of such function, which must be a bare name (not a namespaced or a method function’s name).
 
 The action functions will be called in the context where their respective BNF statements are defined. Their return values will become the values of the LHS symbols corresponding to the RHS alternatives modified by the `action` adverb.
 
@@ -395,7 +395,7 @@ The match context information, such as
 matched rule data, input string locations and literals
 will be provided by [context accessors](#context_accessors) in `luif.context` namespace.
 
-If the semantics of a BNF statement is defined in a separate Lua file, LUIF functionality must be imported with Lua's [`require`] (http://www.lua.org/manual/5.1/manual.html#pdf-require) function.
+If the semantics of a BNF statement is defined in a separate Lua file, LUIF functionality must be imported with Lua’s [`require`] (http://www.lua.org/manual/5.1/manual.html#pdf-require) function.
 
 The syntax for a semantic action function is
 
@@ -405,7 +405,7 @@ action = function (params) body end
 
 It will be called as `f (params)`
 with `params` set to
-the values defined by the semantics of the matched RHS alternative's symbols.
+the values defined by the semantics of the matched RHS alternative’s symbols.
 
 [parameter list is under discussion at https://github.com/rns/kollos-luif-doc/issues/26]
 
@@ -414,7 +414,7 @@ the values defined by the semantics of the matched RHS alternative's symbols.
 
 Context accessors live in the `luif.context` namespace.
 They can be called from semantic actions to get matched rule and location data.
-To import them into a separate file, use Lua's [`require`](http://www.lua.org/manual/5.1/manual.html#pdf-require) function, i.e.
+To import them into a separate file, use Lua’s [`require`](http://www.lua.org/manual/5.1/manual.html#pdf-require) function, i.e.
 
 ```lua
 require 'luif.context'
@@ -434,7 +434,7 @@ whose semantic action or completed/predicted event handler is being called durin
 
 ##### `alt_no = luif.context.alternative()`
 
-returns the number of the BNF rule's RHS alternative
+returns the number of the BNF rule’s RHS alternative
 whose semantic action or completed/predicted event handler is being called during the parse.
 
 ##### `prec = luif.context.precedence()`
@@ -500,7 +500,7 @@ but this can change in future.
 
 Full support is only assured for the "C" locale -- support for other locales may be limited, inconsistent, or removed in the future.
 
-Lua's `os.setlocale()`, when used in the LUIF context for anything but the "C" locale, may fail, silently or otherwise.
+Lua’s `os.setlocale()`, when used in the LUIF context for anything but the "C" locale, may fail, silently or otherwise.
 
 [todo: update the tentative language above as Kollos project progresses]
 
