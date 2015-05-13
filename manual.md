@@ -78,16 +78,18 @@ Initially, the [post-processing](#post_processing) will not support anything but
 
 ```lua
 -- structural grammar
-a ::= b c       -- the first rule is the start rule
-                -- using the LHS (b c) of a lexical rule
-                -- on the RHS of a structural rule makes a lexeme
-a ::= w
+a ::= <b> <c>   -- the first rule is the start rule
+                -- unless the start rule is defined explicitly
+
+a ::= <w> -- using the LHS of a lexical rule (<w>, or <b> <c> above
+          -- on the RHS of a structural rule makes a lexeme
+
 aa ::= a a
 
 -- lexical grammar
-w ~ x y z
-b ~ 'b' x
-c ~ 'c' y
+<w> ~ x y z
+<b> ~ 'b' x
+<c> ~ 'c' y
 
 x ~ 'x'
 y ~ 'y'
