@@ -123,7 +123,8 @@ of the produce operator is
     :grammar:=
 ```
 where `grammar` is the name of a grammar.  `grammar` must be a string
-of the from acceptable as a Lua variable name.
+of the form acceptable as a Lua variable name.
+
 Initially, the [post-processing](#post_processing) will not support anything but `l0` and `g1` used in the default way, like this:
 
 ```lua
