@@ -692,7 +692,7 @@ in_string_char ~ [^"] | '\"'
 
 whitespace     ~ [\s]+
 
--- [todo: specify equivalent in LUIF ]
+--[todo: specify equivalent in LUIF ]
 :discard       ~ whitespace
 
 ```
