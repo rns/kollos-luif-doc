@@ -154,17 +154,13 @@ the lower layer (KLOL) processes the KIR.
 The start rule of a LUIF structural grammar sets
 
 - the name,
-
 - the start symbol, and
-
 - the lexical grammar of a structural grammar.
 
 If a start rule is omitted
 
 - the name of the grammar will be `g1` and all subsequent rules will be defined in that grammar or, if they are lexical, in its linked lexical grammar `l0`,
-
 - the start symbol will be the LHS of the structural rule, which occurs first in the source file, and
-
 - the lexical grammar will be `l0`.
 
 The syntax of a start rule is
