@@ -34,8 +34,11 @@ The LUIF is [Lua](http://www.lua.org/), extended with
 [Events](#events)<br/>
 [Post-Processing](#post_processing)<br/>
 [Programmatic Grammar Construction](#programmatic_grammar_construction)<br/>
-[Locale Support](#locale_support)<br/>
 [The Complete Syntax of BNF Statement](#complete_syntax_of_bnf_statement)<br/>
+[Implementation Considerations](#implementation_considerations)<br/>
+- [Lua patterns](#lua_patterns)<br/>
+- [Fatal Errors](#fatal_errors)<br/>
+- [Locale Support](#locale_support)<br/>
 [Example Grammars](#example_grammars)<br/>
 - [Calculator](#calculator)<br/>
 - [JSON](#json)<br/>
@@ -521,15 +524,6 @@ The details are specified in a [separate document](d2l/spec.md).
 At the moment, LUIF statements cannot be affected by Lua statements directly,
 but this can change in future.
 
-<a id="locale_support"></a>
-## Locale support
-
-Full support is only assured for the "C" locale -- support for other locales may be limited, inconsistent, or removed in the future.
-
-Lua’s `os.setlocale()`, when used in the LUIF context for anything but the "C" locale, may fail, silently or otherwise.
-
-[todo: update the tentative language above as Kollos project progresses]
-
 <a id="complete_syntax_of_bnf_statement"></a>
 ## The Complete Syntax of BNF Statement
 
@@ -617,6 +611,7 @@ character_class ::= String
 ```
 [todo: `character_class` as sequence separator is [under discussion](https://github.com/rns/kollos-luif-doc/issues/17#issuecomment-98474355)]
 
+<a id="implementation_considerations"></a>
 ## Implementation considerations
 
 Where feasible, discussion of implementation
@@ -630,13 +625,15 @@ These discussions
 may not be appropriate to keep in the reference
 manual once implementation is complete.
 
+<a id="lua_patterns"></a>
 ### Lua patterns
 
-[todo: Lua patterns can be much slower than regexes, so we can
-use lua patterns as they are or
-translate them to regexes for speed
-or make this an option, discussion -- https://github.com/rns/kollos-luif-doc/issues/24#issuecomment-99699997]
+Initially, Lua patterns will be used to implement character classes.
+However, Lua patterns do not support pre-compilation and
+can be slow in lots of real-life situations, e.g. benchmarks,
+so other options, e.g., regexes, can be considered.
 
+<a id="fatal_errors"></a>
 ### Fatal errors
 
 Fatal errors, if they affect the KIR,
@@ -644,6 +641,15 @@ are always caught at the lower-level (KLOL).
 They may be caught at the higher-level (KHIL) as well,
 if that is convenient,
 or if it is necessary for the logic.
+
+<a id="locale_support"></a>
+### Locale support
+
+Full support is only assured for the "C" locale -- support for other locales may be limited, inconsistent, or removed in the future.
+
+Lua’s `os.setlocale()`, when used in the LUIF context for anything but the "C" locale, may fail, silently or otherwise.
+
+[todo: update the tentative language above as Kollos project progresses]
 
 <a id="example_grammars"></a>
 ## Example grammars
