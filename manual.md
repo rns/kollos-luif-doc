@@ -171,12 +171,14 @@ If the start rule is omitted
 The syntax of a start rule is
 
 ```
-start_rule ::= ':' grammar ':=' 'lexer' '=' lexical_grammar_name ( 'start' = start_symbol_name )?
+start_rule ::= ':' grammar ':='
+  ( 'lexer' '=' lexical_grammar_name ( 'start' =  start_symbol )? )?
+
 ```
 
 The `lexer` adverb defines the lexical grammar for the structural grammar specified in the start rule. If it is omitted, the name of the lexical grammar will be the name of the structural with `_lex` appended, e.g., in the case of `start :grammar:= `, `grammar_lex`.
 
-The `start` adverb, which is optional, defines the start symbol of the grammar. If its is omitted, the start symbol will be the LHS of the structural rule, which occurs first in the source file.
+The `start` adverb, which is optional, defines the start symbol of the grammar. If it is omitted, the start symbol will be the LHS of the structural rule, which occurs first in the source file.
 
 An adverbless start rule just sets the name of the structural grammar for all rules that follow, e.g. `:json:=`.
 
