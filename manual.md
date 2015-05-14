@@ -125,7 +125,7 @@ then it defaults to structural.
 
 A rule is structural if it belongs to a structural grammar.
 A rule is lexical if it belongs to a lexical grammar.
-Structural or lexical rules are declared by using produce-operators.
+Structural or lexical rules are declared by using produce-operators (`::=` and `~`).
 
 In a lexical grammar, a lexeme is a top-level symbol,
 and must be specified with the `lexeme` adverb.
