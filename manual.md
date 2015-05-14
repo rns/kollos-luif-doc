@@ -73,7 +73,7 @@ of the produce operator is
 where `grammar` is the name of a grammar.  `grammar` must be a string
 of the form acceptable as a Lua variable name.
 
-If the produce-operator is `::=`, then the grammar is `g1`.  The tilde `~` can be a produce-operator, in which case it is equivalent to `:l0:=`.
+If the produce-operator is `::=`, then the grammar is `g1`.  The tilde `~` can be a produce-operator, in which case it is equivalent to `:l0:=` or `:lexical_grammar_name:=` if the `lexical_grammar_name` is set using the [`lexer` adverb](#lexer_adverb) of a [start rule](#start_rule).
 
 A grammar can be either [structural or lexical](#structural_and_lexical_grammars).
 
