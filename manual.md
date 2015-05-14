@@ -23,9 +23,10 @@ The LUIF is [Lua](http://www.lua.org/), extended with
 - [Comments](#comments)<br/>
 - [Adverbs](#adverbs)<br/>
   - [`action`](#action)<br/>
+  - [`assoc`](#assoc)
+  - [`name`](#name)
   - [`completed`](#completed)<br/>
   - [`predicted`](#predicted)<br/>
-  - [`assoc`](#assoc)
 
 [Semantics](#semantics)<br/>
 - [Defining Semantics with `action` adverb](#defining_semantics_with_action_adverb)<br/>
@@ -395,6 +396,21 @@ Its value is specified in [Semantics](#semantics) section below.
 
 The `action` adverb can also have a special `lexeme` value [descrived above](#structural_and_lexical_grammars).
 
+<a id="assoc"></a>
+#### `assoc`
+
+The `assoc` adverb defines associativity of a [precedenced rule](#precedenced_rules).
+Its value can be `left`, `right`, or `group`.
+The function of this adverb is as defined in the [SLIF](https://metacpan.org/pod/distribution/Marpa-R2/pod/Scanless/DSL.pod#assoc).
+
+For a usage example, see the [Calculator](#calculator) grammar below.
+
+<a id="name"></a>
+#### `name` adverb
+
+The `assoc` adverb defines the name of a RHS alternative it modifies.
+The name can then be retrieved using `luif.context.alternative()` function.
+
 <a id="completed"></a>
 #### `completed`
 
@@ -412,15 +428,6 @@ the Lua function to be called when the RHS alternative is predicted during the p
 Its value is the same as that of the `action` adverb.
 
 For more details on parse events, see [Events](#events) section.
-
-<a id="assoc"></a>
-#### `assoc`
-
-The `assoc` adverb defines associativity of a [precedenced rule](#precedenced_rules).
-Its value can be `left`, `right`, or `group`.
-The function of this adverb is as defined in the [SLIF](https://metacpan.org/pod/distribution/Marpa-R2/pod/Scanless/DSL.pod#assoc).
-
-For a usage example, see the [Calculator](#calculator) grammar below.
 
 <a id="semantics"></a>
 ## Semantics
@@ -477,10 +484,12 @@ whose semantic action or completed/predicted event handler is being called durin
 returns the integer ID of the BNF rule
 whose semantic action or completed/predicted event handler is being called during the parse.
 
-##### `alt_no = luif.context.alternative()`
+##### `alt_name = luif.context.alternative()`
 
-returns the number of the BNF rule’s RHS alternative
-whose semantic action or completed/predicted event handler is being called during the parse.
+returns the name of the BNF rule’s RHS alternative
+whose semantic action or completed/predicted event handler is being called during the parse,
+if such name is set using the [`name` adverb](#name) or
+`nil` if it is not so set.
 
 ##### `prec = luif.context.precedence()`
 
