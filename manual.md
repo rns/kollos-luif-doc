@@ -452,7 +452,7 @@ It will be called as `f (params)`
 with `params` set to
 the values defined by the semantics of the matched RHS alternative’s symbols.
 
-[parameter list is under discussion at https://github.com/rns/kollos-luif-doc/issues/26]
+[todo: parameter list is under discussion at https://github.com/rns/kollos-luif-doc/issues/26]
 
 <a id="context_accessors"></a>
 #### Context Accessors
@@ -675,6 +675,8 @@ Lua’s `os.setlocale()`, when used in the LUIF context for anything but the "C"
 
 <a id="calculator"></a>
 ### Calculator
+
+[todo: update parameter list per https://github.com/rns/kollos-luif-doc/issues/26]
 
 ```
 Script ::= Expression+ % ','
