@@ -556,8 +556,6 @@ but this can change in future.
 
 The general syntax for a BNF statement is as follows (`stat`, `block`, `funcbody`, `Name`, and `String` symbols are as defined by the Lua grammar):
 
-Note: this describes LUIF structural and lexical grammars 'used in the default way' as defined in [Grammars](#grammars) section above. The first rule will act as the start rule.
-
 ```
 stat ::= bnf
 
