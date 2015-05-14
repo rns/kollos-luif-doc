@@ -22,11 +22,11 @@ The LUIF is [Lua](http://www.lua.org/), extended with
 - [Character Classes](#character_classes)<br/>
 - [Comments](#comments)<br/>
 - [Adverbs](#adverbs)<br/>
-  - [`action`](#action)<br/>
-  - [`assoc`](#assoc)
+  - [`action`](#action_adverb)<br/>
+  - [`assoc`](#assoc_adverb)
   - [`name`](#name_adverb)
-  - [`completed`](#completed)<br/>
-  - [`predicted`](#predicted)<br/>
+  - [`completed`](#completed_adverb)<br/>
+  - [`predicted`](#predicted_adverb)<br/>
 
 [Semantics](#semantics)<br/>
 - [Defining Semantics with `action` adverb](#defining_semantics_with_action_adverb)<br/>
@@ -198,7 +198,7 @@ A precedenced rule contains a series of one or more RHS alternatives, separated 
 
 An alternative may be followed by a list of [adverbs](#adverbs).
 
-The RHS alternatives in a precedenced right hand side proceed from tightest (highest) priority to loosest. The double "or" symbol (`||`) is the "loosen" operator -- the alternatives after it have a looser (lower) priority than the alternatives before it. The single "or" symbol (`|`) is the ordinary "alternative" operator -- alternatives on each side of it have the same priority. Associativity is specified using the [`assoc`](#assoc) adverb, as described below.
+The RHS alternatives in a precedenced right hand side proceed from tightest (highest) priority to loosest. The double "or" symbol (`||`) is the "loosen" operator -- the alternatives after it have a looser (lower) priority than the alternatives before it. The single "or" symbol (`|`) is the ordinary "alternative" operator -- alternatives on each side of it have the same priority. Associativity is specified using the [`assoc`](#assoc_adverb) adverb, as described below.
 
 For a usage example of precedenced rules, see the [Calculator](#calculator) grammar below.
 
@@ -388,7 +388,7 @@ A LUIF rule can be modified by one or more adverbs.
 Adverbs are `name = value` pairs separated with commas.
 A comma is also used to separate an adverb from the RHS alternative it modifies.
 
-<a id="action"></a>
+<a id="action_adverb"></a>
 #### `action` adverb
 
 The `action` adverb defines the semantics of the RHS alternative it modifies.
@@ -396,7 +396,7 @@ Its value is specified in [Semantics](#semantics) section below.
 
 The `action` adverb can also have a special `lexeme` value [descrived above](#structural_and_lexical_grammars).
 
-<a id="assoc"></a>
+<a id="assoc_adverb"></a>
 #### `assoc` adverb
 
 The `assoc` adverb defines associativity of a [precedenced rule](#precedenced_rules).
@@ -412,7 +412,7 @@ The `name` adverb defines the name of a RHS alternative it modifies.
 The name can then be retrieved using
 [`luif.context.alternative()`](#luif_context_alternative) function.
 
-<a id="completed"></a>
+<a id="completed_adverb"></a>
 #### `completed` adverb
 
 The `completed` adverb defines
@@ -421,7 +421,7 @@ Its value is the same as that of the `action` adverb.
 
 For more details on parse events, see [Events](#events) section.
 
-<a id="predicted"></a>
+<a id="predicted_adverb"></a>
 #### `predicted` adverb
 
 The `predicted` adverb defines
@@ -490,7 +490,7 @@ whose semantic action or completed/predicted event handler is being called durin
 
 returns the name of the BNF rule’s RHS alternative
 whose semantic action or completed/predicted event handler is being called during the parse,
-if such name is set using the [`name` adverb](#name) or
+if such name is set using the [`name` adverb](#name_adverb) or
 `nil` if it is not so set.
 
 ##### `prec = luif.context.precedence()`
@@ -523,7 +523,7 @@ the BNF rule whose semantic action or completed/predicted event handler is being
 <a id="events"></a>
 ## Events
 
-Parse events are defined using [`completed`](#completed) and [`predicted`](#predicted) adverbs.
+Parse events are defined using [`completed`](#completed_adverb) and [`predicted`](#predicted_adverb) adverbs.
 
 [todo: provide getting started info/tutorial on parse events].
 
