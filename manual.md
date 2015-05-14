@@ -173,7 +173,6 @@ The syntax of a start rule is
 ```
 start_rule ::= ':' grammar ':='
   ( 'lexer' '=' lexical_grammar_name ( 'start' =  start_symbol )? )?
-
 ```
 
 The `lexer` adverb defines the lexical grammar for the structural grammar specified in the start rule. If it is omitted, the name of the lexical grammar will be the name of the structural with `_lex` appended, e.g., in the case of `start :grammar:= `, `grammar_lex`.
