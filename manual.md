@@ -65,7 +65,8 @@ a [sequence](#sequences) or another,
 [grouped or hidden](#grouping_and_hiding_symbols), RHS alternative.
 
 BNF statements are grouped into one or more grammars.
-The grammar is indicated by the produce-operator of the BNF. The general form
+The grammar is indicated by the produce-operator of the BNF.
+The general form
 of the produce operator is
 ```
     :grammar:=
@@ -164,7 +165,7 @@ The start rule of a LUIF structural grammar sets its
 
 If the start rule is omitted
 
-- the name of the grammar will be `g1` and all subsequent rules will belong in that grammar or, if they are lexical, in its associated lexical grammar `l0`,
+- the name of the grammar will be `g1` and all subsequent rules will belong to that grammar or, if they are lexical, in its associated lexical grammar `l0`,
 - the start symbol will be the LHS of the structural rule, which occurs first in the source file, and
 - the lexical grammar will be `l0`.
 
