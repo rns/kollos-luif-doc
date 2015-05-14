@@ -77,7 +77,7 @@ If the produce-operator is `::=`, then the grammar is `g1`.  The tilde `~` can b
 
 A grammar can be either [structural or lexical](#structural_and_lexical_grammars).
 
-A structural grammar will often contain lexical elements, such as strings and character classes, and these will go into its linked lexical grammar.  The [start rule](#start_rule) of a structural grammar specifies its lexical grammar with `lexer` adverb.  In a lexical grammar the lexemes are indicated with the `lexeme` adverb -- if a rule has a lexeme adverb, its LHS is a lexeme.
+A structural grammar will often contain lexical elements, such as strings and character classes, and these will go into its associated lexical grammar.  The [start rule](#start_rule) of a structural grammar specifies its lexical grammar with [`lexer` adverb](#lexer_adverb).  In a lexical grammar the lexemes are indicated with the `lexeme` adverb -- if a rule has a lexeme adverb, its LHS is a lexeme.
 
 Initially, the [post-processing](#post_processing) will not support anything but `l0` and `g1` used in the default way, like this:
 
@@ -164,7 +164,7 @@ The start rule of a LUIF structural grammar sets its
 
 If the start rule is omitted
 
-- the name of the grammar will be `g1` and all subsequent rules will belong in that grammar or, if they are lexical, in its linked lexical grammar `l0`,
+- the name of the grammar will be `g1` and all subsequent rules will belong in that grammar or, if they are lexical, in its associated lexical grammar `l0`,
 - the start symbol will be the LHS of the structural rule, which occurs first in the source file, and
 - the lexical grammar will be `l0`.
 
@@ -175,8 +175,10 @@ start_rule ::= ':' grammar ':='
   ( 'lexer' '=' lexical_grammar_name ( 'start' =  start_symbol )? )?
 ```
 
+<a id="lexer_adverb"></a>
 The `lexer` adverb defines the lexical grammar for the structural grammar specified in the start rule. If it is omitted, the name of the lexical grammar will be the name of the structural with `_lex` appended, e.g., in the case of `start :grammar:= `, `grammar_lex`.
 
+<a id="start_adverb"></a>
 The `start` adverb, which is optional, defines the start symbol of the grammar. If it is omitted, the start symbol will be the LHS of the structural rule, which occurs first in the source file.
 
 An adverbless start rule just sets the name of the structural grammar for all rules that follow, e.g. `:json:=`.
