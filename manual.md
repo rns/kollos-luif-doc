@@ -174,7 +174,7 @@ The syntax of a start rule is
 start :grammar:= <start symbol name> ( lexer = <lexical grammar name> )?
 ```
 
-The `lexer` adverb defines the lexical grammar for the structural grammar specified in the start rule.
+The `lexer` adverb defines the lexical grammar for the structural grammar specified in the start rule. The name of the lexical grammar will be ther name of the structural with `_lex` appended, e.g., in the case of `start :grammar:= `, `grammar_lex`.
 
 <a id="precedenced_rules"></a>
 ### Precedenced Rules
