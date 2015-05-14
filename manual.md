@@ -78,7 +78,7 @@ If the produce-operator is `::=`, then the grammar is `g1`.  The tilde `~` can b
 
 A grammar can be either [structural or lexical](#structural_and_lexical_grammars).
 
-A structural grammar will often contain lexical elements, such as strings and character classes, and these will go into its associated lexical grammar.  The [start rule](#start_rule) of a structural grammar specifies its lexical grammar with [`lexer` adverb](#lexer_adverb).  In a lexical grammar the lexemes are indicated with the `lexeme` adverb -- if a rule has a lexeme adverb, its LHS is a lexeme.
+A structural grammar will often contain lexical elements, such as strings and character classes, and these will go into its associated lexical grammar.  The [start rule](#start_rule) of a structural grammar specifies its lexical grammar with the [`lexer` adverb](#lexer_adverb).  In a lexical grammar the lexemes are indicated with the `lexeme` adverb -- if a rule has a lexeme adverb, its LHS is a lexeme.
 
 Initially, the [post-processing](#post_processing) will not support anything but `l0` and `g1` used in the default way, like this:
 
@@ -550,7 +550,11 @@ Note: this describes LUIF structural and lexical grammars 'used in the default w
 ```
 stat ::= bnf
 
-bnf ::= lhs produce_op rhs  -- to make references to LHS/RHS easier to understand
+bnf ::= start_rule |
+        lhs produce_op rhs
+
+start_rule ::= ':' grammar ':='
+  ( 'lexer' '=' lexical_grammar_name ( 'start' =  start_symbol )? )?
 
 lhs ::= symbol_name
 
@@ -568,8 +572,8 @@ adverb ::= action |
            predicted |
            assoc
 
--- values other than function(...) -- https://github.com/rns/kollos-luif-doc/issues/12
--- context in action functions -- https://github.com/rns/kollos-luif-doc/issues/11
+--[todo: values other than function(...) -- https://github.com/rns/kollos-luif-doc/issues/12 ]
+--[todo: context in action functions -- https://github.com/rns/kollos-luif-doc/issues/11 ]
 action ::= 'action' '=' functionexp
 
 completed ::= 'completed' '=' functionexp
