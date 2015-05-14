@@ -24,7 +24,7 @@ The LUIF is [Lua](http://www.lua.org/), extended with
 - [Adverbs](#adverbs)<br/>
   - [`action`](#action)<br/>
   - [`assoc`](#assoc)
-  - [`name`](#name)
+  - [`name`](#name_adverb)
   - [`completed`](#completed)<br/>
   - [`predicted`](#predicted)<br/>
 
@@ -405,7 +405,7 @@ The function of this adverb is as defined in the [SLIF](https://metacpan.org/pod
 
 For a usage example, see the [Calculator](#calculator) grammar below.
 
-<a id="name"></a>
+<a id="name_adverb"></a>
 #### `name` adverb
 
 The `name` adverb defines the name of a RHS alternative it modifies.
