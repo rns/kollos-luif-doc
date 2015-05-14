@@ -145,7 +145,7 @@ but the structural grammar has no
 associated lexical grammar.
 
 A _lexeme_ is a sequence of characters in the input matched by a rule in a lexical grammar.
-Marpa’s usage of the term "lexeme" is special to it.
+Marpa’s usage of the term “lexeme” is special to it.
 
 For all pairings of structural grammars and their lexers,
 both grammars in the pair must have a consistent idea of
@@ -198,7 +198,7 @@ A precedenced rule contains a series of one or more RHS alternatives, separated 
 
 An alternative may be followed by a list of [adverbs](#adverbs), from which it is separated with a comma.
 
-The RHS alternatives in a precedenced right hand side proceed from tightest (highest) priority to loosest. The double "or" symbol (`||`) is the "loosen" operator -- the alternatives after it have a looser (lower) priority than the alternatives before it. The single "or" symbol (`|`) is the ordinary "alternative" operator -- alternatives on each side of it have the same priority. Associativity is specified using the [`assoc`](#assoc_adverb) adverb, as described below.
+The RHS alternatives in a precedenced right hand side proceed from tightest (highest) priority to loosest. The double “or” symbol (`||`) is the “loosen” operator -- the alternatives after it have a looser (lower) priority than the alternatives before it. The single “or” symbol (`|`) is the ordinary “alternative” operator -- alternatives on each side of it have the same priority. Associativity is specified using the [`assoc`](#assoc_adverb) adverb, as described below.
 
 For a usage example of precedenced rules, see the [Calculator](#calculator) grammar below.
 
@@ -245,7 +245,7 @@ it must come after every item.
 In particular, there *must* be a separator
 after the last item.
 
-A "liberal" separator may be used either
+A “liberal” separator may be used either
 as a proper separator or a terminator.
 That is, the separator after the last item
 is optional.
@@ -303,7 +303,7 @@ Parentheses and square brackets can be nested.
 If square brackets are used at any nesting level
 containing a symbol, that symbol is hidden.
 In other words,
-there is no way to "unhide" a symbol that is inside
+there is no way to “unhide” a symbol that is inside
 square brackets.
 
 A grouped or hidden series of RHS symbols can be followed by
@@ -673,9 +673,9 @@ or if it is necessary for the logic.
 <a id="locale_support"></a>
 ### Locale support
 
-Full support is only assured for the "C" locale -- support for other locales may be limited, inconsistent, or removed in the future.
+Full support is only assured for the “C” locale -- support for other locales may be limited, inconsistent, or removed in the future.
 
-Lua’s `os.setlocale()`, when used in the LUIF context for anything but the "C" locale, may fail, silently or otherwise.
+Lua’s `os.setlocale()`, when used in the LUIF context for anything but the “C” locale, may fail, silently or otherwise.
 
 [todo: update the tentative language above as Kollos project progresses]
 
