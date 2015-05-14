@@ -157,9 +157,9 @@ keys are:
   The value is the internal symbol
   database, described below.
 
-* `structural`  Optional.
-  Non-nil if and only if this is
+* `structural`  A Lua true value if and only if this is
   a structural grammar.
+  Optional for lexical grammars.
 
 ### The external symbol database
 
