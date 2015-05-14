@@ -156,25 +156,35 @@ the lower layer (KLOL) processes the KIR.
 <a id="start_rule"></a>
 ### Start Rule
 
-The start rule of a LUIF structural grammar sets
+The start rule of a LUIF structural grammar sets its
 
-- the name,
-- the start symbol, and
-- the lexical grammar of a structural grammar.
+- name, and, optionally,
+- its lexical grammar and
+- start symbol.
 
-If a start rule is omitted
+If the start rule is omitted
 
-- the name of the grammar will be `g1` and all subsequent rules will be defined in that grammar or, if they are lexical, in its linked lexical grammar `l0`,
+- the name of the grammar will be `g1` and all subsequent rules will belong in that grammar or, if they are lexical, in its linked lexical grammar `l0`,
 - the start symbol will be the LHS of the structural rule, which occurs first in the source file, and
 - the lexical grammar will be `l0`.
 
 The syntax of a start rule is
 
 ```
-start :grammar:= <start symbol name> ( lexer = <lexical grammar name> )?
+start_rule ::= ':' grammar ':=' 'lexer' '=' lexical_grammar_name ( 'start' = start_symbol_name )?
 ```
 
-The `lexer` adverb defines the lexical grammar for the structural grammar specified in the start rule. The name of the lexical grammar will be the name of the structural with `_lex` appended, e.g., in the case of `start :grammar:= `, `grammar_lex`.
+The `lexer` adverb defines the lexical grammar for the structural grammar specified in the start rule. If it is omitted, the name of the lexical grammar will be the name of the structural with `_lex` appended, e.g., in the case of `start :grammar:= `, `grammar_lex`.
+
+The `start` adverb, which is optional, defines the start symbol of the grammar. If its is omitted, the start symbol will be the LHS of the structural rule, which occurs first in the source file.
+
+An adverbless start rule just sets the name of the structural grammar for all rules that follow, e.g. `:json:=`.
+
+As an example, this start rule
+```
+:calc:= start = Script, lexer = calc_lex
+```
+defines a structural grammar named `calc` with start symbol `Script` and lexical grammar `calc_lex`.
 
 <a id="precedenced_rules"></a>
 ### Precedenced Rules
