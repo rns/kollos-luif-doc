@@ -389,7 +389,7 @@ Adverbs are `name = value` pairs separated with commas.
 A comma is also used to separate an adverb from the RHS alternative it modifies.
 
 <a id="action"></a>
-#### `action`
+#### `action` adverb
 
 The `action` adverb defines the semantics of the RHS alternative it modifies.
 Its value is specified in [Semantics](#semantics) section below.
@@ -397,7 +397,7 @@ Its value is specified in [Semantics](#semantics) section below.
 The `action` adverb can also have a special `lexeme` value [descrived above](#structural_and_lexical_grammars).
 
 <a id="assoc"></a>
-#### `assoc`
+#### `assoc` adverb
 
 The `assoc` adverb defines associativity of a [precedenced rule](#precedenced_rules).
 Its value can be `left`, `right`, or `group`.
@@ -412,7 +412,7 @@ The `assoc` adverb defines the name of a RHS alternative it modifies.
 The name can then be retrieved using `luif.context.alternative()` function.
 
 <a id="completed"></a>
-#### `completed`
+#### `completed` adverb
 
 The `completed` adverb defines
 the Lua function to be called when the RHS alternative is completed during the parse.
@@ -421,7 +421,7 @@ Its value is the same as that of the `action` adverb.
 For more details on parse events, see [Events](#events) section.
 
 <a id="predicted"></a>
-#### `predicted`
+#### `predicted` adverb
 
 The `predicted` adverb defines
 the Lua function to be called when the RHS alternative is predicted during the parse.
