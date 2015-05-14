@@ -408,8 +408,9 @@ For a usage example, see the [Calculator](#calculator) grammar below.
 <a id="name"></a>
 #### `name` adverb
 
-The `assoc` adverb defines the name of a RHS alternative it modifies.
-The name can then be retrieved using `luif.context.alternative()` function.
+The `name` adverb defines the name of a RHS alternative it modifies.
+The name can then be retrieved using
+[`luif.context.alternative()`](#luif_context_alternative) function.
 
 <a id="completed"></a>
 #### `completed` adverb
@@ -484,6 +485,7 @@ whose semantic action or completed/predicted event handler is being called durin
 returns the integer ID of the BNF rule
 whose semantic action or completed/predicted event handler is being called during the parse.
 
+<a id="luif_context_alternative"></a>
 ##### `alt_name = luif.context.alternative()`
 
 returns the name of the BNF rule’s RHS alternative
