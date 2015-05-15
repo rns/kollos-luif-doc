@@ -7,7 +7,7 @@ Skimming should give some idea of the kinds of
 information the KIR will need, at least.
 ]
 
-Kollos's interface language will be the LUIF, essentially
+Kollos’s interface language will be the LUIF, essentially
 Lua 5.1 extended with BNF.
 A top layer, called the Kollos high layer, or KHIL,
 will parse this into the "Kollos intermediate representation".
@@ -118,7 +118,7 @@ is the name
 of a property,
 and the value
 of the key-value pair
-is the property's value.
+is the property’s value.
 
 A *database table* is a
 Lua table
@@ -290,7 +290,7 @@ is the name
 of a property,
 and the value
 of the key-value pair
-is the property's value.
+is the property’s value.
 
 * `lhs` -- the symbol name of the LHS symbol
 
