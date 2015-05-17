@@ -269,8 +269,9 @@ Here are some examples:
     <A>* % ','         -- zero or more properly comma-separated <A> symbols
     (A B)* % ','       -- A and B, repeated zero or more times, and properly comma-separated
     <A>+ %% ','        -- one or more comma-separated or comma-terminated <A> symbols
-
 ```
+
+[todo: examples for charclass separators]
 
 The repetend cannot be nullable.
 If a separator is specified, it cannot be nullable.
@@ -281,6 +282,8 @@ such a repetition is very ambiguous.
 An application which really wants to specify rules involving nullable repetition,
 can specify them directly in BNF,
 and these will make the programmer’s intent clear.
+
+[todo: nullable separators -- http://irclog.perlgeek.de/marpa/2015-05-03#i_10539668]
 
 <a id="grouping_and_hiding_symbols"></a>
 ### Grouping and Hiding Symbols
