@@ -109,6 +109,10 @@ methods:
 * `location()` -- the current location, including the
   blob name.
 
+Notes on location object from IRC channel:
+  purpose -- http://irclog.perlgeek.de/marpa/2015-05-18#i_10623286
+  inside-out object http://irclog.perlgeek.de/marpa/2015-05-18#i_10623311
+
 ### Implementation
 
 Location objects are intended to serve a wide variety of purposes.
