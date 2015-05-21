@@ -10,6 +10,9 @@ In the LUIF, Direct-to-Lua (D2L) calls are used to transform LUIF statements int
 
 ## Functions
 
+[todo: bare literals except for '|', '||', '%', '%%', define symbols, S{ } defines sequences
+https://github.com/rns/kollos-luif-doc/issues/33]
+
 `luif.G{...}` takes a table of LUIF rules expressed as direct-to-Lua calls
 and returns a table representing LUIF rules for KHIL. ([LPeg counterpart]
 (http://www.inf.puc-rio.br/~roberto/lpeg/lpeg.html#grammar)).
