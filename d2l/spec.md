@@ -57,10 +57,10 @@ LUIF rules are written as Lua tables, whose fields can be set using D2L function
 local grammar = luif.G{
   ...
   -- without adverbs
-  lhs = { luif.S'symbol', luif.S'another_symbol', ... luif.L'literal' }
+  lhs = { 'symbol', 'another_symbol', ... luif.L'literal' }
   -- with adverbs
   lhs = {
-    luif.S'symbol', luif.S'another_symbol', ... luif.L'literal',
+    'symbol', 'another_symbol', ... luif.L'literal',
     { action = function(...) ... end }
   }
 }
@@ -71,19 +71,17 @@ local grammar = luif.G{
 Sequence rules have single RHS alternative, their syntax is
 
 ```lua
-local S, Q, L = luif.S, luif.Q, luif.L
+local S, L = luif.S, luif.L
 local grammar = luif.G{
   ...
-  seq = { S'item', Q'+', '%', S'separator' },
-  seq = { S'item', Q'+', '%%', S'separator' },
-  seq = { S'item', Q'+', '%', L',' }, -- literal as sequence separator
-  seq = { S'item', Q'+', '%', C'[;,]' }, -- character class as sequence separator
+  seq = S{ 'item', '+', '%', 'separator' },
+  seq = S{ 'item', '+', '%%', 'separator' },
+  seq = S{ 'item', '+', '%', L',' }, -- literal as sequence separator
+  seq = S{ 'item', '+', '%', C'[;,]' }, -- character class as sequence separator
 }
 ```
 
 Note:
-
-Character classes as sequence separators are currently under discussion at http://irclog.perlgeek.de/marpa/2015-05-03#i_10538440
 
 [todo: define support for SLIF extensions per https://github.com/rns/kollos-luif-doc/issues/17]
 
@@ -97,13 +95,13 @@ local grammar = luif.G{
   ...
   lhs = {
     -- first alternative, tightest precedence
-    { S'symbol', S'another_symbol', ... L'literal' },
+    { 'symbol', 'another_symbol', ... L'literal' },
     -- without precedence, '|' is implied
-    { S'symbol', S'another_symbol', ... L'literal' },
+    { 'symbol', 'another_symbol', ... L'literal' },
     -- with looser precedence
-    { '||', S'symbol', S'another_symbol', ... L'literal' },
+    { '||', 'symbol', 'another_symbol', ... L'literal' },
     -- with the same precedence
-    { '|', S'symbol', S'another_symbol', ... L'literal' },
+    { '|', 'symbol', 'another_symbol', ... L'literal' },
   },
   ...
 }
@@ -158,27 +156,23 @@ Expression ::=
 
 #### Calculator Grammar in D2L
 
-Note: See `d2l.lua` for the complete example.
-
 ```lua
 local calc = luif.G{
-  Script = { S'Expression', Q'+', '%', L',' },
+  Script = S{ 'Expression', '+', '%', L',' },
   Expression = {
-    { S'Number' },
-    { '|' , '(', S'Expression', ')' },
-    { '||', S'Expression', L'**', S'Expression', { action = pow } },
-    { '||', S'Expression', L'*', S'Expression', { action = mul } },
-    { '|' , S'Expression', L'/', S'Expression', { action = div } },
-    { '||', S'Expression', L'+', S'Expression', { action = add } },
-    { '|' , S'Expression', L'-', S'Expression', { action = sub } },
+    { 'Number' },
+    { '|' , '(', 'Expression', ')' },
+    { '||', 'Expression', L'**', 'Expression', { action = pow } },
+    { '||', 'Expression', L'*', 'Expression', { action = mul } },
+    { '|' , 'Expression', L'/', 'Expression', { action = div } },
+    { '||', 'Expression', L'+', 'Expression', { action = add } },
+    { '|' , 'Expression', L'-', 'Expression', { action = sub } },
   },
   Number = C'[0-9]'
 }
 ```
 
 ### Example 2: JSON Grammar
-
-[todo: use the full json grammar from the example in `manual.md` ]
 
 #### JSON Grammar in LUIF
 
@@ -210,43 +204,41 @@ null     ~ 'null'
 
 #### JSON Grammar in D2L
 
-Note: See `d2l.lua` for the complete example.
-
 ```lua
 local json = luif.G{
 
   json = {
-    { S'object' },
-    { S'array' }
+    { 'object' },
+    { 'array' }
   },
 
   object = {
     { luif.hide( L'{', L'}' ) },
-    { luif.hide( L'{' ), S'members', luif.hide( L'}' ) }
+    { luif.hide( L'{' ), 'member', luif.hide( L'}' ) }
   },
 
-  members = { S'pair', Q'+', '%', S'comma' },
+  members = S{ 'pair', '+', '%', 'comma' },
 
   pair = {
-    { S'string', luif.hide( L':' ), S'value' }
+    { 'string', luif.hide( L':' ), 'value' }
   },
 
   value = {
-    { S'string' },
-    { S'object' },
-    { S'number' },
-    { S'array' },
-    { S'S_true' },
-    { S'S_false' },
-    { S'null' },
+    { 'string' },
+    { 'object' },
+    { 'number' },
+    { 'array' },
+    { 'S_true' },
+    { 'S_false' },
+    { 'null' },
   },
 
   array = {
     { luif.hide( L'[', L']' ) },
-    { luif.hide( L'[' ), S'elements', luif.hide( L']' ) },
+    { luif.hide( L'[' ), 'element', luif.hide( L']' ) },
   },
 
-  elements = { S'value', Q'+', '%', S'comma' },
+  elements = S{ 'value', '+', '%', 'comma' },
 
   string = { '[todo]' },
 
