@@ -23,8 +23,7 @@ a [counted (sequence) rule](../manual.md#sequences).
 
 `luif.hide(...)` and `luif.group(...)` take a list of prefixed D2L strings and provide LUIF hiding and grouping.
 
-Special `'|'`, `'||'`, `'%%'`, `'~'` and `'%'` literals are used
-in the meaning defined by the LUIF grammar for `|`, `||`, `%%`, `~` and `%`.
+Special literals `'|'`, `'||'`, `'%'`, `'%%'`, `'%-'`, `'%$'`, `'*'`, `'+'`, `'?'`, and '**' are used as defined by the LUIF grammar.
 If an application needs such literals in its grammar,
 it must prefix them with `luif.L`, e.g. `luif.L'|'`.
 
