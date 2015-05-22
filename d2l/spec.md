@@ -10,8 +10,7 @@ In the LUIF, Direct-to-Lua (D2L) calls are used to transform LUIF statements int
 
 ## Functions
 
-[todo: bare literals except for '|', '||', '%', '%%', define symbols, S{ } defines sequences
-https://github.com/rns/kollos-luif-doc/issues/33]
+Bare literals except for special literals (see below) define symbols.
 
 `luif.G{...}` takes a table of LUIF rules expressed as direct-to-Lua calls
 and returns a table representing LUIF rules for KHIL. ([LPeg counterpart]
@@ -20,11 +19,11 @@ and returns a table representing LUIF rules for KHIL. ([LPeg counterpart]
 `luif.S(S_item, quantifier, operator, S_separator)` defines
 a [counted (sequence) rule](../manual.md#sequences).
 
-`luif.L(string)`, and `luif.C(string)` prefix strings serving as LUIF symbols, literals and character classes, accordingly.
+`luif.L(string)`, and `luif.C(string)` prefix strings serving as LUIF literals and character classes, accordingly.
 
 `luif.hide(...)` and `luif.group(...)` take a list of prefixed D2L strings and provide LUIF hiding and grouping.
 
-`'|'`, `'||'`, `'%%'`, `'~'` and `'%'` literals are used
+Special `'|'`, `'||'`, `'%%'`, `'~'` and `'%'` literals are used
 in the meaning defined by the LUIF grammar for `|`, `||`, `%%`, `~` and `%`.
 If an application needs such literals in its grammar,
 it must prefix them with `luif.L`, e.g. `luif.L'|'`.
