@@ -28,15 +28,15 @@ in the meaning defined by the LUIF grammar for `|`, `||`, `%%`, `~` and `%`.
 If an application needs such literals in its grammar,
 it must prefix them with `luif.L`, e.g. `luif.L'|'`.
 
-`luif.grammar_new(name, table)`
+`luif.grammar_new(key, table)`
 produces Kollos Intermediate Representation (KIR)
 of the grammar contained in `table` and
-adds it under key `name` to KIR's table of grammars.
+adds it under `key` to KIR’s table of grammars.
 The `table` must be produced by a call to `luif.G()`.
 
-`luif.grammar_loadstring(name, string)`
+`luif.grammar_loadstring(key, string)`
 produces KIR of the grammar contained in `string` and
-adds it under key `name` to KIR's table of grammars.
+adds it under `key` to KIR’s table of grammars.
 `string` must contain a grammar table serialized so
 that it evaluates to a valid LUIF grammar representation
 by `loadstring(string [, chunkname])`.
