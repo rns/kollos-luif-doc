@@ -17,9 +17,10 @@ https://github.com/rns/kollos-luif-doc/issues/33]
 and returns a table representing LUIF rules for KHIL. ([LPeg counterpart]
 (http://www.inf.puc-rio.br/~roberto/lpeg/lpeg.html#grammar)).
 
-`luif.S(string)`, `luif.L(string)`, and `luif.C(string)` prefix strings serving as LUIF symbols, literals and character classes, accordingly.
+`luif.S(S_item, quantifier, operator, S_separator)` defines
+a [counted (sequence) rule](../manual.md#sequences).
 
-`luif.Q(string)` marks string as a quantifier for sequence rules.
+`luif.L(string)`, and `luif.C(string)` prefix strings serving as LUIF symbols, literals and character classes, accordingly.
 
 `luif.hide(...)` and `luif.group(...)` take a list of prefixed D2L strings and provide LUIF hiding and grouping.
 
